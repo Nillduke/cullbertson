@@ -11,7 +11,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->web(append: [\App\Http\Middleware\OptimizePublicResponse::class]);
+        $middleware->web(append: [\App\Http\Middleware\OptimizePublicResponse::class, \App\Http\Middleware\AppendFormInformation::class]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

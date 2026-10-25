@@ -61,5 +61,6 @@ Route::get('/wp-sitemap-{key}.xml',[\App\Http\Controllers\SitemapController::cla
 Route::redirect('/sitemap_index.xml','/wp-sitemap.xml',301);
 Route::redirect('/sitemap.xml','/wp-sitemap.xml',301);
 Route::post('/contact-us/send',[\App\Http\Controllers\ContactController::class,'store'])->middleware('throttle:5,10');
+Route::post('/privacy-choices/request',[\App\Http\Controllers\PrivacyRequestController::class,'store'])->middleware('throttle:5,10');
 Route::post('/requests/{kind}',[\App\Http\Controllers\SupportRequestController::class,'store'])->where('kind','careers|documents|classic')->middleware('throttle:5,10');
 Route::get('/{path}', [PageController::class, 'show'])->where('path', '.*')->name('page');

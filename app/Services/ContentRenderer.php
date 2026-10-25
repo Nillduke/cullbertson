@@ -5,6 +5,7 @@ class ContentRenderer
 {
     public function render(PageSection $section): string
     {
+        if($section->component==='privacy_request')return view('content.privacy-request')->render();
         if(str_contains($section->content_html,'id="auto-quote-wizard"') || str_contains($section->content_html,'id="service-quote-wizard"'))return app(QuoteInitialView::class)->render($section->content_html,Page::find($section->page_id)?->presentation['service']??'');
         if($section->component==='legacy_archive')return '';
         if(in_array($section->component,['design_insurance_directory','design_agency_team','design_request_form'],true)){

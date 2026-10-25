@@ -17,6 +17,7 @@
     @endif
     @include('partials.performance-stylesheet',['href'=>asset($baseStylesheet).'?v='.filemtime(public_path($baseStylesheet))])
     @include('partials.performance-stylesheet',['href'=>asset('exit-intent.css').'?v='.filemtime(public_path('exit-intent.css'))])
+    <link rel="stylesheet" href="{{ asset('form-information.css') }}?v={{ filemtime(public_path('form-information.css')) }}">
     @if(isset($contentPage) && $contentPage->type === 'blog_index')<link rel="stylesheet" href="{{ asset('cms.css') }}">@endif
     @if(!empty($insuranceArticles))
         @include('partials.performance-stylesheet',['href'=>asset('insurance-articles.css').'?v='.filemtime(public_path('insurance-articles.css'))])

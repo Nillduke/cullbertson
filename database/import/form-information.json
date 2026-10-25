@@ -1,0 +1,64 @@
+{
+  "label": "About this form and your privacy",
+  "agency": "Culbertson Agency",
+  "logo": "assets/culbertson-mark.svg",
+  "address": "13099 S Cleveland Ave, Suite 310, Fort Myers, FL 33907",
+  "phone": "(239) 210-7700",
+  "phoneUrl": "tel:12392107700",
+  "notice": "When you submit contact details, you ask Culbertson Agency to respond to your enquiry using the information and contact preferences you provide. This notice does not add consent to marketing calls or text messages.",
+  "quoteNotice": "Quote forms save the information you enter when you select Continue, so our agency team can help even if you do not finish. Submitting a form does not purchase, change or bind insurance coverage.",
+  "powered": "Powered by",
+  "linksLabel": "Form policies and privacy choices",
+  "links": [
+    {
+      "label": "Privacy Policy",
+      "url": "/privacy-policy-2/"
+    },
+    {
+      "label": "Terms of Use",
+      "url": "/terms-of-use/"
+    },
+    {
+      "label": "Do not sell my personal information",
+      "url": "/do-not-sell-my-personal-information/"
+    },
+    {
+      "label": "Privacy Choices",
+      "url": "/privacy-choices/"
+    },
+    {
+      "label": "Cookies and Other Technology",
+      "url": "/cookie-policy/"
+    },
+    {
+      "label": "SMS and Contact Terms",
+      "url": "/sms-terms-of-service/"
+    }
+  ],
+  "choicesNotice": "Manage your contact preferences or send a privacy request through Privacy Choices. Our team reviews these requests; submitting one does not automatically delete records or change your insurance policy.",
+  "request": {
+    "eyebrow": "YOUR INFORMATION. YOUR CHOICES.",
+    "title": "Send a privacy request",
+    "intro": "Tell our Fort Myers team what you would like us to review. You may also call (239) 210-7700 or write to the agency address shown below.",
+    "sensitiveNote": "Do not include Social Security numbers, payment card details, medical information, passwords or identity documents in this form.",
+    "name": "Full name *",
+    "email": "Email address *",
+    "phone": "Phone number (optional)",
+    "type": "What would you like to request? *",
+    "message": "Additional details (optional)",
+    "types": {
+      "contact-preferences": "Change my contact or marketing preferences",
+      "do-not-sell": "Record my do-not-sell or sharing preference",
+      "access": "Ask about or access my personal information",
+      "correction": "Correct my personal information",
+      "deletion": "Request deletion of my personal information",
+      "other": "Ask another privacy question"
+    },
+    "authorized": "I am making this request about my own information, or I am authorized to act for the person identified. The agency may contact me to verify and process this request.",
+    "processing": "This sends a request to our agency team for review. Applicable law, identity checks and insurance record-retention requirements may affect how we can respond. This is not consent to marketing.",
+    "submit": "Send privacy request",
+    "successTitle": "Your privacy request has been received.",
+    "successBody": "Keep this reference. Our agency team will review your request and may contact you to verify your identity or clarify your instructions.",
+    "inboxTopic": "Privacy request"
+  }
+}
