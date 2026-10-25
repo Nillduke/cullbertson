@@ -10,7 +10,7 @@
  const element=(tag,cls,text)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=text;return el;};
  async function upload(file,progress){
   const data=new FormData();data.append('image',file,file.name||'image.png');
-  const response=await fetch('/admin/media',{method:'POST',headers:{'Accept':'application/json','X-CSRF-TOKEN':token},body:data});
+  const response=await fetch((document.body.dataset.adminBase||'/admin')+'/media',{method:'POST',headers:{'Accept':'application/json','X-CSRF-TOKEN':token},body:data});
   const result=await response.json();
   if(!response.ok)throw new Error(Object.values(result.errors||{}).flat().join(' ')||result.message||'Image upload failed.');
   progress?.(100);return result.location;
@@ -28,7 +28,7 @@
  async function loadPicker(page){
   const sequence=++pickerRequest;const status=picker.querySelector('.cms-picker-status'),grid=picker.querySelector('.cms-picker-grid');status.textContent='Loading images...';
   try{
-   const response=await fetch(`/admin/media/picker?page=${page}&q=${encodeURIComponent(pickerQuery)}`,{headers:{Accept:'application/json'}});if(!response.ok)throw new Error('Could not load the media library. Please sign in again if your session expired.');const data=await response.json();if(sequence!==pickerRequest)return;
+   const response=await fetch(`${document.body.dataset.adminBase||'/admin'}/media/picker?page=${page}&q=${encodeURIComponent(pickerQuery)}`,{headers:{Accept:'application/json'}});if(!response.ok)throw new Error('Could not load the media library. Please sign in again if your session expired.');const data=await response.json();if(sequence!==pickerRequest)return;
    pickerPage=data.current_page;grid.replaceChildren();status.textContent=data.total?`${data.total.toLocaleString()} images - Page ${data.current_page} of ${data.last_page}`:'No images found. Try a different search or upload an image.';
    data.data.forEach(image=>{const button=element('button');button.type='button';button.setAttribute('aria-label',`Choose ${image.name}`);const img=element('img');img.src=image.path;img.alt=image.alt||image.name;img.loading='lazy';button.append(img,element('span',null,image.name));button.onclick=()=>{selectedCallback(image.path,{alt:image.alt||''});picker.close();};grid.append(button);});
    picker.querySelector('[data-picker-prev]').disabled=!data.prev_page_url;picker.querySelector('[data-picker-next]').disabled=!data.next_page_url;
@@ -45,7 +45,7 @@
   if(!window.tinymce){field.hidden=false;return;}
   field.dataset.loading='true';
   try{await tinymce.init({
-   target:field,base_url:'/vendor/tinymce',suffix:'.min',license_key:'gpl',promotion:false,branding:true,add_form_submit_trigger:false,submit_patch:false,
+   target:field,base_url:new URL('.',document.querySelector('script[src*="/vendor/tinymce/tinymce.min.js"]').src).href.replace(/\/$/,''),suffix:'.min',license_key:'gpl',promotion:false,branding:true,add_form_submit_trigger:false,submit_patch:false,
    height:520,min_height:300,resize:true,menubar:'file edit view insert format tools table help',toolbar_mode:'sliding',
    plugins:'accordion advlist anchor autolink autosave charmap code codesample directionality emoticons fullscreen help image importcss insertdatetime link lists media nonbreaking pagebreak preview quickbars save searchreplace table visualblocks visualchars wordcount',
    toolbar:['save undo redo restoredraft | blocks fontfamily fontsize | bold italic underline strikethrough | forecolor backcolor | removeformat','alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media table | accordion charmap emoticons codesample | ltr rtl | searchreplace code fullscreen preview'],

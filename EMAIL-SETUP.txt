@@ -1,0 +1,46 @@
+ADMIN EMAIL / SMTP
+
+Open Admin > Email & SMTP (/admin/mail). Settings are read from the private
+mail_settings table on each send; .env mail defaults are not used for these
+notifications. Passwords are encrypted with APP_KEY and never shown back in forms.
+Keep APP_KEY with your private backup. The cPanel package excludes mail_settings
+and mail_deliveries, along with customer data and other runtime secrets.
+
+Providers:
+  GoDaddy cPanel: localhost, 25, no auth, no TLS (GoDaddy-documented local relay).
+  GoDaddy legacy / Plesk: relay-hosting.secureserver.net, 25, no auth, no TLS.
+  Custom SMTP: provider host/port, STARTTLS or implicit TLS, optional auth.
+  Log only: private log output; explicitly marked Logged only, not delivered.
+
+GoDaddy requires a sender mailbox on a domain you control, with matching SPF.
+A Gmail address is suitable as the recipient, not as the GoDaddy relay sender.
+This setup does not create a domain mailbox or change DNS automatically.
+Source: https://www.godaddy.com/en/help/send-form-mail-using-an-smtp-relay-server-953
+
+Save a draft first, check the SMTP connection (no mail sent), then send a test.
+Enable notifications once the sender and recipients are configured.
+Accepted by SMTP is not proof of inbox placement. Check inbox, spam and bounces.
+
+Completed quotes notify once per saved reference. Optional partial notifications
+notify once when the first partial record is created, not on every Continue.
+Contacts, careers, documents and privacy requests use the contact notification
+switch. Feedback has its own switch. Historical leads are not automatically mailed.
+Recipients are captured on each outbox entry. Updates do not change old recipients.
+
+Leads and outbox entries are saved before an after-response send is scheduled.
+If delivery fails, the lead remains in the inbox. Email does not include full
+quote answers or uploaded files. Privacy/document notifications omit contact
+details. Basic contact fields on other notices can be turned off in settings.
+
+Retry command: php artisan mail:deliver --limit=20
+On shared hosting run it every five minutes from the private application folder.
+The command uses database claims to prevent simultaneous sends of the same row.
+Failed sends back off up to five attempts. Failed entries can be retried by an admin.
+SMTP cannot guarantee exactly-once delivery when a connection/worker is interrupted
+after the remote server accepts a message; review the inbox before retrying.
+
+The command needs no queue worker. The normal first attempt is after the HTTP
+response and database commit. Notifications are disabled until a sender is set.
+
+Validation:
+  php artisan test --filter="AdminMailTest|QuoteProgressTest|FormInformationTest|SupportPagesTest"

@@ -11,6 +11,11 @@ use App\Models\FormDefinition;
 Route::get('/admin/login',[AdminAuthController::class,'login'])->name('login');
 Route::post('/admin/login',[AdminAuthController::class,'authenticate'])->middleware('throttle:5,1');
 Route::middleware(['auth',EnsureCmsAdmin::class])->prefix('admin')->group(function(){
+    Route::get('/mail',[\App\Http\Controllers\MailSettingsController::class,'index']);
+    Route::post('/mail',[\App\Http\Controllers\MailSettingsController::class,'save']);
+    Route::post('/mail/connection',[\App\Http\Controllers\MailSettingsController::class,'connection'])->middleware('throttle:5,1');
+    Route::post('/mail/test',[\App\Http\Controllers\MailSettingsController::class,'test'])->middleware('throttle:3,1');
+    Route::post('/mail/retry/{delivery}',[\App\Http\Controllers\MailSettingsController::class,'retry'])->middleware('throttle:10,1');
     Route::post('/logout',[AdminAuthController::class,'logout']);
     Route::get('/',[CmsController::class,'dashboard']);
     Route::get('/seo',[\App\Http\Controllers\SeoProfileController::class,'index']);
