@@ -52,3 +52,6 @@ The project's ROOT .htaccess is a local workspace guard (Require all denied); do
 Alternative hosting: if you can set the domain document root directly to a Laravel project's public/ folder, upload the normal private project layout, use the original public/index.php and leave APP_PUBLIC_PATH empty.
 Official requirements: https://laravel.com/docs/13.x/deployment
 TinyMCE: bundled self-hosted GPL edition; see public vendor notices. Premium plugins are not included.
+
+QUOTE ASSET ROUTING FIX
+Auto and bundle quote pages use /auto-quote/ and /quote/. Their CSS/JS live under /quote-assets/auto/ and /quote-assets/services/. If updating an older manual installation, remove its old public_html/auto-quote/ and public_html/quote/ asset folders after uploading quote-assets/. Physical folders at these page URLs can intercept the Laravel route and cause a server 404/403. Legacy CSS/JS URLs redirect to the new asset files. Run migrate --force to update stored asset paths.

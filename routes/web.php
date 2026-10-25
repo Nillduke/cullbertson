@@ -37,6 +37,11 @@ Route::get('/forms/{key}',fn(string $key)=>response()->json(FormDefinition::data
 
 Route::get('/feedback', [QuoteController::class, 'token']);
 Route::post('/feedback', [FeedbackController::class, 'store'])->middleware('throttle:feedback');
+// Preserve old asset URLs while keeping native quote page paths free of physical folders.
+Route::redirect('/auto-quote/form.css','/quote-assets/auto/form.css',301);
+Route::redirect('/auto-quote/form.js','/quote-assets/auto/form.js',301);
+Route::redirect('/quote/services.css','/quote-assets/services/services.css',301);
+Route::redirect('/quote/services.js','/quote-assets/services/services.js',301);
 Route::get('/auto-quote/submit', [QuoteController::class, 'token']);
 Route::post('/auto-quote/submit', [QuoteController::class, 'auto'])->middleware('throttle:quotes');
 Route::get('/quote/submit', [QuoteController::class, 'token']);

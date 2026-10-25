@@ -87,10 +87,10 @@
     "bodyClass": "content-page quote-flow-page",
     "service": "",
     "styles": [
-      "/auto-quote/form.css?v=4"
+      "/quote-assets/auto/form.css?v=4"
     ],
     "scripts": [
-      "/auto-quote/form.js?v=5"
+      "/quote-assets/auto/form.js?v=5"
     ]
   },
   "be-careful-of-this-clause-if-you-have-to-file-a-homeowners-insurance-claim-2": {
@@ -370,10 +370,10 @@
     "bodyClass": "content-page quote-flow-page",
     "service": "",
     "styles": [
-      "/auto-quote/form.css?v=4"
+      "/quote-assets/auto/form.css?v=4"
     ],
     "scripts": [
-      "/auto-quote/form.js?v=5"
+      "/quote-assets/auto/form.js?v=5"
     ]
   },
   "get-a-quote/get-a-auto-insurance-quote": {
@@ -383,10 +383,10 @@
     "bodyClass": "content-page quote-flow-page",
     "service": "",
     "styles": [
-      "/auto-quote/form.css?v=4"
+      "/quote-assets/auto/form.css?v=4"
     ],
     "scripts": [
-      "/auto-quote/form.js?v=5"
+      "/quote-assets/auto/form.js?v=5"
     ]
   },
   "get-a-quote/get-a-boat-insurance-quote": {
@@ -396,11 +396,11 @@
     "bodyClass": "content-page quote-flow-page",
     "service": "boat",
     "styles": [
-      "/auto-quote/form.css?v=4",
-      "/quote/services.css?v=1"
+      "/quote-assets/auto/form.css?v=4",
+      "/quote-assets/services/services.css?v=1"
     ],
     "scripts": [
-      "/quote/services.js?v=1"
+      "/quote-assets/services/services.js?v=1"
     ]
   },
   "get-a-quote/get-a-condo-insurance-quote": {
@@ -410,11 +410,11 @@
     "bodyClass": "content-page quote-flow-page",
     "service": "condo",
     "styles": [
-      "/auto-quote/form.css?v=4",
-      "/quote/services.css?v=1"
+      "/quote-assets/auto/form.css?v=4",
+      "/quote-assets/services/services.css?v=1"
     ],
     "scripts": [
-      "/quote/services.js?v=1"
+      "/quote-assets/services/services.js?v=1"
     ]
   },
   "get-a-quote/get-a-flood-insurance-quote": {
@@ -424,11 +424,11 @@
     "bodyClass": "content-page quote-flow-page",
     "service": "flood",
     "styles": [
-      "/auto-quote/form.css?v=4",
-      "/quote/services.css?v=1"
+      "/quote-assets/auto/form.css?v=4",
+      "/quote-assets/services/services.css?v=1"
     ],
     "scripts": [
-      "/quote/services.js?v=1"
+      "/quote-assets/services/services.js?v=1"
     ]
   },
   "get-a-quote/get-a-home-insurance-quote": {
@@ -438,11 +438,11 @@
     "bodyClass": "content-page quote-flow-page",
     "service": "home",
     "styles": [
-      "/auto-quote/form.css?v=4",
-      "/quote/services.css?v=1"
+      "/quote-assets/auto/form.css?v=4",
+      "/quote-assets/services/services.css?v=1"
     ],
     "scripts": [
-      "/quote/services.js?v=1"
+      "/quote-assets/services/services.js?v=1"
     ]
   },
   "get-a-quote/get-a-life-insurance-quote": {
@@ -452,11 +452,11 @@
     "bodyClass": "content-page quote-flow-page",
     "service": "life",
     "styles": [
-      "/auto-quote/form.css?v=4",
-      "/quote/services.css?v=1"
+      "/quote-assets/auto/form.css?v=4",
+      "/quote-assets/services/services.css?v=1"
     ],
     "scripts": [
-      "/quote/services.js?v=1"
+      "/quote-assets/services/services.js?v=1"
     ]
   },
   "get-a-quote/get-a-motorcycle-insurance-quote": {
@@ -466,11 +466,11 @@
     "bodyClass": "content-page quote-flow-page",
     "service": "motorcycle",
     "styles": [
-      "/auto-quote/form.css?v=4",
-      "/quote/services.css?v=1"
+      "/quote-assets/auto/form.css?v=4",
+      "/quote-assets/services/services.css?v=1"
     ],
     "scripts": [
-      "/quote/services.js?v=1"
+      "/quote-assets/services/services.js?v=1"
     ]
   },
   "get-a-quote/get-a-personal-umbrella-protection-quote": {
@@ -480,11 +480,11 @@
     "bodyClass": "content-page quote-flow-page",
     "service": "umbrella",
     "styles": [
-      "/auto-quote/form.css?v=4",
-      "/quote/services.css?v=1"
+      "/quote-assets/auto/form.css?v=4",
+      "/quote-assets/services/services.css?v=1"
     ],
     "scripts": [
-      "/quote/services.js?v=1"
+      "/quote-assets/services/services.js?v=1"
     ]
   },
   "get-a-quote/get-a-rv-insurance-quote": {
@@ -494,11 +494,11 @@
     "bodyClass": "content-page quote-flow-page",
     "service": "rv",
     "styles": [
-      "/auto-quote/form.css?v=4",
-      "/quote/services.css?v=1"
+      "/quote-assets/auto/form.css?v=4",
+      "/quote-assets/services/services.css?v=1"
     ],
     "scripts": [
-      "/quote/services.js?v=1"
+      "/quote-assets/services/services.js?v=1"
     ]
   },
   "get-a-quote/golf-cart-insurance-quote": {
@@ -508,11 +508,11 @@
     "bodyClass": "content-page quote-flow-page",
     "service": "golf-cart",
     "styles": [
-      "/auto-quote/form.css?v=4",
-      "/quote/services.css?v=1"
+      "/quote-assets/auto/form.css?v=4",
+      "/quote-assets/services/services.css?v=1"
     ],
     "scripts": [
-      "/quote/services.js?v=1"
+      "/quote-assets/services/services.js?v=1"
     ]
   },
   "get-a-quote": {
@@ -522,11 +522,11 @@
     "bodyClass": "content-page quote-flow-page",
     "service": "",
     "styles": [
-      "/auto-quote/form.css?v=4",
-      "/quote/services.css?v=1"
+      "/quote-assets/auto/form.css?v=4",
+      "/quote-assets/services/services.css?v=1"
     ],
     "scripts": [
-      "/quote/services.js?v=1"
+      "/quote-assets/services/services.js?v=1"
     ]
   },
   "get-a-quote/renters": {
@@ -536,11 +536,11 @@
     "bodyClass": "content-page quote-flow-page",
     "service": "renters",
     "styles": [
-      "/auto-quote/form.css?v=4",
-      "/quote/services.css?v=1"
+      "/quote-assets/auto/form.css?v=4",
+      "/quote-assets/services/services.css?v=1"
     ],
     "scripts": [
-      "/quote/services.js?v=1"
+      "/quote-assets/services/services.js?v=1"
     ]
   },
   "home-businesses-and-homeowners-insurance-coverage-what-you-need-to-know": {
@@ -1047,11 +1047,11 @@
     "bodyClass": "content-page quote-flow-page",
     "service": "",
     "styles": [
-      "/auto-quote/form.css?v=4",
-      "/quote/services.css?v=1"
+      "/quote-assets/auto/form.css?v=4",
+      "/quote-assets/services/services.css?v=1"
     ],
     "scripts": [
-      "/quote/services.js?v=1"
+      "/quote-assets/services/services.js?v=1"
     ]
   },
   "recruit": {
