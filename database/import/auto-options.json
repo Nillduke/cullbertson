@@ -1,0 +1,239 @@
+{
+  "makes": [
+    "Buick",
+    "Chevrolet",
+    "Chrysler",
+    "Dodge",
+    "Ford",
+    "Honda",
+    "Hyundai",
+    "Jeep",
+    "Kia",
+    "Nissan",
+    "Toyota",
+    "Acura",
+    "Alfa Romeo",
+    "Aston Martin",
+    "Audi",
+    "Bentley",
+    "BMW",
+    "Cadillac",
+    "Ferrari",
+    "Fiat",
+    "Genesis",
+    "Global Electric Motors",
+    "GMC",
+    "Infiniti",
+    "Isuzu",
+    "Jaguar",
+    "Lamborghini",
+    "Land Rover",
+    "Lexus",
+    "Lincoln",
+    "Lotus",
+    "Lucid Motors",
+    "Maserati",
+    "Mazda",
+    "McLaren Automotive",
+    "Mercedes-Benz",
+    "MINI",
+    "Mitsubishi",
+    "Nikola",
+    "Polestar",
+    "Porsche",
+    "Ram",
+    "Rivian",
+    "Rolls-Royce",
+    "Subaru",
+    "Suzuki",
+    "Tesla",
+    "Vinfast Trading And Production Llc",
+    "Volkswagen",
+    "Volvo",
+    "Yamaha"
+  ],
+  "popularMakes": [
+    "Buick",
+    "Chevrolet",
+    "Chrysler",
+    "Dodge",
+    "Ford",
+    "Honda",
+    "Hyundai",
+    "Jeep",
+    "Kia",
+    "Nissan",
+    "Toyota"
+  ],
+  "carriers": [
+    "21st Century Insurance",
+    "AAA Insurance Co.",
+    "Allstate",
+    "American Family",
+    "AMICA",
+    "Country Financial",
+    "Esurance",
+    "Farmers",
+    "Geico",
+    "Liberty Mutual",
+    "Mercury",
+    "Metlife",
+    "Nationwide",
+    "Progressive",
+    "Safeco",
+    "State Farm",
+    "The Hartford",
+    "Travelers",
+    "USAA",
+    "Other"
+  ],
+  "tenures": [
+    "1-2 Years",
+    "2-3 Years",
+    "3-5 Years",
+    "5+ Years",
+    "Less Than A Year"
+  ],
+  "genders": [
+    "Male",
+    "Female",
+    "Non-Binary"
+  ],
+  "states": [
+    "AK",
+    "AL",
+    "AR",
+    "AZ",
+    "CA",
+    "CO",
+    "CT",
+    "DC",
+    "DE",
+    "FL",
+    "GA",
+    "HI",
+    "IA",
+    "ID",
+    "IL",
+    "IN",
+    "KS",
+    "KY",
+    "LA",
+    "MA",
+    "MD",
+    "ME",
+    "MI",
+    "MN",
+    "MO",
+    "MS",
+    "MT",
+    "NC",
+    "ND",
+    "NE",
+    "NH",
+    "NJ",
+    "NM",
+    "NV",
+    "NY",
+    "OH",
+    "OK",
+    "OR",
+    "PA",
+    "RI",
+    "SC",
+    "SD",
+    "TN",
+    "TX",
+    "UT",
+    "VA",
+    "VT",
+    "WA",
+    "WI",
+    "WV",
+    "WY"
+  ],
+  "minimumYear": 1987,
+  "observedSourceMaximumYear": 2027,
+  "yesNo": [
+    "Yes",
+    "No"
+  ],
+  "copy": {
+    "Review your quote request.": {
+      "title": "Review your quote request.",
+      "description": "Review your details before saving your quote request."
+    },
+    "What year is your vehicle?": {
+      "title": "What year is your vehicle?",
+      "description": "Let’s start with the vehicle you’d like to insure."
+    },
+    "What make is your vehicle?": {
+      "title": "What make is your vehicle?",
+      "description": null
+    },
+    "Which model do you drive?": {
+      "title": "Which model do you drive?",
+      "description": null
+    },
+    "Add another vehicle?": {
+      "title": "Add another vehicle?",
+      "description": "You can include up to six vehicles in this request."
+    },
+    "Are you currently insured?": {
+      "title": "Are you currently insured?",
+      "description": "This helps us understand where you’re starting from."
+    },
+    "Who are you insured with?": {
+      "title": "Who are you insured with?",
+      "description": "Choose your current insurance company."
+    },
+    "Are you a homeowner?": {
+      "title": "Are you a homeowner?",
+      "description": "We can help you explore coverage for more than your car."
+    },
+    "Include a home insurance quote?": {
+      "title": "Include a home insurance quote?",
+      "description": "Let our team know if you’d like to explore home and auto together."
+    },
+    "What is your date of birth?": {
+      "title": "What is your date of birth?",
+      "description": "Enter the date for this driver. This form is for adults aged 18 or older."
+    },
+    "What is your gender?": {
+      "title": "What is your gender?",
+      "description": "Select the option for this driver."
+    },
+    "Are you married?": {
+      "title": "Are you married?",
+      "description": "Select the option for this driver."
+    },
+    "Any at-fault accidents in the last 3 years?": {
+      "title": "Any at-fault accidents in the last 3 years?",
+      "description": "Answer for this driver only."
+    },
+    "Any DUI in the last 3 years?": {
+      "title": "Any DUI in the last 3 years?",
+      "description": "Answer for this driver only."
+    },
+    "What is your name?": {
+      "title": "What is your name?",
+      "description": "Enter the name for this driver."
+    },
+    "Add another driver?": {
+      "title": "Add another driver?",
+      "description": "Include other adult drivers you’d like our team to consider. Up to six drivers."
+    },
+    "What is your address?": {
+      "title": "What is your address?",
+      "description": "Where do you keep the vehicle you’d like to insure?"
+    },
+    "Where can we email you?": {
+      "title": "Where can we email you?",
+      "description": "Use the email address you’d like associated with this request."
+    },
+    "What is your phone number?": {
+      "title": "What is your phone number?",
+      "description": "How can our local team reach you about your quote request?"
+    }
+  }
+}

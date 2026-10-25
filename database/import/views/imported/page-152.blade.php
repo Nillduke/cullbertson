@@ -1,0 +1,34 @@
+@extends('layouts.app')
+@section('content')
+@verbatim
+<main id="main"><section class="content-page-heading shell"><a href="/">Home</a><span>/</span><p>Insurance articles</p><h1>What to Do if Your Home is Destroyed by a Natural Disaster</h1></section><article class="imported-content shell">
+<search>
+</search>
+<h2>What to Do if Your Home is Destroyed by a Natural Disaster</h2>
+<img alt="" class="attachment-full size-full wp-image-9192" height="720" loading="lazy" src="/assets/original/2022/10/the-house-is-destroyed_sm.jpg" width="1080">
+<p>When your home is damaged or destroyed in a natural disaster, it can feel like your world has been turned upside down. In addition to the emotional toll, you may also be facing significant financial challenges. After all, even though your home has been destroyed, you’re still responsible for making your mortgage payments.</p>
+<p>So what should you do if you find yourself in this situation? Here are four steps to help you start the recovery process:</p>
+<h2>Step 1: Call Your Insurance Company to File a Claim</h2>
+<p>In the event that your home is damaged or destroyed, the first step is to contact your insurance company. Be prepared with all relevant information, such as photos and videos of the damage, as well as any other supporting documentation. The insurance company will likely ask you a number of questions in order to process your claim. </p>
+<p>Once your claim has been filed, an adjuster will be assigned to visit your property in order to assess the damage and determine the extent of coverage. In some cases, it may be necessary to hire a certified public adjuster to help negotiate with the insurance company on your behalf. In either case, it’s important to have a clear understanding of your policy in order to ensure that you receive the full benefits to which you’re entitled.</p>
+<figure><img alt="hurricane ian destroyed house in florida residential natural disaster" class="wp-image-4708" height="342" loading="lazy" src="/assets/original/2022/10/hurricane-ian-destroyed-house-in-florida-residenti_sm-1024x683.jpg" width="512"/></figure>
+<h2>Step 2: Apply for Aid from Government Organizations</h2>
+<p>After you’ve contacted your insurance company, the next step is to apply for aid from government organizations like FEMA. FEMA offers grants and low-interest loans to help homeowners rebuild their homes and their lives after a disaster. You can apply for FEMA assistance online, by phone, or in person at a disaster recovery center. </p>
+<p>The process is relatively simple: you’ll need to provide some basic information about yourself and your property, and then FEMA will determine if you’re eligible for assistance. If you are, they’ll send you a packet of information detailing the types of assistance available and how to apply for them. Even if you don’t think you’re eligible for FEMA assistance, it’s still worth applying; you may be surprised at what’s available. So don’t delay—contact FEMA today and start the process of rebuilding your life.</p>
+<h2>Step 3: Contact Your Mortgage Servicer</h2>
+<p>After a disaster, the last thing you want to worry about is your mortgage. <a href="https://www.consumerfinance.gov/ask-cfpb/what-should-i-do-if-my-house-is-destroyed-in-a-natural-disaster-en-1521/#:~:text=Step%201%3A%20Call%20your%20insurance,let%20them%20know%20what%20happened.">But even if your home has been destroyed, you’re still responsible for making your payments. </a></p>
+<p>So the third step is to reach out to your mortgage servicer and let them know what happened. </p>
+<p>If you can’t make your regular payments, they may offer options like forbearance or modification that can help you catch up without incurring fees or facing foreclosure. It’s worth taking the time to explore all your options because losing your home is the last thing you need after everything else has been turned upside down.</p>
+<h2>Step 4: Seek Help from Community Organizations</h2>
+<p>After a major disaster, the last thing you want to worry about is finding somewhere to get help. Thankfully, there are often community-based organizations that spring up to offer assistance with everything from tarping roofs to providing hot meals. These groups can be invaluable resources during the rebuilding process, so don’t hesitate to seek them out. Not only will they be able to provide you with much-needed practical assistance, but they can also offer emotional support during this difficult time. So if you’re feeling lost after a disaster, make sure to look for a community-based organization in your area. They just might be exactly what you need.</p>
+<h2>What if I Can’t Live in My Home because it’s Destroyed?</h2>
+<p>If your home is uninhabitable, you will need to find a place to stay temporarily.</p>
+<p>This could mean staying with friends or family, renting an apartment, or staying in a hotel. If you have to move out of your home, keep all of your receipts as you may be able to get reimbursement from your insurance company. Note that if you have to live in a hotel, you will likely have to pay for your own expenses. However, if you can prove that the damage to your home was caused by a natural disaster, you may be able to get some help from the government. In any case, it’s important to have a plan in place in case you need to leave your home unexpectedly.</p>
+<figure><img alt="hurricane ian flooded destroyed houses in florida residential natural disaster" class="wp-image-4709" height="342" loading="lazy" src="/assets/original/2022/10/hurricane-ian-flooded-houses-in-florida-residentia_sm-1024x683.jpg" width="512"/></figure>
+<h2>How to Avoid Foreclosure After a Disaster</h2>
+<p>If you’re worried about foreclosure, the best thing you can do is contact your mortgage servicer as soon as possible. Explain your situation and see what options are available to you. You may be able to temporarily stop making payments, or you may qualify for a loan modification that will make your payments more manageable. Whatever you do, don’t simply stop paying your mortgage—this will only make things worse in the long run. If you’re struggling to make ends meet after a disaster, there are programs available to help you keep your home. But you have to take action quickly—don’t wait until it’s too late.</p>
+<p>If your home is ever damaged or destroyed by a natural disaster, remember that you’re not alone. There are many organizations and programs available to help you through this difficult time. </p>
+<p>Start by <a href="/contact-us/">contacting your insurance company</a> and mortgage servicer, and then apply for aid from government organizations like FEMA. Finally, seek out help from community-based organizations—they can be a source of both physical and emotional support during the rebuilding process.</p>
+</img></article></main>
+@endverbatim
+@endsection

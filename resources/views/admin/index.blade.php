@@ -1,0 +1,9 @@
+@extends('admin.layout')
+@section('title','Pages & posts')
+@section('content')
+<div class="cms-title"><div><p class="cms-kicker">YOUR WEBSITE, IN ONE PLACE</p><h1>Pages & posts</h1><p>Content is served directly from the database.</p></div><a class="cms-button" href="/admin/pages/create?type={{ request('type','page') }}">Create content +</a></div>
+<div class="cms-stats">@foreach($counts as $label=>$count)<div><strong>{{ $count }}</strong><span>{{ $label }}</span></div>@endforeach</div>
+<form class="cms-filter" method="get"><input name="q" value="{{ request('q') }}" placeholder="Search title or URL" aria-label="Search content"><select name="type" aria-label="Content type"><option value="">All content</option>@foreach(['page','post','insurance','staff','blog_index'] as $type)<option @selected(request('type')===$type)>{{ $type }}</option>@endforeach</select><select name="status" aria-label="Publication status"><option value="">All statuses</option><option value="published" @selected(request('status')==='published')>Published</option><option value="draft" @selected(request('status')==='draft')>Draft</option></select><button class="cms-button">Apply filters</button></form>
+<div class="cms-table"><table><thead><tr><th>Content</th><th>Type</th><th>Status</th><th></th></tr></thead><tbody>@foreach($pages as $page)<tr><td><strong>{{ $page->title }}</strong><small>/{{ $page->slug }}</small></td><td>{{ $page->type }}</td><td><span class="cms-status {{ $page->status }}">{{ $page->status }}</span></td><td><a href="/admin/pages/{{ $page->id }}/edit">Edit &rarr;</a></td></tr>@endforeach
+@if($pages->isEmpty())<tr><td colspan="4"><div class="admin-empty"><h3>No matching content</h3><p>Try another search or clear your filters.</p><a href="/admin/content">View all content</a></div></td></tr>@endif</tbody></table></div><div class="cms-pages">{{ $pages->links('pagination.cms') }}</div>
+@endsection

@@ -1,0 +1,54 @@
+CULBERTSON LARAVEL - MANUAL CPANEL UPLOAD
+
+Runtime: PHP 8.3 or newer, Laravel 13, Composer dependencies, PDO SQLite.
+The current application uses SQLite. Switching DB_CONNECTION to mysql does NOT migrate its content; use the supplied content snapshot for this deployment.
+
+1. FOLDER LAYOUT
+Recommended cPanel split layout (the prepared ZIP uses this):
+  /home/CPANEL_USERNAME/culbertson_app/  private Laravel application
+  /home/CPANEL_USERNAME/public_html/     public files ONLY
+For an addon domain or subdomain, public_html means that domain's actual document root.
+Upload/extract culbertson-cpanel-upload.zip into your cPanel home directory, NOT inside public_html. Confirm the two folders line up with the layout above. Do not overwrite an existing website without taking a backup first.
+
+2. FILES TO UPLOAD
+culbertson_app/: app/, bootstrap/, config/, database/, resources/, routes/, storage/ (empty runtime folders), vendor/ (production dependencies), artisan, composer.json, composer.lock, .env.production.example.
+public_html/: every file and directory from public/, including .htaccess, assets/, vendor/tinymce/, index.php and all CSS/JS. The prepared index.php already points to ../culbertson_app and uses public_html as Laravel's public path.
+The supplied database/database.sqlite is a CONTENT-ONLY snapshot of the current design, pages, taxonomies, team, redirects, labels and media catalogue. Local users/passwords, sessions, customer submissions, jobs and caches have been removed.
+
+The GitHub source repository excludes vendor/ and all SQLite files. Therefore a GitHub source ZIP alone is not the complete manual deployment package. The prepared cPanel ZIP supplies production vendor/ and the cleaned database. Public TinyMCE files ARE included in Git and in the cPanel ZIP.
+
+3. CONFIGURE YOUR SERVER
+In cPanel, select PHP 8.3+ for the domain. Enable PDO SQLite/sqlite3, mbstring, fileinfo, DOM/XML, cURL, OpenSSL and the other Laravel-required extensions. Enable HTTPS.
+In culbertson_app copy .env.production.example to .env. Replace YOUR-DOMAIN.com and CPANEL_USERNAME with the real domain/account path. Set:
+  APP_URL=https://your-real-domain.com
+  APP_PUBLIC_PATH=/home/your-account/public_html
+  DB_DATABASE=/home/your-account/culbertson_app/database/database.sqlite
+Keep APP_ENV=production and APP_DEBUG=false. Never use the local .env or local APP_KEY on the server.
+
+4. ONE-TIME SERVER COMMANDS
+Run in cPanel Terminal/SSH from /home/your-account/culbertson_app (use your host's PHP 8.3 binary if the default php is older):
+  php artisan key:generate --force
+  php artisan migrate --force
+  php artisan cms:create-admin --email=your-admin-email@example.com
+The admin command asks for a new password privately and does not print or save it to a public file. It leaves existing administrators unchanged.
+  php artisan config:cache
+  php artisan view:cache
+If Terminal/SSH is unavailable, ask the hosting provider to run the setup commands. This package has no publicly accessible installer or setup URL.
+Do NOT run migrate:fresh or db:seed on the supplied content database.
+
+5. PERMISSIONS AND CHECKS
+The PHP process must be able to write storage/, bootstrap/cache/, database/ and database/database.sqlite (SQLite needs its containing directory writable too). Ensure public_html/assets/media/ exists and is writable for image uploads. Use host-appropriate permissions, typically directories 755/775 and files 644/664; do not use 777. Keep .env and the SQLite file outside public_html.
+Open the homepage, /insurance/golf-cart-insurance/, an article, /agency-staff/, /admin/login, and /wp-sitemap.xml. Check image upload and one test enquiry.
+SEARCH_ENGINE_INDEXING=false keeps the site out of indexing for staging. Set true only when ready to launch, then run config:cache again. Admin pages always stay noindex.
+Email delivery is not configured; enquiries and quotes are stored in the admin inbox. MAIL_MAILER=log does not send email. Configure real SMTP separately if needed.
+
+6. FUTURE UPDATES
+Back up the server database and media before updating. Upload changed application/public files; rebuild production dependencies if composer.lock changes. Keep the server .env, database/database.sqlite and uploaded public_html/assets/media/ intact. Never overwrite a live database with the initial package snapshot. Run migrate --force for new migrations, then refresh config/view caches.
+
+7. NEVER UPLOAD TO PUBLIC_HTML OR GITHUB
+.env, the SQLite database, private admin credential files, .local-setup/, database backups/SQL dumps, logs, sessions, generated cache files, .git/, node_modules/ and test reports.
+The project's ROOT .htaccess is a local workspace guard (Require all denied); do not upload it. public/.htaccess is the correct public rewrite file and IS in the ZIP.
+
+Alternative hosting: if you can set the domain document root directly to a Laravel project's public/ folder, upload the normal private project layout, use the original public/index.php and leave APP_PUBLIC_PATH empty.
+Official requirements: https://laravel.com/docs/13.x/deployment
+TinyMCE: bundled self-hosted GPL edition; see public vendor notices. Premium plugins are not included.

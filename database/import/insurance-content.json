@@ -1,0 +1,1385 @@
+{
+  "insurance/auto-insurance": {
+    "eyebrow": "HERE FOR YOUR FLORIDA LIFE",
+    "heading": "Auto Insurance Florida",
+    "subtitle": "Drive with Confidence in Fort Myers",
+    "intro_heading": "Drive with Confidence in Fort Myers",
+    "intro_body": "Your auto insurance protects you in the event of a car accident or theft. In exchange for a premium, an insurance carrier pays your losses according to the terms of your policy.",
+    "quote_eyebrow": "LOCAL PEOPLE. PERSONAL GUIDANCE.",
+    "quote_heading": "Find coverage that fits your life.",
+    "quote_body": "Start with your ZIP code. Our team can help you explore your coverage options.",
+    "zip_label": "Your ZIP code",
+    "feature_eyebrow": "MADE FOR YOUR EVERYDAY ADVENTURES",
+    "feature_heading": "Drive with Confidence in Fort Myers",
+    "feature_body": "Get Tailored Coverage from Culbertson Agency, Your Local Experts in Auto Insurance",
+    "coverage_eyebrow": "UNDERSTAND YOUR OPTIONS",
+    "coverage_heading": "What does auto insurance cover?",
+    "coverage_intro": "The amount of coverage can vary depending on the policy you choose. Here are some of the most common coverage options.",
+    "coverage_note": "Available coverage, exclusions, limits and deductibles vary by insurer and policy. Your agent can explain the details before you choose.",
+    "faq_eyebrow": "A LITTLE CLARITY GOES A LONG WAY",
+    "faq_heading": "Understand your coverage.",
+    "home_label": "Home",
+    "insurance_label": "Insurance",
+    "breadcrumb": "Auto Insurance Florida",
+    "explore_label": "Explore coverage options",
+    "quote_button": "Get a quote",
+    "zip_placeholder": "Enter ZIP code",
+    "zip_validation": "Enter a five-digit ZIP code",
+    "phone_intro": "Prefer to talk?",
+    "phone": "(239) 210-7700",
+    "phone_url": "tel:12392107700",
+    "feature_link_label": "Start your quote",
+    "resources_label": "More ways we can help",
+    "quote_url": "/auto-quote/",
+    "hero": "/assets/family-auto.webp",
+    "hero_alt": "Auto Insurance Florida",
+    "feature_image": "/assets/family-auto.webp",
+    "feature_image_alt": "Auto Insurance Florida",
+    "feature_points": [
+      "Coverage for accidents, theft, and natural disasters.",
+      "Protection for medical costs",
+      "Bundling options for big savings"
+    ],
+    "coverages": [
+      {
+        "title": "Liability",
+        "body": "<p>\r\n\t\t\t\t\t\tIf you’re responsible for an accident, liability car insurance protects you.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Collision",
+        "body": "<p>\r\n\t\t\t\t\t\tCar collision coverage helps pay for repairs if your vehicle is damaged in an accident.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Comprehensive",
+        "body": "<p>\r\n\t\t\t\t\t\tThis covers auto damage caused by incidents other than collisions like theft or severe weather.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Uninsured and Underinsured",
+        "body": "<p>\r\n\t\t\t\t\t\tCoverage for auto and medical bills if you’re in an accident with an uninsured or underinsured driver.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Personal Injury",
+        "body": "<p>\r\n\t\t\t\t\t\tAlso known as no-fault insurance, this helps pay for medical expenses caused by a car accident.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Roadside and Rental",
+        "body": "<p>\r\n\t\t\t\t\t\tAdded coverage options include rental cars in the event of an accident and roadside assistance.\t\t\t\t\t</p>"
+      }
+    ],
+    "questions": [
+      {
+        "title": "What is auto insurance?",
+        "body": "<p>Your auto insurance protects you in the event of a car accident or theft. In exchange for a premium, an insurance carrier pays your losses according to the terms of your policy.</p>"
+      },
+      {
+        "title": "What doesn't auto insurance cover?",
+        "body": "<ul><li>General wear and tear</li><li>Intentional damage</li><li>Routine auto maintenance and repairs</li><li>Drivers not listed on your policy</li><li>Commercial use of your car</li><li>Ridesharing</li><li>Stolen personal items</li></ul>"
+      },
+      {
+        "title": "Ask the right questions to find the best auto insurance for you",
+        "body": "<p><strong>Questions to consider for yourself</strong></p><ul><li>What is my commute? Where do I park? Consider these day-to-day activities to help determine the amount of coverage you need.</li><li>Who else will be driving my car?</li><li>Do I need any additional coverage like gap or commercial?</li></ul><p><strong>Questions to ask your agent</strong></p><ul><li>Do I qualify for any savings or discounts?</li><li>Are there coverage requirements for my state</li><li>What isn’t covered on my auto insurance policy?</li></ul>"
+      }
+    ],
+    "resources": [
+      {
+        "eyebrow": "YOUR FLORIDA LIFE",
+        "title": "More of life. Covered.",
+        "body": "We can help you find the right policy for all of your insurance needs. Explore our insurance options.",
+        "links": [
+          {
+            "label": "Explore our insurance",
+            "url": "/insurance"
+          },
+          {
+            "label": "Home + auto quotes",
+            "url": "/quote?service=home-auto"
+          }
+        ]
+      },
+      {
+        "eyebrow": "HELPFUL READING",
+        "title": "A little more peace of mind.",
+        "body": "Practical guidance to help you understand insurance and prepare for the unexpected.",
+        "links": [
+          {
+            "label": "All insurance articles",
+            "url": "/expert-insurance-insights-and-tips-culbertson-agency-articles/"
+          }
+        ]
+      },
+      {
+        "eyebrow": "HERE WHEN YOU NEED US",
+        "title": "Let’s talk about your coverage.",
+        "body": "Have a question about coverage, a policy or a claim? Our Fort Myers team is here to help.",
+        "links": [
+          {
+            "label": "Contact our team",
+            "url": "/contact-us"
+          },
+          {
+            "label": "Claims support",
+            "url": "/claims"
+          },
+          {
+            "label": "(239) 210-7700",
+            "url": "tel:12392107700"
+          }
+        ]
+      }
+    ]
+  },
+  "insurance/boat-insurance": {
+    "eyebrow": "HERE FOR YOUR FLORIDA LIFE",
+    "heading": "Boat Insurance in Fort Myers, FL",
+    "subtitle": "Navigate Florida Waters with Confidence",
+    "intro_heading": "Navigate Florida Waters with Confidence",
+    "intro_body": "",
+    "quote_eyebrow": "LOCAL PEOPLE. PERSONAL GUIDANCE.",
+    "quote_heading": "Find coverage that fits your life.",
+    "quote_body": "Start with your ZIP code. Our team can help you explore your coverage options.",
+    "zip_label": "Your ZIP code",
+    "feature_eyebrow": "MADE FOR YOUR EVERYDAY ADVENTURES",
+    "feature_heading": "Navigate Florida Waters with Confidence",
+    "feature_body": "Affordable boat coverage for Florida’s waters—protecting you from storms, theft, and more, on and off the water.",
+    "coverage_eyebrow": "UNDERSTAND YOUR OPTIONS",
+    "coverage_heading": "What does boat insurance cover?",
+    "coverage_intro": "The amount of coverage can vary depending on the policy you choose. Here are some of the most common coverage options.",
+    "coverage_note": "Available coverage, exclusions, limits and deductibles vary by insurer and policy. Your agent can explain the details before you choose.",
+    "faq_eyebrow": "A LITTLE CLARITY GOES A LONG WAY",
+    "faq_heading": "Understand your coverage.",
+    "home_label": "Home",
+    "insurance_label": "Insurance",
+    "breadcrumb": "Boat Insurance in Fort Myers, FL",
+    "explore_label": "Explore coverage options",
+    "quote_button": "Get a quote",
+    "zip_placeholder": "Enter ZIP code",
+    "zip_validation": "Enter a five-digit ZIP code",
+    "phone_intro": "Prefer to talk?",
+    "phone": "(239) 210-7700",
+    "phone_url": "tel:12392107700",
+    "feature_link_label": "Start your quote",
+    "resources_label": "More ways we can help",
+    "quote_url": "/get-a-quote/get-a-boat-insurance-quote/",
+    "hero": "/assets/original/2024/11/sunset-in-florida-keys-with-boat-arriving-to-the.webp",
+    "hero_alt": "Boat Insurance in Fort Myers, FL",
+    "feature_image": "/assets/original/2024/11/sunset-in-florida-keys-with-boat-arriving-to-the.webp",
+    "feature_image_alt": "Boat Insurance in Fort Myers, FL",
+    "feature_points": [],
+    "coverages": [
+      {
+        "title": "Physical Damage",
+        "body": "<p>\r\n\t\t\t\t\t\tRepairs or replacement for your boat, motor, or trailer from collisions, storms, or theft—on water or land.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Liability",
+        "body": "<p>\r\n\t\t\t\t\t\tCosts if you injure someone or damage their property while boating.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Medical Payments",
+        "body": "<p>\r\n\t\t\t\t\t\tExpenses for injuries to you or passengers.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Towing",
+        "body": "<p>\r\n\t\t\t\t\t\tOn-water or roadside assistance for breakdowns.\r\n\r\n\t\t\t\t\t</p>"
+      }
+    ],
+    "questions": [
+      {
+        "title": "What Boat Insurance in Florida Typically Doesn’t Cover",
+        "body": "<ul><li>General wear and tear</li><li>Intentional damage</li><li>Routine maintenance and repairs</li><li>Mechanical Breakdowns (Unless Added)</li><li><span><span><span>Damage While Racing or in Commercial Use</span></span></span></li><li><span><span><span>Damage to Uninsured Boaters (Unless Added)</span></span></span></li><li><span><span><span>Personal Belongings (Unless Specified)</span></span></span></li></ul>"
+      },
+      {
+        "title": "Ask the Right Questions to Find the Best Boat Insurance for You",
+        "body": "<p><strong>Questions to consider for yourself</strong></p><ul><li><span><span><span>How do I use my boat? Where do I dock or store it? </span></span></span><span><span>Think about your boating habits—weekend cruises, fishing trips, or long voyages—and where you keep your boat (marina, trailer, or driveway). This helps determine the coverage level you need.</span></span></li><li><span><span><span>Who else will be operating my boat? </span></span></span><span><span>Will family, friends, or renters use it? Their experience and frequency of use can affect your insurance needs.</span></span></li><li><span><span><span>Do I need any additional coverage like towing or salvage? </span></span></span><span><span>Consider extras like on-water towing, fuel spill liability, or salvage costs for your boat’s specific risks.</span></span></li></ul><p><strong>Questions to ask your agent</strong></p><ul><li><p>Do I qualify for any savings or discounts? Ask about discounts for safe boating courses, bundling with home insurance, or secure storage (e.g., a locked marina).</p></li><li><p>Are there coverage requirements for boating in Florida? While Florida doesn’t mandate boat insurance, some marinas or lenders do—confirm what’s required for your situation.</p></li><li><p>What isn’t covered by my boat insurance policy? Understand exclusions like wear and tear, marine life damage, or uninsured boater incidents to avoid surprises.</p></li></ul>"
+      },
+      {
+        "title": "Boat Insurance in Florida: Key Facts to Understand",
+        "body": "<p>Living in Fort Myers means enjoying coastal beauty, but it also brings specific challenges. We offer comprehensive coverage options to protect you against local risks, including:</p><p>\r\n\t\t\t\t\t\tPolicies can cap at $250,000 (NFIP-style) or offer higher limits with private insurers—Cassidy finds the right fit for your boat’s value.\t\t\t\t\t</p><p>\r\n\t\t\t\t\t\tComprehensive plans cover your boat whether it’s cruising, docked, or trailered—essential for year-round Fort Myers boaters.\t\t\t\t\t</p><p>\r\n\t\t\t\t\t\tSafe boating courses, multi-policy bundles, or newer boats can lower your premium—let us maximize your savings.\t\t\t\t\t</p><p>We'll make sure that you’re equipped with the knowledge and coverage to boat confidently.</p>"
+      }
+    ],
+    "resources": [
+      {
+        "eyebrow": "YOUR FLORIDA LIFE",
+        "title": "More of life. Covered.",
+        "body": "We can help you find the right policy for all of your insurance needs. Explore our insurance options.",
+        "links": [
+          {
+            "label": "Explore our insurance",
+            "url": "/insurance"
+          },
+          {
+            "label": "Home + auto quotes",
+            "url": "/quote?service=home-auto"
+          }
+        ]
+      },
+      {
+        "eyebrow": "HELPFUL READING",
+        "title": "A little more peace of mind.",
+        "body": "Practical guidance to help you understand insurance and prepare for the unexpected.",
+        "links": [
+          {
+            "label": "All insurance articles",
+            "url": "/expert-insurance-insights-and-tips-culbertson-agency-articles/"
+          }
+        ]
+      },
+      {
+        "eyebrow": "HERE WHEN YOU NEED US",
+        "title": "Let’s talk about your coverage.",
+        "body": "Have a question about coverage, a policy or a claim? Our Fort Myers team is here to help.",
+        "links": [
+          {
+            "label": "Contact our team",
+            "url": "/contact-us"
+          },
+          {
+            "label": "Claims support",
+            "url": "/claims"
+          },
+          {
+            "label": "(239) 210-7700",
+            "url": "tel:12392107700"
+          }
+        ]
+      }
+    ]
+  },
+  "insurance/condo-insurance": {
+    "eyebrow": "HERE FOR YOUR FLORIDA LIFE",
+    "heading": "Florida Condo Insurance",
+    "subtitle": "Stay Protected in Your Florida Condo",
+    "intro_heading": "Stay Protected in Your Florida Condo",
+    "intro_body": "Condo insurance, also known as HO-6 insurance, is a policy designed to protect condo owners. It provides coverage for the interior of your unit, your personal belongings, and liability risks. Unlike homeowners insurance, it complements the condo association’s master policy, which typically covers the exterior and communal areas. Condo insurance helps ensure your individual unit and possessions are protected from unexpected events.",
+    "quote_eyebrow": "LOCAL PEOPLE. PERSONAL GUIDANCE.",
+    "quote_heading": "Find coverage that fits your life.",
+    "quote_body": "Start with your ZIP code. Our team can help you explore your coverage options.",
+    "zip_label": "Your ZIP code",
+    "feature_eyebrow": "MADE FOR YOUR EVERYDAY ADVENTURES",
+    "feature_heading": "Stay Protected in Your Florida Condo",
+    "feature_body": "Get Tailored Coverage from the Culbertson Agency, Your Local Experts in Condo Insurance",
+    "coverage_eyebrow": "UNDERSTAND YOUR OPTIONS",
+    "coverage_heading": "What does condo insurance cover?",
+    "coverage_intro": "A standard condo insurance policy includes coverage for the following:",
+    "coverage_note": "Available coverage, exclusions, limits and deductibles vary by insurer and policy. Your agent can explain the details before you choose.",
+    "faq_eyebrow": "A LITTLE CLARITY GOES A LONG WAY",
+    "faq_heading": "Understand your coverage.",
+    "home_label": "Home",
+    "insurance_label": "Insurance",
+    "breadcrumb": "Florida Condo Insurance",
+    "explore_label": "Explore coverage options",
+    "quote_button": "Get a quote",
+    "zip_placeholder": "Enter ZIP code",
+    "zip_validation": "Enter a five-digit ZIP code",
+    "phone_intro": "Prefer to talk?",
+    "phone": "(239) 210-7700",
+    "phone_url": "tel:12392107700",
+    "feature_link_label": "Start your quote",
+    "resources_label": "More ways we can help",
+    "quote_url": "/get-a-quote/get-a-condo-insurance-quote/",
+    "hero": "/assets/coverage/condo.webp",
+    "hero_alt": "Florida Condo Insurance",
+    "feature_image": "/assets/coverage/condo.webp",
+    "feature_image_alt": "Florida Condo Insurance",
+    "feature_points": [
+      "Protection for your condo's interior and personal belongings",
+      "Coverage for liability and unexpected damages",
+      "Expertise in Florida’s unique insurance needs"
+    ],
+    "coverages": [
+      {
+        "title": "Interior of Your Unit",
+        "body": "<p>\r\n\t\t\t\t\t\tProtects walls, floors, ceilings, and other interior features within your condo.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Personal Belongings",
+        "body": "<p>\r\n\t\t\t\t\t\tCovers your furniture, electronics, clothing, and more if they’re damaged or stolen.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Liability Protection",
+        "body": "<p>\r\n\t\t\t\t\t\tOffers financial protection if someone is injured inside your condo or if you accidentally cause damage to another unit or common area.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Loss of Use",
+        "body": "<p>\r\n\t\t\t\t\t\tPays for temporary housing and related expenses if your condo is uninhabitable due to a covered disaster.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Assessments",
+        "body": "<p>\r\n\t\t\t\t\t\tMay cover shared costs if the condo association needs to repair damage to common areas caused by a covered event.\t\t\t\t\t</p>"
+      }
+    ],
+    "questions": [
+      {
+        "title": "What is condo insurance?",
+        "body": "<p>Condo insurance, also known as HO-6 insurance, is a policy designed to protect condo owners. It provides coverage for the interior of your unit, your personal belongings, and liability risks. Unlike homeowners insurance, it complements the condo association’s master policy, which typically covers the exterior and communal areas. Condo insurance helps ensure your individual unit and possessions are protected from unexpected events.</p>"
+      },
+      {
+        "title": "What doesn’t condo insurance cover?",
+        "body": "<p>While condo insurance offers valuable protection, it does not cover everything. Exclusions typically include:</p><ul><li><strong>Flood Damage</strong>: Like homeowners insurance, flood damage isn’t included and requires a separate flood insurance policy.</li><li><strong>Master Policy Coverage</strong>: Damage to the exterior of the building and shared spaces is usually covered by the condo association’s master policy.</li><li><strong>Wear and Tear</strong>: Routine maintenance and gradual wear are not covered.</li><li><strong>Earthquake Damage</strong>: (in Florida?)</li><li><strong>High-Value Items</strong>: Items like expensive jewelry or rare collectibles may need additional coverage through endorsements or riders.</li></ul>"
+      },
+      {
+        "title": "What are the right questions to ask to find the best condo insurance?",
+        "body": "<p>When searching for the right condo insurance in Florida, asking the right questions can help you make an informed decision. Consider these questions:</p><ul><li>What does my condo association’s master policy cover, and where does my responsibility begin?</li><li>What risks, like hurricanes or wind damage, are explicitly covered or excluded in my policy?</li><li>Does the policy include coverage for assessments by the condo association?</li><li>Do I need flood insurance for my condo?</li><li>How much coverage do I need for my personal belongings and interior upgrades?</li><li>What is the deductible for hurricane or wind-related damage?</li><li>Are there any discounts available, such as for security systems or updated building codes?</li></ul>"
+      }
+    ],
+    "resources": [
+      {
+        "eyebrow": "YOUR FLORIDA LIFE",
+        "title": "More of life. Covered.",
+        "body": "We can help you find the right policy for all of your insurance needs. Explore our insurance options.",
+        "links": [
+          {
+            "label": "Explore our insurance",
+            "url": "/insurance"
+          },
+          {
+            "label": "Home + auto quotes",
+            "url": "/quote?service=home-auto"
+          }
+        ]
+      },
+      {
+        "eyebrow": "HELPFUL READING",
+        "title": "A little more peace of mind.",
+        "body": "Practical guidance to help you understand insurance and prepare for the unexpected.",
+        "links": [
+          {
+            "label": "All insurance articles",
+            "url": "/expert-insurance-insights-and-tips-culbertson-agency-articles/"
+          }
+        ]
+      },
+      {
+        "eyebrow": "HERE WHEN YOU NEED US",
+        "title": "Let’s talk about your coverage.",
+        "body": "Have a question about coverage, a policy or a claim? Our Fort Myers team is here to help.",
+        "links": [
+          {
+            "label": "Contact our team",
+            "url": "/contact-us"
+          },
+          {
+            "label": "Claims support",
+            "url": "/claims"
+          },
+          {
+            "label": "(239) 210-7700",
+            "url": "tel:12392107700"
+          }
+        ]
+      }
+    ]
+  },
+  "insurance/flood-insurance": {
+    "eyebrow": "HERE FOR YOUR FLORIDA LIFE",
+    "heading": "Florida Flood Insurance",
+    "subtitle": "Stay Safe and Secure During Hurricane Season",
+    "intro_heading": "Stay Safe and Secure During Hurricane Season",
+    "intro_body": "Flood insurance is a type of policy that protects homeowners, renters, and businesses from financial losses caused by flooding. It covers damages resulting from overflowing rivers, heavy rainfall, storm surges, and other natural flood events. Standard homeowners insurance policies typically do not cover flood-related damages, making standalone flood insurance essential for those living in flood-prone areas, especially in Florida.",
+    "quote_eyebrow": "LOCAL PEOPLE. PERSONAL GUIDANCE.",
+    "quote_heading": "Find coverage that fits your life.",
+    "quote_body": "Start with your ZIP code. Our team can help you explore your coverage options.",
+    "zip_label": "Your ZIP code",
+    "feature_eyebrow": "MADE FOR YOUR EVERYDAY ADVENTURES",
+    "feature_heading": "Stay Safe and Secure During Hurricane Season",
+    "feature_body": "Get Tailored Coverage from Culbertson Agency, Your Local Experts in Flood Insurance",
+    "coverage_eyebrow": "UNDERSTAND YOUR OPTIONS",
+    "coverage_heading": "What Does Flood Insurance Cover?",
+    "coverage_intro": "Flood insurance generally provides coverage for the following:",
+    "coverage_note": "Available coverage, exclusions, limits and deductibles vary by insurer and policy. Your agent can explain the details before you choose.",
+    "faq_eyebrow": "A LITTLE CLARITY GOES A LONG WAY",
+    "faq_heading": "Understand your coverage.",
+    "home_label": "Home",
+    "insurance_label": "Insurance",
+    "breadcrumb": "Florida Flood Insurance",
+    "explore_label": "Explore coverage options",
+    "quote_button": "Get a quote",
+    "zip_placeholder": "Enter ZIP code",
+    "zip_validation": "Enter a five-digit ZIP code",
+    "phone_intro": "Prefer to talk?",
+    "phone": "(239) 210-7700",
+    "phone_url": "tel:12392107700",
+    "feature_link_label": "Start your quote",
+    "resources_label": "More ways we can help",
+    "quote_url": "/get-a-quote/get-a-flood-insurance-quote/",
+    "hero": "/assets/original/2022/10/hurricane-ian-flooded-houses-in-florida-residentia_sm-1024x683.jpg",
+    "hero_alt": "Florida Flood Insurance",
+    "feature_image": "/assets/original/2022/10/hurricane-ian-flooded-houses-in-florida-residentia_sm-1024x683.jpg",
+    "feature_image_alt": "Florida Flood Insurance",
+    "feature_points": [
+      "Protection against flood damage to your home and belongings",
+      "Peace of mind during unpredictable weather",
+      "Affordable options tailored to Florida homeowners"
+    ],
+    "coverages": [
+      {
+        "title": "Structural Damage",
+        "body": "<p>\r\n\t\t\t\t\t\tRepairs to your home’s foundation, walls, floors, and other structural components due to flooding.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Personal Belongings",
+        "body": "<p>\r\n\t\t\t\t\t\tReplacement or repair of damaged items such as furniture, appliances, electronics, and clothing.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Detached Structures",
+        "body": "<p>\r\n\t\t\t\t\t\tCoverage for garages, sheds, or other detached buildings on your property (if included in the policy).\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Electrical and Plumbing Systems",
+        "body": "<p>\r\n\t\t\t\t\t\tRepairs to wiring, HVAC systems, plumbing, and water heaters damaged by floodwaters.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Cleanup Costs",
+        "body": "<p>\r\n\t\t\t\t\t\tExpenses for removing debris and cleaning up after a flood event.\t\t\t\t\t</p>"
+      }
+    ],
+    "questions": [
+      {
+        "title": "What is Flood Insurance?",
+        "body": "<p>Flood insurance is a type of policy that protects homeowners, renters, and businesses from financial losses caused by flooding. It covers damages resulting from overflowing rivers, heavy rainfall, storm surges, and other natural flood events. Standard homeowners insurance policies typically do not cover flood-related damages, making standalone flood insurance essential for those living in flood-prone areas, especially in Florida.</p>"
+      },
+      {
+        "title": "What Doesn’t Flood Insurance Cover?",
+        "body": "<ul><li><strong>Groundwater or Sewer Backups</strong>: Damage caused by sewer backups or groundwater seepage unless it resulted directly from a flood event and is covered by the policy.</li><li><strong>Additional Living Expenses</strong>: Temporary housing or living expense costs while your home is under repair (most flood policies don’t include this unless added).</li><li><strong>Exterior Property</strong>: Landscaping, swimming pools, decks, patios, and fences are typically not covered.</li><li><strong>Vehicles</strong>: Damage to cars and other vehicles due to flooding is not covered by flood insurance—it’s usually included in comprehensive auto insurance policies.</li><li><strong>Small Damages Below the Deductible</strong>: Any damage less than your policy’s deductible amount.</li></ul>"
+      },
+      {
+        "title": "Ask the right questions to find the best auto insurance for you",
+        "body": "<p>To choose the most suitable flood insurance for your needs, consider asking the following questions:</p><ul><li>Am I located in a high-risk flood zone?</li><li>How much coverage do I need for my home’s structure and personal belongings?</li><li>What is the deductible, and how does it affect my premium?</li><li>Does the policy include any exclusions that I should be aware of?</li><li>Can I add coverage for additional living expenses or other extras?</li><li>Is coverage available through the National Flood Insurance Program (NFIP), or should I consider private insurers?</li><li>What is the waiting period for the policy to go into effect?</li><li>Are there discounts for bundling my flood insurance with other policies?</li><li>How does this policy address specific flood risks during hurricane season?</li></ul><p>By working with a knowledgeable agency like Culbertson Agency, you can ensure your plan is customized to meet your needs and keep your property protected, even during Florida’s unpredictable hurricane season.</p>"
+      }
+    ],
+    "resources": [
+      {
+        "eyebrow": "YOUR FLORIDA LIFE",
+        "title": "More of life. Covered.",
+        "body": "We can help you find the right policy for all of your insurance needs. Explore our insurance options.",
+        "links": [
+          {
+            "label": "Explore our insurance",
+            "url": "/insurance"
+          },
+          {
+            "label": "Home + auto quotes",
+            "url": "/quote?service=home-auto"
+          }
+        ]
+      },
+      {
+        "eyebrow": "HELPFUL READING",
+        "title": "A little more peace of mind.",
+        "body": "Practical guidance to help you understand insurance and prepare for the unexpected.",
+        "links": [
+          {
+            "label": "All insurance articles",
+            "url": "/expert-insurance-insights-and-tips-culbertson-agency-articles/"
+          }
+        ]
+      },
+      {
+        "eyebrow": "HERE WHEN YOU NEED US",
+        "title": "Let’s talk about your coverage.",
+        "body": "Have a question about coverage, a policy or a claim? Our Fort Myers team is here to help.",
+        "links": [
+          {
+            "label": "Contact our team",
+            "url": "/contact-us"
+          },
+          {
+            "label": "Claims support",
+            "url": "/claims"
+          },
+          {
+            "label": "(239) 210-7700",
+            "url": "tel:12392107700"
+          }
+        ]
+      }
+    ]
+  },
+  "insurance/florida-motorcycle-insurance": {
+    "eyebrow": "HERE FOR YOUR FLORIDA LIFE",
+    "heading": "Florida Motorcycle Insurance",
+    "subtitle": "Ride with Confidence on Florida’s Roads",
+    "intro_heading": "Ride with Confidence on Florida’s Roads",
+    "intro_body": "Motorcycle insurance is a specialized policy designed to protect motorcycles and their riders. It offers financial protection in case of accidents, theft, or other unexpected events. This type of insurance can also cover medical expenses, liability for damages you may cause to others, and more. Motorcycle insurance is essential in Florida, not only for legal compliance in many cases but also to safeguard yourself while riding through the state’s diverse roads and weather conditions.",
+    "quote_eyebrow": "LOCAL PEOPLE. PERSONAL GUIDANCE.",
+    "quote_heading": "Find coverage that fits your life.",
+    "quote_body": "Start with your ZIP code. Our team can help you explore your coverage options.",
+    "zip_label": "Your ZIP code",
+    "feature_eyebrow": "MADE FOR YOUR EVERYDAY ADVENTURES",
+    "feature_heading": "Ride with Confidence on Florida’s Roads",
+    "feature_body": "Get Tailored Coverage from Culbertson Agency, Your Local Experts in Motorcycle Insurance",
+    "coverage_eyebrow": "UNDERSTAND YOUR OPTIONS",
+    "coverage_heading": "What does motorcycle insurance cover?",
+    "coverage_intro": "Motorcycle insurance typically includes the following coverages:",
+    "coverage_note": "Available coverage, exclusions, limits and deductibles vary by insurer and policy. Your agent can explain the details before you choose.",
+    "faq_eyebrow": "A LITTLE CLARITY GOES A LONG WAY",
+    "faq_heading": "Understand your coverage.",
+    "home_label": "Home",
+    "insurance_label": "Insurance",
+    "breadcrumb": "Florida Motorcycle Insurance",
+    "explore_label": "Explore coverage options",
+    "quote_button": "Get a quote",
+    "zip_placeholder": "Enter ZIP code",
+    "zip_validation": "Enter a five-digit ZIP code",
+    "phone_intro": "Prefer to talk?",
+    "phone": "(239) 210-7700",
+    "phone_url": "tel:12392107700",
+    "feature_link_label": "Start your quote",
+    "resources_label": "More ways we can help",
+    "quote_url": "/get-a-quote/get-a-motorcycle-insurance-quote/",
+    "hero": "/assets/original/2025/03/250311_culbertson_2025-fat-boy-m50-motorcycle.webp",
+    "hero_alt": "Florida Motorcycle Insurance",
+    "feature_image": "/assets/original/2025/03/250311_culbertson_2025-fat-boy-m50-motorcycle.webp",
+    "feature_image_alt": "Florida Motorcycle Insurance",
+    "feature_points": [
+      "Protection for accidents, theft, and liability",
+      "Coverage for medical costs and passenger safety",
+      "Bundling discounts for bigger savings"
+    ],
+    "coverages": [
+      {
+        "title": "Liability",
+        "body": "<p>\r\n\t\t\t\t\t\tCovers costs if you’re legally responsible for injuries or property damage in an accident.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Collision",
+        "body": "<p>\r\n\t\t\t\t\t\tPays for repairs to your motorcycle if it’s damaged in a collision, regardless of fault.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Comprehensive",
+        "body": "<p>\r\n\t\t\t\t\t\tProtects against non-collision-related damages, including theft, vandalism, fire, and weather-related events like storms or hurricanes.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Uninsured and Underinsured",
+        "body": "<p>\r\n\t\t\t\t\t\tCovers expenses if you’re in an accident caused by a driver with little or no insurance.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Medical Payments (MedPay)",
+        "body": "<p>\r\n\t\t\t\t\t\tHelps cover medical costs for you and your passengers after an accident.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Roadside and Rental",
+        "body": "<p>\r\n\t\t\t\t\t\tAdded coverage options include rental cars in the event of an accident and roadside assistance.\t\t\t\t\t</p>"
+      }
+    ],
+    "questions": [
+      {
+        "title": "What is motorcycle insurance?",
+        "body": "<p>Motorcycle insurance is a specialized policy designed to protect motorcycles and their riders. It offers financial protection in case of accidents, theft, or other unexpected events. This type of insurance can also cover medical expenses, liability for damages you may cause to others, and more. Motorcycle insurance is essential in Florida, not only for legal compliance in many cases but also to safeguard yourself while riding through the state’s diverse roads and weather conditions.</p>"
+      },
+      {
+        "title": "What doesn’t motorcycle insurance cover?",
+        "body": "<ul><li><strong>Intentional Damage</strong>: Any damage caused intentionally by you or someone else.</li><li><strong>Events Above Policy Limits</strong>: Costs beyond the maximum coverage amount.</li><li><strong>Racing or Stunting</strong>: Injuries or damages incurred while racing or performing stunts.</li><li><strong>Wear and Tear</strong>: Standard maintenance or mechanical breakdown due to regular use.</li><li><strong>Excluded Riders</strong>: Accidents caused by individuals not listed on your policy.</li></ul>"
+      },
+      {
+        "title": "What are the right questions to ask to find the best motorcycle insurance?",
+        "body": "<ul><li>What coverage is required in Florida?</li><li>Does the policy cover my motorcycle if it’s stolen or damaged by hurricanes or floods?</li><li>What level of liability insurance do I need to protect my assets?</li><li>Are passengers covered under my plan?</li><li>Does my policy include uninsured/underinsured motorist protection?</li><li>Can I add coverage for custom parts or accessories on my bike?</li><li>Are there any discounts for safe riders or motorcycle safety courses?</li><li>Can I bundle my motorcycle insurance with other policies for savings?</li><li>What is the claims process and how long does it take?</li><li>Are there any exclusions I should be aware of in my policy?</li></ul>"
+      }
+    ],
+    "resources": [
+      {
+        "eyebrow": "YOUR FLORIDA LIFE",
+        "title": "More of life. Covered.",
+        "body": "We can help you find the right policy for all of your insurance needs. Explore our insurance options.",
+        "links": [
+          {
+            "label": "Explore our insurance",
+            "url": "/insurance"
+          },
+          {
+            "label": "Home + auto quotes",
+            "url": "/quote?service=home-auto"
+          }
+        ]
+      },
+      {
+        "eyebrow": "HELPFUL READING",
+        "title": "A little more peace of mind.",
+        "body": "Practical guidance to help you understand insurance and prepare for the unexpected.",
+        "links": [
+          {
+            "label": "All insurance articles",
+            "url": "/expert-insurance-insights-and-tips-culbertson-agency-articles/"
+          }
+        ]
+      },
+      {
+        "eyebrow": "HERE WHEN YOU NEED US",
+        "title": "Let’s talk about your coverage.",
+        "body": "Have a question about coverage, a policy or a claim? Our Fort Myers team is here to help.",
+        "links": [
+          {
+            "label": "Contact our team",
+            "url": "/contact-us"
+          },
+          {
+            "label": "Claims support",
+            "url": "/claims"
+          },
+          {
+            "label": "(239) 210-7700",
+            "url": "tel:12392107700"
+          }
+        ]
+      }
+    ]
+  },
+  "insurance/florida-rv-mobile-home-insurance": {
+    "eyebrow": "HERE FOR YOUR FLORIDA LIFE",
+    "heading": "Florida RV Insurance",
+    "subtitle": "Explore the Open Road with Peace of Mind",
+    "intro_heading": "Explore the Open Road with Peace of Mind",
+    "intro_body": "RV insurance is a specialized policy that provides coverage for recreational vehicles, such as motorhomes, travel trailers, and fifth wheels. It protects against financial losses due to accidents, theft, liability, and natural disasters while on the road or parked. RV insurance is essential for both full-time RVers and occasional vacationers, offering peace of mind as you explore Florida’s scenic routes and beyond.",
+    "quote_eyebrow": "LOCAL PEOPLE. PERSONAL GUIDANCE.",
+    "quote_heading": "Find coverage that fits your life.",
+    "quote_body": "Start with your ZIP code. Our team can help you explore your coverage options.",
+    "zip_label": "Your ZIP code",
+    "feature_eyebrow": "MADE FOR YOUR EVERYDAY ADVENTURES",
+    "feature_heading": "Explore the Open Road with Peace of Mind",
+    "feature_body": "Get Tailored Coverage from Culbertson Agency, Your Local Experts in RV Insurance",
+    "coverage_eyebrow": "UNDERSTAND YOUR OPTIONS",
+    "coverage_heading": "What does RV insurance cover?",
+    "coverage_intro": "RV insurance typically includes a variety of coverages to protect your investment and liability, such as:",
+    "coverage_note": "Available coverage, exclusions, limits and deductibles vary by insurer and policy. Your agent can explain the details before you choose.",
+    "faq_eyebrow": "A LITTLE CLARITY GOES A LONG WAY",
+    "faq_heading": "Understand your coverage.",
+    "home_label": "Home",
+    "insurance_label": "Insurance",
+    "breadcrumb": "Florida RV Insurance",
+    "explore_label": "Explore coverage options",
+    "quote_button": "Get a quote",
+    "zip_placeholder": "Enter ZIP code",
+    "zip_validation": "Enter a five-digit ZIP code",
+    "phone_intro": "Prefer to talk?",
+    "phone": "(239) 210-7700",
+    "phone_url": "tel:12392107700",
+    "feature_link_label": "Start your quote",
+    "resources_label": "More ways we can help",
+    "quote_url": "/get-a-quote/get-a-rv-insurance-quote/",
+    "hero": "/assets/coverage/rv.webp",
+    "hero_alt": "Florida RV Insurance",
+    "feature_image": "/assets/coverage/rv.webp",
+    "feature_image_alt": "Florida RV Insurance",
+    "feature_points": [
+      "Coverage for accidents, theft, and liability",
+      "Options for full-time RVers and vacationers",
+      "Expert guidance for Florida's unique travel needs"
+    ],
+    "coverages": [
+      {
+        "title": "Collision Coverage",
+        "body": "<p>\r\n\t\t\t\t\t\tPays for repairs or replacement if your RV is damaged in an accident.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Comprehensive Coverage",
+        "body": "<p>\r\n\t\t\t\t\t\tIncludes protection against non-collision incidents, such as theft, vandalism, fire, or weather-related damage like hurricanes.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Liability Coverage",
+        "body": "<p>\r\n\t\t\t\t\t\tCovers expenses if you’re responsible for injuries or property damage to others.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Personal Belongings",
+        "body": "<p>\r\n\t\t\t\t\t\tProtection for items inside your RV, including electronics, clothing, and appliances.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Medical Payments",
+        "body": "<p>\r\n\t\t\t\t\t\tCovers medical costs for you and your passengers in case of an accident.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Full-Time Coverage",
+        "body": "<p>\r\n\t\t\t\t\t\tAdditional protection for those who use their RV as a primary residence, including liability and personal belongings.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Roadside and Rental",
+        "body": "<p>\r\n\t\t\t\t\t\tAdded coverage options include rental cars in the event of an accident and roadside assistance.\t\t\t\t\t</p>"
+      }
+    ],
+    "questions": [
+      {
+        "title": "What is RV insurance?",
+        "body": "<p>RV insurance is a specialized policy that provides coverage for recreational vehicles, such as motorhomes, travel trailers, and fifth wheels. It protects against financial losses due to accidents, theft, liability, and natural disasters while on the road or parked. RV insurance is essential for both full-time RVers and occasional vacationers, offering peace of mind as you explore Florida’s scenic routes and beyond.</p>"
+      },
+      {
+        "title": "What doesn’t RV insurance cover?",
+        "body": "<ul>\n<li><strong>Wear and Tear</strong>: Regular maintenance, aging, and mechanical breakdowns are not covered.</li>\n<li><strong>Damages Above Policy Limits</strong>: Claims that exceed your policy limits will not be fully reimbursed.</li>\n<li><strong>Personal Property Not Listed in the Policy</strong>: Certain high-value items like jewelry may require additional coverage.</li>\n<li><strong>Intentional Damage</strong>: Any damage caused on purpose by the owner.</li>\n<li><strong>Unauthorized Drivers</strong>: Accidents caused by someone not listed on the policy.</li>\n<li><strong>Non-Insured Events</strong>: Events not explicitly covered in your policy, such as floods if you don’t have comprehensive coverage.</li>\n</ul>"
+      },
+      {
+        "title": "What are the right questions to ask to find the best RV insurance?",
+        "body": "<p>To ensure you select the best RV insurance policy for your needs, consider asking these important questions:</p><ul>\n<li>What type of RV insurance do I need for my specific vehicle (Class A, B, C, or towable)?</li>\n<li>How much liability coverage is recommended for Florida roads?</li>\n<li>Does the policy include comprehensive and collision coverage?</li>\n<li>What additional coverages are available for full-time RV living or vacation use?</li>\n<li>Are my personal belongings and appliances included in the policy?</li>\n<li>Does the policy cover roadside assistance and towing?</li>\n<li>What are the policy limits, deductibles, and out-of-pocket costs?</li>\n<li>Are there discounts for safe drivers, bundling policies, or RV safety features?</li>\n<li>Am I covered in all states or only within Florida?</li>\n<li>How are claims handled and what is the average response time?</li>\n</ul><p>Working with an experienced provider like Culbertson Agency ensures you get a comprehensive and customized policy that suits your travel style while addressing Florida’s unique risks.</p>"
+      }
+    ],
+    "resources": [
+      {
+        "eyebrow": "YOUR FLORIDA LIFE",
+        "title": "More of life. Covered.",
+        "body": "We can help you find the right policy for all of your insurance needs. Explore our insurance options.",
+        "links": [
+          {
+            "label": "Explore our insurance",
+            "url": "/insurance"
+          },
+          {
+            "label": "Home + auto quotes",
+            "url": "/quote?service=home-auto"
+          }
+        ]
+      },
+      {
+        "eyebrow": "HELPFUL READING",
+        "title": "A little more peace of mind.",
+        "body": "Practical guidance to help you understand insurance and prepare for the unexpected.",
+        "links": [
+          {
+            "label": "All insurance articles",
+            "url": "/expert-insurance-insights-and-tips-culbertson-agency-articles/"
+          }
+        ]
+      },
+      {
+        "eyebrow": "HERE WHEN YOU NEED US",
+        "title": "Let’s talk about your coverage.",
+        "body": "Have a question about coverage, a policy or a claim? Our Fort Myers team is here to help.",
+        "links": [
+          {
+            "label": "Contact our team",
+            "url": "/contact-us"
+          },
+          {
+            "label": "Claims support",
+            "url": "/claims"
+          },
+          {
+            "label": "(239) 210-7700",
+            "url": "tel:12392107700"
+          }
+        ]
+      }
+    ]
+  },
+  "insurance/golf-cart-insurance": {
+    "eyebrow": "HERE FOR YOUR FLORIDA LIFE",
+    "heading": "Golf Cart Insurance",
+    "subtitle": "For the course. The community. The life you love.",
+    "intro_heading": "Cruise with confidence on the green or around your community. Let’s find golf cart coverage that fits your Florida lifestyle.",
+    "intro_body": "Golf cart insurance helps protect owners of recreational and street-legal golf carts against accidents, theft and liability. Whether you use your cart on the course or in your neighborhood, our Fort Myers team can help you explore your options.",
+    "quote_eyebrow": "LOCAL PEOPLE. PERSONAL GUIDANCE.",
+    "quote_heading": "Find golf cart coverage that fits your life.",
+    "quote_body": "Tell us a little about your cart and how you use it. Start with your ZIP code, and our team can help with the next steps.",
+    "zip_label": "Your ZIP code",
+    "feature_eyebrow": "MADE FOR YOUR EVERYDAY ADVENTURES",
+    "feature_heading": "A small cart. A big part of your life.",
+    "feature_body": "From a round of golf to a ride around the neighborhood, your golf cart deserves coverage that reflects how you actually use it.",
+    "coverage_eyebrow": "UNDERSTAND YOUR OPTIONS",
+    "coverage_heading": "What does golf cart insurance cover?",
+    "coverage_intro": "Build a policy around your cart, your passengers and the way you get around. Options may include:",
+    "coverage_note": "Available coverage, exclusions, limits and deductibles vary by insurer and policy. Your agent can explain the details before you choose.",
+    "faq_eyebrow": "A LITTLE CLARITY GOES A LONG WAY",
+    "faq_heading": "Know your coverage. Enjoy your ride.",
+    "home_label": "Home",
+    "insurance_label": "Insurance",
+    "breadcrumb": "Golf cart",
+    "explore_label": "Explore coverage options",
+    "quote_button": "Get a quote",
+    "zip_placeholder": "Enter ZIP code",
+    "zip_validation": "Enter a five-digit ZIP code",
+    "phone_intro": "Prefer to talk?",
+    "phone": "(239) 210-7700",
+    "phone_url": "tel:12392107700",
+    "feature_link_label": "Start your quote",
+    "resources_label": "More ways we can help",
+    "quote_url": "/get-a-quote/golf-cart-insurance-quote/",
+    "hero": "/assets/insurance/golf-cart-family.webp",
+    "hero_alt": "A family enjoying a golf cart ride in the Florida sunshine",
+    "feature_image": "/assets/insurance/golf-cart-coverage.jpg",
+    "feature_image_alt": "A golf cart parked outdoors on a sunny day",
+    "feature_points": [
+      "Protection options for accidents, theft and liability",
+      "Coverage for recreational and street-legal golf carts",
+      "Personal guidance for your Florida lifestyle"
+    ],
+    "coverages": [
+      {
+        "title": "Liability",
+        "body": "Helps with costs if you are responsible for injuries to others or damage to their property."
+      },
+      {
+        "title": "Collision",
+        "body": "Helps pay for damage to your golf cart resulting from a collision, subject to your policy and deductible."
+      },
+      {
+        "title": "Comprehensive",
+        "body": "Helps protect against covered non-collision incidents, such as theft, vandalism, fire and certain weather events."
+      },
+      {
+        "title": "Uninsured & underinsured motorist",
+        "body": "Protection options for an accident involving someone who has no insurance or insufficient coverage."
+      },
+      {
+        "title": "Medical payments",
+        "body": "Helps with covered medical expenses for injuries to you or your passengers."
+      },
+      {
+        "title": "Accessories & upgrades",
+        "body": "Ask about protection for custom wheels, seats, windshields, paint and other accessories."
+      },
+      {
+        "title": "Street-legal use",
+        "body": "Discuss coverage for use on permitted public roads, based on your cart, its classification and policy terms."
+      }
+    ],
+    "questions": [
+      {
+        "title": "What is golf cart insurance?",
+        "body": "<p>It is insurance designed for recreational and street-legal golf carts. A policy can combine liability protection with coverage for damage to the cart, theft, passengers and accessories. The right options depend on your cart and where and how it is used.</p>"
+      },
+      {
+        "title": "What doesn’t golf cart insurance cover?",
+        "body": "<p>Policies have exclusions and limits. Ask your agent about:</p><ul><li>Wear and tear or mechanical breakdown</li><li>Drivers or uses excluded by the policy</li><li>Driving a cart in areas where its use is not permitted</li><li>Intentional damage</li><li>Claims above your coverage limits or below your deductible</li><li>Weather events or other losses excluded by your particular policy</li></ul>"
+      },
+      {
+        "title": "What should I ask before choosing a policy?",
+        "body": "<ul><li>What coverage applies to my cart and the places where I drive it?</li><li>Does the policy cover recreational use, street-legal use, or both?</li><li>What liability limits should I discuss with my agent?</li><li>How are hurricane damage and flooding treated?</li><li>Are comprehensive and collision coverage included?</li><li>Is use away from the golf course covered?</li><li>How are custom wheels, seats and other accessories protected?</li><li>Are discounts available when combining policies?</li><li>How do I report a claim and what happens next?</li><li>What limits, deductibles and exclusions should I understand?</li></ul>"
+      }
+    ],
+    "resources": [
+      {
+        "eyebrow": "YOUR FLORIDA LIFE",
+        "title": "More of life. Covered.",
+        "body": "Your cart is just one part of the picture. Explore protection for your home, car and everyday adventures.",
+        "links": [
+          {
+            "label": "Explore our insurance",
+            "url": "/insurance"
+          },
+          {
+            "label": "Home + auto quotes",
+            "url": "/quote?service=home-auto"
+          }
+        ]
+      },
+      {
+        "eyebrow": "HELPFUL READING",
+        "title": "A little more peace of mind.",
+        "body": "Practical guidance to help you understand insurance and prepare for the unexpected.",
+        "links": [
+          {
+            "label": "Theft & vandalism coverage",
+            "url": "/theft-and-vandalism-coverage-for-car-insurance"
+          },
+          {
+            "label": "Roadside assistance",
+            "url": "/is-roadside-assistance-included-in-your-car-insurance-policy"
+          },
+          {
+            "label": "All insurance articles",
+            "url": "/expert-insurance-insights-and-tips-culbertson-agency-articles"
+          }
+        ]
+      },
+      {
+        "eyebrow": "HERE WHEN YOU NEED US",
+        "title": "Let’s talk about your cart.",
+        "body": "Have a question about coverage, a policy or a claim? Our Fort Myers team is here to help.",
+        "links": [
+          {
+            "label": "Contact our team",
+            "url": "/contact-us"
+          },
+          {
+            "label": "Claims support",
+            "url": "/claims"
+          },
+          {
+            "label": "(239) 210-7700",
+            "url": "tel:12392107700"
+          }
+        ]
+      }
+    ]
+  },
+  "insurance/homeowners-insurance": {
+    "eyebrow": "HERE FOR YOUR FLORIDA LIFE",
+    "heading": "Florida Homeowners Insurance",
+    "subtitle": "Protect Your Home with Confidence in Fort Myers",
+    "intro_heading": "Protect Your Home with Confidence in Fort Myers",
+    "intro_body": "Florida Homeowners Insurance is a type of policy designed to protect your home and personal belongings against unexpected events. It provides coverage for damage caused by specific hazards, as well as liability protection if someone is injured on your property. This kind of insurance gives you peace of mind, knowing that your investment and personal assets are safeguarded.",
+    "quote_eyebrow": "LOCAL PEOPLE. PERSONAL GUIDANCE.",
+    "quote_heading": "Find coverage that fits your life.",
+    "quote_body": "Start with your ZIP code. Our team can help you explore your coverage options.",
+    "zip_label": "Your ZIP code",
+    "feature_eyebrow": "MADE FOR YOUR EVERYDAY ADVENTURES",
+    "feature_heading": "Protect Your Home with Confidence in Fort Myers",
+    "feature_body": "Get Tailored Coverage from Culbertson Agency, Your Local Experts in Florida Homeowners Insurance",
+    "coverage_eyebrow": "UNDERSTAND YOUR OPTIONS",
+    "coverage_heading": "What does Florida homeowners insurance cover?",
+    "coverage_intro": "A standard Florida homeowners insurance policy typically includes the following coverage options:",
+    "coverage_note": "Available coverage, exclusions, limits and deductibles vary by insurer and policy. Your agent can explain the details before you choose.",
+    "faq_eyebrow": "A LITTLE CLARITY GOES A LONG WAY",
+    "faq_heading": "Understand your coverage.",
+    "home_label": "Home",
+    "insurance_label": "Insurance",
+    "breadcrumb": "Florida Homeowners Insurance",
+    "explore_label": "Explore coverage options",
+    "quote_button": "Get a quote",
+    "zip_placeholder": "Enter ZIP code",
+    "zip_validation": "Enter a five-digit ZIP code",
+    "phone_intro": "Prefer to talk?",
+    "phone": "(239) 210-7700",
+    "phone_url": "tel:12392107700",
+    "feature_link_label": "Start your quote",
+    "resources_label": "More ways we can help",
+    "quote_url": "/get-a-quote/get-a-home-insurance-quote/",
+    "hero": "/assets/florida-neighborhood.webp",
+    "hero_alt": "Florida Homeowners Insurance",
+    "feature_image": "/assets/florida-neighborhood.webp",
+    "feature_image_alt": "Florida Homeowners Insurance",
+    "feature_points": [
+      "Coverage for storms, theft, fire, and natural disasters",
+      "Protection for your home and personal belongings",
+      "Personalized service to meet your unique needs"
+    ],
+    "coverages": [
+      {
+        "title": "Structure of Your Home",
+        "body": "<p>\r\n\t\t\t\t\t\tProtects against damage to your home caused by covered perils like fire, windstorms, hail, and theft.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Personal Belongings",
+        "body": "<p>\r\n\t\t\t\t\t\tCovers your furniture, clothing, and other belongings if they’re stolen or damaged.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Liability Protection",
+        "body": "<p>\r\n\t\t\t\t\t\tProtects you if someone is injured on your property or if you accidentally cause damage to someone else's property.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Additional Living Expenses",
+        "body": "<p>\r\n\t\t\t\t\t\tPays for temporary housing and other expenses if your home becomes unlivable due to a covered incident.\t\t\t\t\t</p>"
+      }
+    ],
+    "questions": [
+      {
+        "title": "What is Florida homeowners insurance?",
+        "body": "<p>Florida Homeowners Insurance is a type of policy designed to protect your home and personal belongings against unexpected events. It provides coverage for damage caused by specific hazards, as well as liability protection if someone is injured on your property. This kind of insurance gives you peace of mind, knowing that your investment and personal assets are safeguarded.</p>"
+      },
+      {
+        "title": "What doesn’t homeowners insurance cover?",
+        "body": "<p>While homeowners insurance offers broad protection, it does not cover everything. Common exclusions include:</p><ul><li><strong>Flood Damage</strong>: Standard policies do not cover flooding; a separate flood insurance policy is needed, especially in Florida’s high-risk areas.</li><li><strong>Earthquake Damage</strong> …but something tells us you’re not worried about that!</li><li><strong>Wear and Tear</strong> or gradual maintenance issues, like roof aging, which are considered the homeowner’s responsibility.</li><li><strong>High-Value Items</strong>: Items like fine jewelry or art may require additional endorsements or riders for complete coverage.</li></ul>"
+      },
+      {
+        "title": "Typical Florida Home Insurance Policy Limits",
+        "body": "<table><colgroup> <col/> <col/></colgroup>\n<tbody>\n<tr>\n<th>\r\nCoverage Component\r\n</th>\n<th>\r\nTypical Limit of Coverage\r\n</th>\n</tr>\n<tr>\n<td>\r\nDwelling\r\n</td>\n<td>\r\nYour Choice\r\n</td>\n</tr>\n<tr>\n<td>\r\nOther Structures\r\n</td>\n<td>\r\n10% of Dwelling Coverage Limit\r\n</td>\n</tr>\n<tr>\n<td>\r\nPersonal Property\r\n</td>\n<td>\r\n50% of Dwelling Coverage Limit\r\n</td>\n</tr>\n<tr>\n<td>\r\nLoss of Use\r\n</td>\n<td>\r\n20% of Dwelling Coverage Limit\r\n</td>\n</tr>\n<tr>\n<td>\r\nPersonal Liability\r\n</td>\n<td>\r\nYour Choice\r\n</td>\n</tr>\n<tr>\n<td>\r\nMedical Payments\r\n</td>\n<td>\r\nYour Choice\r\n</td>\n</tr>\n</tbody>\n</table>"
+      },
+      {
+        "title": "What are the right questions to ask to find the best homeowners insurance?",
+        "body": "<p>Finding the right homeowners insurance policy can feel overwhelming. Start by asking these important questions to ensure you’re getting the protection you need:</p><ul><li><p>What perils or disasters are covered and excluded in my policy? (Pay special attention to hurricane and flood risks in Florida.)</p></li><li><p>How much coverage do I need for my home’s structure?</p></li><li><p>What is the deductible for hurricane or wind damage? (Florida policies often include separate deductibles for hurricanes.)</p></li><li><p>Is my personal property fully covered, or do I need additional coverage for specific items?</p></li><li><p>What discounts or savings options are available?</p></li><li><p>Does my policy include liability protection, and at what limits?</p></li><li><p>Are there any additional coverage options I should consider for Florida-specific risks?</p></li></ul>"
+      }
+    ],
+    "resources": [
+      {
+        "eyebrow": "YOUR FLORIDA LIFE",
+        "title": "More of life. Covered.",
+        "body": "We can help you find the right policy for all of your insurance needs. Explore our insurance options.",
+        "links": [
+          {
+            "label": "Explore our insurance",
+            "url": "/insurance"
+          },
+          {
+            "label": "Home + auto quotes",
+            "url": "/quote?service=home-auto"
+          }
+        ]
+      },
+      {
+        "eyebrow": "HELPFUL READING",
+        "title": "A little more peace of mind.",
+        "body": "Practical guidance to help you understand insurance and prepare for the unexpected.",
+        "links": [
+          {
+            "label": "All insurance articles",
+            "url": "/expert-insurance-insights-and-tips-culbertson-agency-articles/"
+          }
+        ]
+      },
+      {
+        "eyebrow": "HERE WHEN YOU NEED US",
+        "title": "Let’s talk about your coverage.",
+        "body": "Have a question about coverage, a policy or a claim? Our Fort Myers team is here to help.",
+        "links": [
+          {
+            "label": "Contact our team",
+            "url": "/contact-us"
+          },
+          {
+            "label": "Claims support",
+            "url": "/claims"
+          },
+          {
+            "label": "(239) 210-7700",
+            "url": "tel:12392107700"
+          }
+        ]
+      }
+    ]
+  },
+  "insurance/life-insurance": {
+    "eyebrow": "HERE FOR YOUR FLORIDA LIFE",
+    "heading": "Florida Life Insurance",
+    "subtitle": "Plan for the Future with Confidence in Fort Myers",
+    "intro_heading": "Plan for the Future with Confidence in Fort Myers",
+    "intro_body": "Florida Life Insurance is a contract between you and an insurance provider that offers financial protection to your loved ones after you pass away. By paying regular premiums, you ensure that your beneficiaries receive a death benefit, which can help cover expenses like funeral costs, debts, or ongoing living expenses. Some types of life insurance may also include savings or investment components that you can access during your lifetime.",
+    "quote_eyebrow": "LOCAL PEOPLE. PERSONAL GUIDANCE.",
+    "quote_heading": "Find coverage that fits your life.",
+    "quote_body": "Start with your ZIP code. Our team can help you explore your coverage options.",
+    "zip_label": "Your ZIP code",
+    "feature_eyebrow": "MADE FOR YOUR EVERYDAY ADVENTURES",
+    "feature_heading": "Plan for the Future with Confidence in Fort Myers",
+    "feature_body": "Get Tailored Coverage from Culbertson Agency, Your Local Experts in Florida Life Insurance",
+    "coverage_eyebrow": "UNDERSTAND YOUR OPTIONS",
+    "coverage_heading": "What does life insurance cover?",
+    "coverage_intro": "Life insurance policies typically provide coverage for the following:",
+    "coverage_note": "Available coverage, exclusions, limits and deductibles vary by insurer and policy. Your agent can explain the details before you choose.",
+    "faq_eyebrow": "A LITTLE CLARITY GOES A LONG WAY",
+    "faq_heading": "Understand your coverage.",
+    "home_label": "Home",
+    "insurance_label": "Insurance",
+    "breadcrumb": "Florida Life Insurance",
+    "explore_label": "Explore coverage options",
+    "quote_button": "Get a quote",
+    "zip_placeholder": "Enter ZIP code",
+    "zip_validation": "Enter a five-digit ZIP code",
+    "phone_intro": "Prefer to talk?",
+    "phone": "(239) 210-7700",
+    "phone_url": "tel:12392107700",
+    "feature_link_label": "Start your quote",
+    "resources_label": "More ways we can help",
+    "quote_url": "/get-a-quote/get-a-life-insurance-quote/",
+    "hero": "/assets/why-family.jpg",
+    "hero_alt": "Florida Life Insurance",
+    "feature_image": "/assets/why-family.jpg",
+    "feature_image_alt": "Florida Life Insurance",
+    "feature_points": [
+      "Financial security for your loved ones",
+      "Flexible policy options to fit your needs",
+      "Peace of mind for life's unexpected moments"
+    ],
+    "coverages": [
+      {
+        "title": "Death Benefit",
+        "body": "<p>\r\n\t\t\t\t\t\tA lump sum paid to your beneficiaries after your passing to help with financial needs.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Final Expenses",
+        "body": "<p>\r\n\t\t\t\t\t\tCoverage for funeral costs, burial, or cremation expenses.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Outstanding Debts",
+        "body": "<p>\r\n\t\t\t\t\t\tPayment towards mortgages, car loans, or other liabilities you may leave behind.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Income Replacement",
+        "body": "<p>\r\n\t\t\t\t\t\tHelps your loved ones maintain their lifestyle and cover everyday expenses.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Education Costs",
+        "body": "<p>\r\n\t\t\t\t\t\tSupports your children’s or dependents’ future education needs.\t\t\t\t\t</p>"
+      }
+    ],
+    "questions": [
+      {
+        "title": "What is life insurance?",
+        "body": "<p>Florida Life Insurance is a contract between you and an insurance provider that offers financial protection to your loved ones after you pass away. By paying regular premiums, you ensure that your beneficiaries receive a death benefit, which can help cover expenses like funeral costs, debts, or ongoing living expenses. Some types of life insurance may also include savings or investment components that you can access during your lifetime.</p>"
+      },
+      {
+        "title": "What doesn’t life insurance cover?",
+        "body": "<p>While life insurance offers valuable protection, it does have some exclusions. Common exclusions include:</p><ul><li><strong>Fraudulent Information</strong>: If false information was provided on your application.</li><li><strong>Death by Suicide</strong>: Death caused by suicide may not be covered within the first two years of the policy (this varies by provider).</li><li><strong>Risky Activities</strong>: Deaths from high-risk activities like skydiving or car racing may not be covered unless explicitly added to the policy.</li><li><strong>Illegal Activities</strong>: Death resulting from illegal acts may void the policy.</li><li><strong>Non-Payment of Premiums</strong>: If premiums are not paid, the policy may lapse and result in no coverage.</li></ul>"
+      },
+      {
+        "title": "What are the right questions to ask to find the best life insurance?",
+        "body": "<p>Finding the right life insurance for your needs is crucial. Here are key questions to ask when choosing a policy:</p><ul><li>What type of life insurance—term or whole life—is best for my situation?</li><li>How much coverage do I need to protect my family’s financial future?</li><li>What is the length of the policy term, and can it be renewed or converted later?</li><li>Are there any exclusions or specific conditions I should be aware of?</li><li>Does the policy have any additional features, like living benefits or riders?</li><li>What are the premium costs, and will they change over time?</li><li>Can I customize the policy to meet my family’s specific needs and goals?</li><li>Does the insurer have a strong reputation and financial stability?</li></ul><p>By working with an experienced agency like Culbertson Agency, you can explore your options and select a life insurance plan that fits your needs and provides peace of mind for your family’s future.</p>"
+      }
+    ],
+    "resources": [
+      {
+        "eyebrow": "YOUR FLORIDA LIFE",
+        "title": "More of life. Covered.",
+        "body": "We can help you find the right policy for all of your insurance needs. Explore our insurance options.",
+        "links": [
+          {
+            "label": "Explore our insurance",
+            "url": "/insurance"
+          },
+          {
+            "label": "Home + auto quotes",
+            "url": "/quote?service=home-auto"
+          }
+        ]
+      },
+      {
+        "eyebrow": "HELPFUL READING",
+        "title": "A little more peace of mind.",
+        "body": "Practical guidance to help you understand insurance and prepare for the unexpected.",
+        "links": [
+          {
+            "label": "All insurance articles",
+            "url": "/expert-insurance-insights-and-tips-culbertson-agency-articles/"
+          }
+        ]
+      },
+      {
+        "eyebrow": "HERE WHEN YOU NEED US",
+        "title": "Let’s talk about your coverage.",
+        "body": "Have a question about coverage, a policy or a claim? Our Fort Myers team is here to help.",
+        "links": [
+          {
+            "label": "Contact our team",
+            "url": "/contact-us"
+          },
+          {
+            "label": "Claims support",
+            "url": "/claims"
+          },
+          {
+            "label": "(239) 210-7700",
+            "url": "tel:12392107700"
+          }
+        ]
+      }
+    ]
+  },
+  "insurance/personal-umbrella-protection": {
+    "eyebrow": "HERE FOR YOUR FLORIDA LIFE",
+    "heading": "Umbrella Insurance in Fort Myers, FL",
+    "subtitle": "Don’t let a single incident drain your savings.",
+    "intro_heading": "Don’t let a single incident drain your savings.",
+    "intro_body": "",
+    "quote_eyebrow": "LOCAL PEOPLE. PERSONAL GUIDANCE.",
+    "quote_heading": "Find coverage that fits your life.",
+    "quote_body": "Start with your ZIP code. Our team can help you explore your coverage options.",
+    "zip_label": "Your ZIP code",
+    "feature_eyebrow": "MADE FOR YOUR EVERYDAY ADVENTURES",
+    "feature_heading": "Don’t let a single incident drain your savings.",
+    "feature_body": "Umbrella Insurance safeguards your assets and lifestyle, extending coverage beyond home, auto, or boat policies.",
+    "coverage_eyebrow": "UNDERSTAND YOUR OPTIONS",
+    "coverage_heading": "Understanding Umbrella Insurance in Florida: Your Financial Shield",
+    "coverage_intro": "",
+    "coverage_note": "Available coverage, exclusions, limits and deductibles vary by insurer and policy. Your agent can explain the details before you choose.",
+    "faq_eyebrow": "A LITTLE CLARITY GOES A LONG WAY",
+    "faq_heading": "Understand your coverage.",
+    "home_label": "Home",
+    "insurance_label": "Insurance",
+    "breadcrumb": "Umbrella Insurance in Fort Myers, FL",
+    "explore_label": "Explore coverage options",
+    "quote_button": "Get a quote",
+    "zip_placeholder": "Enter ZIP code",
+    "zip_validation": "Enter a five-digit ZIP code",
+    "phone_intro": "Prefer to talk?",
+    "phone": "(239) 210-7700",
+    "phone_url": "tel:12392107700",
+    "feature_link_label": "Start your quote",
+    "resources_label": "More ways we can help",
+    "quote_url": "/get-a-quote/get-a-personal-umbrella-protection-quote/",
+    "hero": "/assets/original/2025/03/teal_blue_umbrella_insurance_sheltering_a_pile_of_money.webp",
+    "hero_alt": "Umbrella Insurance in Fort Myers, FL",
+    "feature_image": "/assets/original/2025/03/teal_blue_umbrella_insurance_sheltering_a_pile_of_money.webp",
+    "feature_image_alt": "Umbrella Insurance in Fort Myers, FL",
+    "feature_points": [],
+    "coverages": [
+      {
+        "title": "Excess Liability",
+        "body": "<p>\r\n\t\t\t\t\t\tPays for damages or injuries you’re legally responsible for, beyond your primary policy limits.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Legal Fees",
+        "body": "<p>\r\n\t\t\t\t\t\tCovers attorney costs, court fees, and settlements if you’re sued, even if you’re not at fault.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Broader Protection",
+        "body": "<p>\r\n\t\t\t\t\t\tIncludes incidents not covered by standard policies, like libel, slander, or certain international liabilities.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "High-Value Assets",
+        "body": "<p>\r\n\t\t\t\t\t\tSafeguards your home, savings, investments, and future earnings from being wiped out by a single claim.\r\n\r\n\t\t\t\t\t</p>"
+      }
+    ],
+    "questions": [
+      {
+        "title": "Why You Should Get Umbrella Insurance",
+        "body": "<p>Protect your Fort Myers lifestyle—home, boats, investments. Without Umbrella Insurance in Florida, one accident or lawsuit could jeopardize all you’ve achieved.</p><p>\r\n\t\t\t\t\t\tExtra coverage to protect your assets from major claims\t\t\t\t\t</p><p>\r\n\t\t\t\t\t\tGet great coverage for a low cost—why risk it?\t\t\t\t\t</p><p>\r\n\t\t\t\t\t\tLocal agents who understand your needs and customize your policy well.\t\t\t\t\t</p><p>Don’t wait for a lawsuit or serious accident to expose your vulnerability and leave you unprotected. The potential cost of inaction could amount to millions of dollars—secure your personalized quote now and rest easy, knowing you have taken proactive steps to safeguard your future and financial well-being.</p>"
+      }
+    ],
+    "resources": [
+      {
+        "eyebrow": "YOUR FLORIDA LIFE",
+        "title": "More of life. Covered.",
+        "body": "We can help you find the right policy for all of your insurance needs. Explore our insurance options.",
+        "links": [
+          {
+            "label": "Explore our insurance",
+            "url": "/insurance"
+          },
+          {
+            "label": "Home + auto quotes",
+            "url": "/quote?service=home-auto"
+          }
+        ]
+      },
+      {
+        "eyebrow": "HELPFUL READING",
+        "title": "A little more peace of mind.",
+        "body": "Practical guidance to help you understand insurance and prepare for the unexpected.",
+        "links": [
+          {
+            "label": "All insurance articles",
+            "url": "/expert-insurance-insights-and-tips-culbertson-agency-articles/"
+          }
+        ]
+      },
+      {
+        "eyebrow": "HERE WHEN YOU NEED US",
+        "title": "Let’s talk about your coverage.",
+        "body": "Have a question about coverage, a policy or a claim? Our Fort Myers team is here to help.",
+        "links": [
+          {
+            "label": "Contact our team",
+            "url": "/contact-us"
+          },
+          {
+            "label": "Claims support",
+            "url": "/claims"
+          },
+          {
+            "label": "(239) 210-7700",
+            "url": "tel:12392107700"
+          }
+        ]
+      }
+    ]
+  },
+  "insurance/renters-insurance": {
+    "eyebrow": "HERE FOR YOUR FLORIDA LIFE",
+    "heading": "Florida Renters Insurance",
+    "subtitle": "Live with Confidence in the Sunshine State",
+    "intro_heading": "Live with Confidence in the Sunshine State",
+    "intro_body": "Renters insurance is a policy designed to protect people who rent their homes or apartments. It covers your personal belongings, liability, and additional living expenses if your rental becomes unlivable due to a covered event. While your landlord’s insurance covers the building itself, renters insurance ensures your possessions and personal liability are protected.",
+    "quote_eyebrow": "LOCAL PEOPLE. PERSONAL GUIDANCE.",
+    "quote_heading": "Find coverage that fits your life.",
+    "quote_body": "Start with your ZIP code. Our team can help you explore your coverage options.",
+    "zip_label": "Your ZIP code",
+    "feature_eyebrow": "MADE FOR YOUR EVERYDAY ADVENTURES",
+    "feature_heading": "Live with Confidence in the Sunshine State",
+    "feature_body": "Get Tailored Coverage from Culbertson Agency, Your Local Experts in Renters Insurance",
+    "coverage_eyebrow": "UNDERSTAND YOUR OPTIONS",
+    "coverage_heading": "What does renters insurance cover?",
+    "coverage_intro": "The amount of coverage can vary depending on the policy you choose. Here are some of the most common coverage options.",
+    "coverage_note": "Available coverage, exclusions, limits and deductibles vary by insurer and policy. Your agent can explain the details before you choose.",
+    "faq_eyebrow": "A LITTLE CLARITY GOES A LONG WAY",
+    "faq_heading": "Understand your coverage.",
+    "home_label": "Home",
+    "insurance_label": "Insurance",
+    "breadcrumb": "Florida Renters Insurance",
+    "explore_label": "Explore coverage options",
+    "quote_button": "Get a quote",
+    "zip_placeholder": "Enter ZIP code",
+    "zip_validation": "Enter a five-digit ZIP code",
+    "phone_intro": "Prefer to talk?",
+    "phone": "(239) 210-7700",
+    "phone_url": "tel:12392107700",
+    "feature_link_label": "Start your quote",
+    "resources_label": "More ways we can help",
+    "quote_url": "/get-a-quote/renters/",
+    "hero": "/assets/original/2021/05/renters_insurance_fort_myers_guide.jpg",
+    "hero_alt": "Florida Renters Insurance",
+    "feature_image": "/assets/original/2021/05/renters_insurance_fort_myers_guide.jpg",
+    "feature_image_alt": "Florida Renters Insurance",
+    "feature_points": [
+      "Protection for personal belongings against theft, fire, and more",
+      "Liability coverage for accidents in your rental home",
+      "Bundling discounts for extra savings"
+    ],
+    "coverages": [
+      {
+        "title": "Liability",
+        "body": "<p>\r\n\t\t\t\t\t\tCovers legal expenses if you’re responsible for injuries or property damage to others.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Personal Belongings",
+        "body": "<p>\r\n\t\t\t\t\t\tProtects your items, such as furniture, electronics, and clothing, from risks like theft, fire, or water damage (not related to floods).\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Medical Payments",
+        "body": "<p>\r\n\t\t\t\t\t\tPays for medical bills if someone is injured in your rental home.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Loss of Use (Additional Living Expenses)",
+        "body": "<p>\r\n\t\t\t\t\t\tProvides funds for temporary housing, food, and other expenses if your rental becomes uninhabitable due to a covered disaster.\t\t\t\t\t</p>"
+      },
+      {
+        "title": "Optional Add-ons",
+        "body": "<p>\r\n\t\t\t\t\t\tCoverage for high-value items like jewelry or protection for natural disasters like hurricanes and floods, depending on your policy.\t\t\t\t\t</p>"
+      }
+    ],
+    "questions": [
+      {
+        "title": "What is renters insurance?",
+        "body": "<p>Renters insurance is a policy designed to protect people who rent their homes or apartments. It covers your personal belongings, liability, and additional living expenses if your rental becomes unlivable due to a covered event. While your landlord’s insurance covers the building itself, renters insurance ensures your possessions and personal liability are protected.</p>"
+      },
+      {
+        "title": "What doesn’t renters insurance cover?",
+        "body": "<ul><li><strong>Flood Damage</strong>: Most policies don’t include flood coverage; a separate policy is required.</li><li><strong>Hurricane Storm Surge</strong> Damage** – Water damage caused by storm surge might also need additional coverage.</li><li><strong>Roommate Belongings</strong>: Unless specifically listed, your roommate’s items aren’t covered under your policy.</li><li><strong>Pest Infestation</strong>: Damage caused by bed bugs, termites, or rodents isn’t included.</li><li><strong>Negligence</strong>: Damages you cause due to intentional or careless actions typically aren’t covered.</li><li><strong>Vehicles and Motorized Equipment</strong>: Cars, boats, or motorized equipment you own aren’t included; separate insurance is needed.</li></ul>"
+      },
+      {
+        "title": "What are the right questions to ask to find the best renters insurance?",
+        "body": "<ul><li>What disasters are covered under this policy?</li><li>Does the policy cover damages from hurricanes or windstorm-related incidents?</li><li>Is flood insurance recommended or necessary based on where I live?</li><li>What’s the limit and deductible for personal belongings coverage?</li><li>Are high-value items like jewelry or electronics fully covered?</li><li>Can I bundle renters insurance with other policies for a discount?</li><li>Does liability coverage include injuries caused by my pets?</li><li>What’s the process and timeline for filing claims?</li><li>Are there any exclusions I should know about for the area of Florida I live in?</li><li>Does the policy cover additional living expenses during hurricane evacuations?</li></ul>"
+      }
+    ],
+    "resources": [
+      {
+        "eyebrow": "YOUR FLORIDA LIFE",
+        "title": "More of life. Covered.",
+        "body": "We can help you find the right policy for all of your insurance needs. Explore our insurance options.",
+        "links": [
+          {
+            "label": "Explore our insurance",
+            "url": "/insurance"
+          },
+          {
+            "label": "Home + auto quotes",
+            "url": "/quote?service=home-auto"
+          }
+        ]
+      },
+      {
+        "eyebrow": "HELPFUL READING",
+        "title": "A little more peace of mind.",
+        "body": "Practical guidance to help you understand insurance and prepare for the unexpected.",
+        "links": [
+          {
+            "label": "All insurance articles",
+            "url": "/expert-insurance-insights-and-tips-culbertson-agency-articles/"
+          }
+        ]
+      },
+      {
+        "eyebrow": "HERE WHEN YOU NEED US",
+        "title": "Let’s talk about your coverage.",
+        "body": "Have a question about coverage, a policy or a claim? Our Fort Myers team is here to help.",
+        "links": [
+          {
+            "label": "Contact our team",
+            "url": "/contact-us"
+          },
+          {
+            "label": "Claims support",
+            "url": "/claims"
+          },
+          {
+            "label": "(239) 210-7700",
+            "url": "tel:12392107700"
+          }
+        ]
+      }
+    ]
+  }
+}

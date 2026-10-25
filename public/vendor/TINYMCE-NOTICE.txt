@@ -1,0 +1,6 @@
+TinyMCE 8.10.0
+Official npm package: https://registry.npmjs.org/tinymce/-/tinymce-8.10.0.tgz
+Source: https://github.com/tinymce/tinymce
+Self-hosted locally under GPL-2.0-or-later; see tinymce/license.md.
+Configured license_key: gpl. Attribution retained. No premium plugins or Tiny Cloud account.
+Integration: public/cms.js. Core packages and plugin files are served from /vendor/tinymce/.

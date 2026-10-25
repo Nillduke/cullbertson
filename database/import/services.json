@@ -1,0 +1,1223 @@
+{
+  "version": 1,
+  "purpose": "Preliminary local quote requests; not carrier applications or pricing. Custom service questions, not scraped from unseen third-party flows.",
+  "services": {
+    "home": {
+      "name": "Homeowners",
+      "intro": "A little about your home. A lot of personal attention.",
+      "icon": "service-home",
+      "path": "get-a-home-insurance-quote",
+      "questions": [
+        {
+          "id": "occupancy",
+          "title": "How is the property used?",
+          "type": "choice",
+          "options": [
+            "Primary residence",
+            "Seasonal / second home",
+            "Rented to others",
+            "Vacant / renovating"
+          ],
+          "description": ""
+        },
+        {
+          "id": "property",
+          "title": "Tell us about the property.",
+          "type": "fields",
+          "fields": [
+            {
+              "id": "yearBuilt",
+              "label": "Year built",
+              "type": "number",
+              "min": 1800,
+              "max": 2027
+            },
+            {
+              "id": "squareFeet",
+              "label": "Approximate living area (sq. ft.)",
+              "type": "number",
+              "min": 100,
+              "max": 50000
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "construction",
+          "title": "What is the main construction?",
+          "type": "choice",
+          "options": [
+            "Concrete / masonry",
+            "Wood frame",
+            "Mixed construction",
+            "Other",
+            "Not sure"
+          ],
+          "description": ""
+        },
+        {
+          "id": "roofAge",
+          "title": "About how old is the roof?",
+          "type": "choice",
+          "options": [
+            "Under 5 years",
+            "5-10 years",
+            "11-15 years",
+            "16-20 years",
+            "Over 20 years",
+            "Not sure"
+          ],
+          "description": ""
+        },
+        {
+          "id": "pool",
+          "title": "Does the property have a pool?",
+          "type": "choice",
+          "options": [
+            "Yes",
+            "No",
+            "Not sure"
+          ],
+          "description": ""
+        }
+      ]
+    },
+    "condo": {
+      "name": "Condo",
+      "intro": "Coverage for your place, your belongings, and your Florida life.",
+      "icon": "service-condo",
+      "path": "get-a-condo-insurance-quote",
+      "questions": [
+        {
+          "id": "occupancy",
+          "title": "How is the property used?",
+          "type": "choice",
+          "options": [
+            "Primary residence",
+            "Seasonal / second home",
+            "Rented to others",
+            "Vacant / renovating"
+          ],
+          "description": ""
+        },
+        {
+          "id": "property",
+          "title": "Tell us about the property.",
+          "type": "fields",
+          "fields": [
+            {
+              "id": "yearBuilt",
+              "label": "Year built",
+              "type": "number",
+              "min": 1800,
+              "max": 2027
+            },
+            {
+              "id": "squareFeet",
+              "label": "Approximate living area (sq. ft.)",
+              "type": "number",
+              "min": 100,
+              "max": 50000
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "floor",
+          "title": "Which floor is the unit on?",
+          "type": "choice",
+          "options": [
+            "Ground / first floor",
+            "Second floor",
+            "Third floor or above",
+            "Not sure"
+          ],
+          "description": ""
+        },
+        {
+          "id": "belongings",
+          "title": "About how much would replacing your belongings cost?",
+          "type": "choice",
+          "options": [
+            "Under $25,000",
+            "$25,000-$49,999",
+            "$50,000-$99,999",
+            "$100,000 or more",
+            "Not sure"
+          ],
+          "description": "An estimate is fine. Your agent can help you choose a coverage amount."
+        },
+        {
+          "id": "association",
+          "title": "Do you have a copy of your association insurance requirements?",
+          "type": "choice",
+          "options": [
+            "Yes",
+            "No",
+            "Not sure"
+          ],
+          "description": ""
+        }
+      ]
+    },
+    "renters": {
+      "name": "Renters",
+      "intro": "Let us help protect the things that make it home.",
+      "icon": "service-renters",
+      "path": "renters",
+      "questions": [
+        {
+          "id": "rentalType",
+          "title": "What kind of home do you rent?",
+          "type": "choice",
+          "options": [
+            "Apartment",
+            "Condo",
+            "House / townhome",
+            "Other"
+          ],
+          "description": ""
+        },
+        {
+          "id": "belongings",
+          "title": "About how much would replacing your belongings cost?",
+          "type": "choice",
+          "options": [
+            "Under $25,000",
+            "$25,000-$49,999",
+            "$50,000-$99,999",
+            "$100,000 or more",
+            "Not sure"
+          ],
+          "description": "An estimate is fine. Your agent can help you choose a coverage amount."
+        },
+        {
+          "id": "roommates",
+          "title": "Do you share the rental with unrelated roommates?",
+          "type": "choice",
+          "options": [
+            "Yes",
+            "No"
+          ],
+          "description": ""
+        },
+        {
+          "id": "landlordLimit",
+          "title": "Has your landlord specified a liability requirement?",
+          "type": "choice",
+          "options": [
+            "$100,000",
+            "$300,000",
+            "$500,000",
+            "Another amount",
+            "No requirement / not sure"
+          ],
+          "description": ""
+        }
+      ]
+    },
+    "flood": {
+      "name": "Flood",
+      "intro": "Start a conversation about protection from rising water.",
+      "icon": "service-flood",
+      "path": "get-a-flood-insurance-quote",
+      "questions": [
+        {
+          "id": "propertyType",
+          "title": "What type of property needs flood coverage?",
+          "type": "choice",
+          "options": [
+            "Single-family home",
+            "Condo unit",
+            "Townhome",
+            "Mobile / manufactured home",
+            "Other residential property"
+          ],
+          "description": ""
+        },
+        {
+          "id": "occupancy",
+          "title": "How is the property used?",
+          "type": "choice",
+          "options": [
+            "Primary residence",
+            "Seasonal / second home",
+            "Rented to others",
+            "Vacant / renovating"
+          ],
+          "description": ""
+        },
+        {
+          "id": "property",
+          "title": "Tell us about the property.",
+          "type": "fields",
+          "fields": [
+            {
+              "id": "yearBuilt",
+              "label": "Year built",
+              "type": "number",
+              "min": 1800,
+              "max": 2027
+            },
+            {
+              "id": "squareFeet",
+              "label": "Approximate living area (sq. ft.)",
+              "type": "number",
+              "min": 100,
+              "max": 50000
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "floodZone",
+          "title": "Do you know the flood zone?",
+          "type": "choice",
+          "options": [
+            "A / AE / AH / AO",
+            "V / VE",
+            "X",
+            "Another zone",
+            "Not sure"
+          ],
+          "description": ""
+        },
+        {
+          "id": "elevation",
+          "title": "Do you have an elevation certificate?",
+          "type": "choice",
+          "options": [
+            "Yes",
+            "No",
+            "Not sure"
+          ],
+          "description": ""
+        },
+        {
+          "id": "pastFlood",
+          "title": "Has this property had a flood loss?",
+          "type": "choice",
+          "options": [
+            "Yes",
+            "No",
+            "Not sure"
+          ],
+          "description": ""
+        }
+      ]
+    },
+    "life": {
+      "name": "Life",
+      "intro": "Tell us your goals. Our team will help with the next steps.",
+      "icon": "service-life",
+      "path": "get-a-life-insurance-quote",
+      "questions": [
+        {
+          "id": "goal",
+          "title": "What is your main reason for life insurance?",
+          "type": "choice",
+          "options": [
+            "Protect family income",
+            "Cover a mortgage or debt",
+            "Final expenses",
+            "Leave a legacy",
+            "Review existing coverage",
+            "Not sure yet"
+          ],
+          "description": ""
+        },
+        {
+          "id": "ageRange",
+          "title": "What is the age range of the person to be insured?",
+          "type": "choice",
+          "options": [
+            "Under 18",
+            "18-29",
+            "30-39",
+            "40-49",
+            "50-59",
+            "60-69",
+            "70 or older"
+          ],
+          "description": ""
+        },
+        {
+          "id": "policyType",
+          "title": "What kind of life coverage interests you?",
+          "type": "choice",
+          "options": [
+            "Term life",
+            "Permanent life",
+            "Help me compare"
+          ],
+          "description": ""
+        },
+        {
+          "id": "lifeAmount",
+          "title": "What coverage amount would you like to discuss?",
+          "type": "choice",
+          "options": [
+            "Under $100,000",
+            "$100,000-$249,999",
+            "$250,000-$499,999",
+            "$500,000-$999,999",
+            "$1 million or more",
+            "Help me decide"
+          ],
+          "description": ""
+        }
+      ]
+    },
+    "boat": {
+      "name": "Boat",
+      "intro": "More time on the water starts with the right conversation.",
+      "icon": "service-boat",
+      "path": "get-a-boat-insurance-quote",
+      "questions": [
+        {
+          "id": "boatType",
+          "title": "What kind of watercraft do you have?",
+          "type": "choice",
+          "options": [
+            "Powerboat",
+            "Sailboat",
+            "Pontoon",
+            "Personal watercraft / jet ski",
+            "Other"
+          ],
+          "description": ""
+        },
+        {
+          "id": "vehicle",
+          "title": "Tell us about your watercraft.",
+          "type": "fields",
+          "fields": [
+            {
+              "id": "year",
+              "label": "Model year",
+              "type": "number",
+              "min": 1900,
+              "max": 2027
+            },
+            {
+              "id": "make",
+              "label": "Make",
+              "type": "text",
+              "maxLength": 80
+            },
+            {
+              "id": "model",
+              "label": "Model",
+              "type": "text",
+              "maxLength": 100
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "boatSize",
+          "title": "A few more details about the boat.",
+          "type": "fields",
+          "fields": [
+            {
+              "id": "length",
+              "label": "Length in feet",
+              "type": "number",
+              "min": 1,
+              "max": 200
+            },
+            {
+              "id": "horsepower",
+              "label": "Total engine horsepower (optional)",
+              "type": "number",
+              "min": 0,
+              "max": 10000,
+              "required": false
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "assetValue",
+          "title": "What is the approximate value of your watercraft?",
+          "type": "fields",
+          "fields": [
+            {
+              "id": "amount",
+              "label": "Estimated value in US dollars",
+              "type": "number",
+              "min": 1,
+              "max": 10000000
+            }
+          ],
+          "description": "Use an estimate; your agent will confirm valuation details."
+        },
+        {
+          "id": "boatUse",
+          "title": "How will you use the watercraft?",
+          "type": "choice",
+          "options": [
+            "Personal recreation",
+            "Fishing / recreation",
+            "Charter / commercial use",
+            "Other"
+          ],
+          "description": ""
+        },
+        {
+          "id": "boatStorage",
+          "title": "Where is it usually kept?",
+          "type": "choice",
+          "options": [
+            "At home / on a trailer",
+            "Marina slip",
+            "Dry storage",
+            "Other"
+          ],
+          "description": ""
+        },
+        {
+          "id": "ownership",
+          "title": "Do you own it or plan to buy it?",
+          "type": "choice",
+          "options": [
+            "Already owned",
+            "Buying soon",
+            "Financed / leased"
+          ],
+          "description": ""
+        }
+      ]
+    },
+    "motorcycle": {
+      "name": "Motorcycle",
+      "intro": "Tell us about your ride. We will help with the coverage.",
+      "icon": "service-motorcycle",
+      "path": "get-a-motorcycle-insurance-quote",
+      "questions": [
+        {
+          "id": "bikeType",
+          "title": "What type of motorcycle do you ride?",
+          "type": "choice",
+          "options": [
+            "Cruiser",
+            "Touring",
+            "Sport / street",
+            "Scooter / moped",
+            "Trike",
+            "Other"
+          ],
+          "description": ""
+        },
+        {
+          "id": "vehicle",
+          "title": "Tell us about your motorcycle.",
+          "type": "fields",
+          "fields": [
+            {
+              "id": "year",
+              "label": "Model year",
+              "type": "number",
+              "min": 1900,
+              "max": 2027
+            },
+            {
+              "id": "make",
+              "label": "Make",
+              "type": "text",
+              "maxLength": 80
+            },
+            {
+              "id": "model",
+              "label": "Model",
+              "type": "text",
+              "maxLength": 100
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "assetValue",
+          "title": "What is the approximate value of your motorcycle?",
+          "type": "fields",
+          "fields": [
+            {
+              "id": "amount",
+              "label": "Estimated value in US dollars",
+              "type": "number",
+              "min": 1,
+              "max": 10000000
+            }
+          ],
+          "description": "Use an estimate; your agent will confirm valuation details."
+        },
+        {
+          "id": "riding",
+          "title": "How do you use your motorcycle?",
+          "type": "choice",
+          "options": [
+            "Pleasure / weekends",
+            "Commuting",
+            "Both pleasure and commuting",
+            "Other"
+          ],
+          "description": ""
+        },
+        {
+          "id": "experience",
+          "title": "How long have you been riding?",
+          "type": "choice",
+          "options": [
+            "Under 1 year",
+            "1-3 years",
+            "4-10 years",
+            "Over 10 years"
+          ],
+          "description": ""
+        },
+        {
+          "id": "ownership",
+          "title": "Do you own it or plan to buy it?",
+          "type": "choice",
+          "options": [
+            "Already owned",
+            "Buying soon",
+            "Financed / leased"
+          ],
+          "description": ""
+        }
+      ]
+    },
+    "golf-cart": {
+      "name": "Golf Cart",
+      "intro": "For the course, the neighborhood, and the journeys between.",
+      "icon": "service-golf-cart",
+      "path": "golf-cart-insurance-quote",
+      "questions": [
+        {
+          "id": "vehicle",
+          "title": "Tell us about your golf cart.",
+          "type": "fields",
+          "fields": [
+            {
+              "id": "year",
+              "label": "Model year",
+              "type": "number",
+              "min": 1900,
+              "max": 2027
+            },
+            {
+              "id": "make",
+              "label": "Make",
+              "type": "text",
+              "maxLength": 80
+            },
+            {
+              "id": "model",
+              "label": "Model",
+              "type": "text",
+              "maxLength": 100
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "cartType",
+          "title": "What type of cart is it?",
+          "type": "choice",
+          "options": [
+            "Standard golf cart",
+            "Street-legal low-speed vehicle",
+            "Not sure"
+          ],
+          "description": ""
+        },
+        {
+          "id": "cartPower",
+          "title": "How is it powered?",
+          "type": "choice",
+          "options": [
+            "Electric",
+            "Gas",
+            "Other"
+          ],
+          "description": ""
+        },
+        {
+          "id": "assetValue",
+          "title": "What is the approximate value of your golf cart?",
+          "type": "fields",
+          "fields": [
+            {
+              "id": "amount",
+              "label": "Estimated value in US dollars",
+              "type": "number",
+              "min": 1,
+              "max": 10000000
+            }
+          ],
+          "description": "Use an estimate; your agent will confirm valuation details."
+        },
+        {
+          "id": "cartUse",
+          "title": "Where will you use the cart?",
+          "type": "choice",
+          "options": [
+            "Golf course only",
+            "Private community / property",
+            "Public roads",
+            "A mix of these"
+          ],
+          "description": ""
+        },
+        {
+          "id": "ownership",
+          "title": "Do you own it or plan to buy it?",
+          "type": "choice",
+          "options": [
+            "Already owned",
+            "Buying soon",
+            "Financed / leased"
+          ],
+          "description": ""
+        }
+      ]
+    },
+    "rv": {
+      "name": "RV & Mobile Home",
+      "intro": "Protection for life on the road or a place to call home.",
+      "icon": "service-rv",
+      "path": "get-a-rv-insurance-quote",
+      "questions": [
+        {
+          "id": "unitType",
+          "title": "What would you like to insure?",
+          "type": "choice",
+          "options": [
+            "Motorhome",
+            "Travel trailer",
+            "Fifth wheel",
+            "Mobile / manufactured home"
+          ],
+          "description": ""
+        },
+        {
+          "id": "vehicle",
+          "title": "Tell us about your RV or manufactured home.",
+          "type": "fields",
+          "fields": [
+            {
+              "id": "year",
+              "label": "Model year",
+              "type": "number",
+              "min": 1900,
+              "max": 2027
+            },
+            {
+              "id": "make",
+              "label": "Make",
+              "type": "text",
+              "maxLength": 80
+            },
+            {
+              "id": "model",
+              "label": "Model",
+              "type": "text",
+              "maxLength": 100
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "assetValue",
+          "title": "What is the approximate value of your RV or manufactured home?",
+          "type": "fields",
+          "fields": [
+            {
+              "id": "amount",
+              "label": "Estimated value in US dollars",
+              "type": "number",
+              "min": 1,
+              "max": 10000000
+            }
+          ],
+          "description": "Use an estimate; your agent will confirm valuation details."
+        },
+        {
+          "id": "rvUse",
+          "title": "How do you use the RV?",
+          "type": "choice",
+          "options": [
+            "Occasional trips",
+            "Seasonal use",
+            "Full-time residence"
+          ],
+          "description": "",
+          "when": {
+            "unitType": [
+              "Motorhome",
+              "Travel trailer",
+              "Fifth wheel"
+            ]
+          }
+        },
+        {
+          "id": "mobileUse",
+          "title": "How is the manufactured home used?",
+          "type": "choice",
+          "options": [
+            "Primary residence",
+            "Seasonal / second home",
+            "Rented to others"
+          ],
+          "description": "",
+          "when": {
+            "unitType": [
+              "Mobile / manufactured home"
+            ]
+          }
+        },
+        {
+          "id": "roofAge",
+          "title": "About how old is the roof?",
+          "type": "choice",
+          "options": [
+            "Under 5 years",
+            "5-10 years",
+            "11-15 years",
+            "16-20 years",
+            "Over 20 years",
+            "Not sure"
+          ],
+          "description": "",
+          "when": {
+            "unitType": [
+              "Mobile / manufactured home"
+            ]
+          }
+        },
+        {
+          "id": "ownership",
+          "title": "Do you own it or plan to buy it?",
+          "type": "choice",
+          "options": [
+            "Already owned",
+            "Buying soon",
+            "Financed / leased"
+          ],
+          "description": ""
+        }
+      ]
+    },
+    "umbrella": {
+      "name": "Personal Umbrella",
+      "intro": "Explore an extra layer of personal liability protection.",
+      "icon": "service-umbrella",
+      "path": "get-a-personal-umbrella-protection-quote",
+      "questions": [
+        {
+          "id": "umbrellaLimit",
+          "title": "What additional liability amount interests you?",
+          "type": "choice",
+          "options": [
+            "$1 million",
+            "$2 million",
+            "$3 million",
+            "$5 million or more",
+            "Help me decide"
+          ],
+          "description": ""
+        },
+        {
+          "id": "autoLiability",
+          "title": "What is your current auto liability limit?",
+          "type": "choice",
+          "options": [
+            "$100,000 / $300,000",
+            "$250,000 / $500,000",
+            "$500,000 combined single limit",
+            "Another limit",
+            "No auto policy",
+            "Not sure"
+          ],
+          "description": ""
+        },
+        {
+          "id": "homeLiability",
+          "title": "What is your current home or renters liability limit?",
+          "type": "choice",
+          "options": [
+            "$100,000",
+            "$300,000",
+            "$500,000",
+            "Another limit",
+            "No property policy",
+            "Not sure"
+          ],
+          "description": ""
+        },
+        {
+          "id": "household",
+          "title": "Tell us about your household.",
+          "type": "fields",
+          "fields": [
+            {
+              "id": "drivers",
+              "label": "Number of household drivers",
+              "type": "number",
+              "min": 0,
+              "max": 30
+            },
+            {
+              "id": "vehicles",
+              "label": "Number of vehicles",
+              "type": "number",
+              "min": 0,
+              "max": 50
+            },
+            {
+              "id": "properties",
+              "label": "Number of properties owned",
+              "type": "number",
+              "min": 0,
+              "max": 50
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "extraAssets",
+          "title": "Do you own a boat, rental property, or recreational vehicle?",
+          "type": "choice",
+          "options": [
+            "Yes",
+            "No",
+            "Not sure"
+          ],
+          "description": ""
+        }
+      ]
+    },
+    "home-auto": {
+      "name": "Home + Auto Bundle",
+      "intro": "One conversation for your home and the road ahead.",
+      "icon": "service-home-auto",
+      "path": null,
+      "questions": [
+        {
+          "id": "bundleProperty",
+          "title": "Which property coverage would you like to bundle?",
+          "type": "choice",
+          "options": [
+            "Homeowners",
+            "Condo",
+            "Renters"
+          ],
+          "description": ""
+        },
+        {
+          "id": "bundleVehicle",
+          "title": "Tell us about your primary vehicle.",
+          "type": "fields",
+          "fields": [
+            {
+              "id": "year",
+              "label": "Model year",
+              "type": "number",
+              "min": 1987,
+              "max": 2027
+            },
+            {
+              "id": "make",
+              "label": "Make",
+              "type": "text",
+              "maxLength": 80
+            },
+            {
+              "id": "model",
+              "label": "Model",
+              "type": "text",
+              "maxLength": 100
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "bundleHousehold",
+          "title": "How many vehicles and drivers need coverage?",
+          "type": "fields",
+          "fields": [
+            {
+              "id": "vehicles",
+              "label": "Vehicles",
+              "type": "number",
+              "min": 1,
+              "max": 20
+            },
+            {
+              "id": "drivers",
+              "label": "Drivers",
+              "type": "number",
+              "min": 1,
+              "max": 20
+            }
+          ],
+          "description": ""
+        },
+        {
+          "id": "property",
+          "title": "Tell us about the property.",
+          "type": "fields",
+          "fields": [
+            {
+              "id": "yearBuilt",
+              "label": "Year built",
+              "type": "number",
+              "min": 1800,
+              "max": 2027
+            },
+            {
+              "id": "squareFeet",
+              "label": "Approximate living area (sq. ft.)",
+              "type": "number",
+              "min": 100,
+              "max": 50000
+            }
+          ],
+          "description": "",
+          "when": {
+            "bundleProperty": [
+              "Homeowners",
+              "Condo"
+            ]
+          }
+        },
+        {
+          "id": "belongings",
+          "title": "About how much would replacing your belongings cost?",
+          "type": "choice",
+          "options": [
+            "Under $25,000",
+            "$25,000-$49,999",
+            "$50,000-$99,999",
+            "$100,000 or more",
+            "Not sure"
+          ],
+          "description": "An estimate is fine. Your agent can help you choose a coverage amount.",
+          "when": {
+            "bundleProperty": [
+              "Renters"
+            ]
+          }
+        },
+        {
+          "id": "bundlePolicies",
+          "title": "Are your home and auto policies with the same insurer?",
+          "type": "choice",
+          "options": [
+            "Yes",
+            "No",
+            "I do not currently have both policies",
+            "Not sure"
+          ],
+          "description": ""
+        }
+      ]
+    }
+  },
+  "common": {
+    "contact": [
+      {
+        "id": "name",
+        "stage": "Contact",
+        "title": "Who should we contact?",
+        "type": "fields",
+        "fields": [
+          {
+            "id": "firstName",
+            "label": "First name",
+            "maxLength": 80,
+            "autocomplete": "given-name"
+          },
+          {
+            "id": "lastName",
+            "label": "Last name",
+            "maxLength": 80,
+            "autocomplete": "family-name"
+          }
+        ]
+      },
+      {
+        "id": "address",
+        "stage": "Contact",
+        "title": "What address needs coverage?",
+        "description": "For property coverage, use the insured property address. For vehicles or watercraft, use the primary garaging or storage address. For life insurance, use your home address.",
+        "type": "fields",
+        "fields": [
+          {
+            "id": "street",
+            "label": "Street address",
+            "maxLength": 160,
+            "autocomplete": "street-address"
+          },
+          {
+            "id": "unit",
+            "label": "Unit / apartment (optional)",
+            "maxLength": 40,
+            "required": false
+          },
+          {
+            "id": "city",
+            "label": "City",
+            "maxLength": 80,
+            "autocomplete": "address-level2"
+          },
+          {
+            "id": "state",
+            "label": "State",
+            "type": "select",
+            "options": [
+              "AK",
+              "AL",
+              "AR",
+              "AZ",
+              "CA",
+              "CO",
+              "CT",
+              "DC",
+              "DE",
+              "FL",
+              "GA",
+              "HI",
+              "IA",
+              "ID",
+              "IL",
+              "IN",
+              "KS",
+              "KY",
+              "LA",
+              "MA",
+              "MD",
+              "ME",
+              "MI",
+              "MN",
+              "MO",
+              "MS",
+              "MT",
+              "NC",
+              "ND",
+              "NE",
+              "NH",
+              "NJ",
+              "NM",
+              "NV",
+              "NY",
+              "OH",
+              "OK",
+              "OR",
+              "PA",
+              "RI",
+              "SC",
+              "SD",
+              "TN",
+              "TX",
+              "UT",
+              "VA",
+              "VT",
+              "WA",
+              "WI",
+              "WV",
+              "WY"
+            ]
+          },
+          {
+            "id": "zip",
+            "label": "ZIP code",
+            "pattern": "[0-9]{5}",
+            "maxLength": 5,
+            "inputmode": "numeric",
+            "autocomplete": "postal-code"
+          }
+        ]
+      },
+      {
+        "id": "email",
+        "stage": "Contact",
+        "title": "Where can we email you?",
+        "type": "fields",
+        "fields": [
+          {
+            "id": "email",
+            "label": "Email address",
+            "type": "email",
+            "maxLength": 254,
+            "autocomplete": "email"
+          }
+        ]
+      },
+      {
+        "id": "phone",
+        "stage": "Contact",
+        "title": "What is the best number to reach you?",
+        "description": "Your preferences stay with this quote request.",
+        "type": "fields",
+        "fields": [
+          {
+            "id": "phone",
+            "label": "Phone number",
+            "type": "tel",
+            "maxLength": 24,
+            "autocomplete": "tel"
+          }
+        ]
+      }
+    ],
+    "coverage": [
+      {
+        "id": "insured",
+        "stage": "Coverage",
+        "type": "choice",
+        "title": "Do you currently have this coverage?",
+        "options": [
+          "Yes",
+          "No",
+          "Not sure"
+        ]
+      },
+      {
+        "id": "carrier",
+        "stage": "Coverage",
+        "type": "fields",
+        "title": "Who is your current insurance company?",
+        "description": "If you do not know, leave this blank and continue.",
+        "when": {
+          "insured": [
+            "Yes"
+          ]
+        },
+        "fields": [
+          {
+            "id": "carrier",
+            "label": "Current insurer (optional)",
+            "maxLength": 100,
+            "required": false
+          }
+        ]
+      },
+      {
+        "id": "start",
+        "stage": "Coverage",
+        "type": "choice",
+        "title": "When would you like coverage to start?",
+        "description": "Your agent will confirm availability and the effective date. Sending a request does not bind coverage.",
+        "options": [
+          "As soon as possible",
+          "Within 30 days",
+          "In 1-2 months",
+          "At my renewal",
+          "Just exploring"
+        ]
+      }
+    ]
+  }
+}

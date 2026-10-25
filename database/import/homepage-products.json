@@ -1,0 +1,75 @@
+{
+  "auto": {
+    "title": "Quote auto insurance",
+    "description": "Compare quotes from several A-rated carriers.",
+    "icon": "auto",
+    "path": "get-a-quote/get-a-auto-insurance-quote/",
+    "info": "insurance/auto-insurance/",
+    "label": "auto insurance"
+  },
+  "bundle": {
+    "title": "Quote home + auto insurance",
+    "description": "Get the Best Florida Home & Auto Insurance.",
+    "icon": "home",
+    "path": "get-a-quote/",
+    "info": "insurance/",
+    "label": "our insurance options"
+  },
+  "property": {
+    "title": "Quote home insurance",
+    "description": "Protect Your Home with Confidence in Fort Myers.",
+    "icon": "home",
+    "path": "get-a-quote/get-a-home-insurance-quote/",
+    "info": "insurance/homeowners-insurance/",
+    "label": "home insurance",
+    "options": [
+      "Home",
+      "Condo",
+      "Renters",
+      "Flood"
+    ]
+  },
+  "recreation": {
+    "title": "Quote motorcycle insurance",
+    "description": "Protect Every Part of Your Life.",
+    "icon": "recreation",
+    "path": "get-a-quote/get-a-motorcycle-insurance-quote/",
+    "info": "insurance/florida-motorcycle-insurance/",
+    "label": "motorcycle insurance",
+    "options": [
+      "Motorcycle",
+      "Boat",
+      "RV"
+    ]
+  },
+  "Condo": {
+    "title": "Quote condo insurance",
+    "path": "get-a-quote/get-a-condo-insurance-quote/",
+    "info": "insurance/condo-insurance/",
+    "label": "condo insurance"
+  },
+  "Renters": {
+    "title": "Quote renters insurance",
+    "path": "get-a-quote/renters/",
+    "info": "insurance/renters-insurance/",
+    "label": "renters insurance"
+  },
+  "Flood": {
+    "title": "Quote flood insurance",
+    "path": "get-a-quote/get-a-flood-insurance-quote/",
+    "info": "insurance/flood-insurance/",
+    "label": "flood insurance"
+  },
+  "Boat": {
+    "title": "Quote boat insurance",
+    "path": "get-a-quote/get-a-boat-insurance-quote/",
+    "info": "insurance/boat-insurance/",
+    "label": "boat insurance"
+  },
+  "RV": {
+    "title": "Quote RV insurance",
+    "path": "get-a-quote/get-a-rv-insurance-quote/",
+    "info": "insurance/florida-rv-mobile-home-insurance/",
+    "label": "RV insurance"
+  }
+}

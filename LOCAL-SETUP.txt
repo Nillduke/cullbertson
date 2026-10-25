@@ -1,0 +1,210 @@
+CULBERTSON LARAVEL - DATABASE CMS
+
+Website: http://localhost:8083/
+Content manager: http://localhost:8083/admin
+Admin login details: ../.local-setup/culbertson-laravel-admin.txt
+The login file is outside the public directory and denied by the workspace Apache host.
+
+START LOCALLY
+Run .\start-local.ps1 in this folder, or:
+php artisan serve --host=127.0.0.1 --port=8083 --no-reload
+Use PHP 8.3.6 from C:/wamp64/bin/php/php8.3.6/php.exe.
+
+DATABASE IS THE CONTENT SOURCE
+SQLite: database/database.sqlite. This is the Laravel content database.
+It is not a live connection to the WordPress MySQL database.
+149 content records include 92 posts, insurance pages and staff profiles.
+Content is divided into ordered page_sections, stored as editable rich HTML.
+Page URLs, titles, SEO descriptions, publication state, categories, featured
+images and presentation settings are database fields. There is no live page
+manifest or static article catalog. CSS, JavaScript and image binaries remain
+normal public assets; their references and editorial content are stored in DB.
+
+Shared header/menus, footer, feedback drawer, exit popup and 404 content are
+site_blocks. Form options, service questions, shared copy and homepage quote
+product content are form_definitions. Quote requests and feedback are stored
+in quote_requests and feedback_entries. Media metadata is in media_assets.
+
+ADMIN CONTENT WORKFLOW
+Pages & posts: search, create, edit, reorder sections, draft/publish and set SEO.
+Edit visually: opens an isolated rich-text section editor with formatting,
+link/image tools. HTML is also available for layout edits. Click Save content
+to write the database. Stored content is rendered as HTML, never executed as Blade.
+Header & footer: edit shared blocks, including menus and popup copy.
+Forms: edit database questions, choices and labels; retain existing field IDs.
+Media: upload JPEG, PNG or WebP (up to 5 MB) and use its path in an editor.
+Inbox: inspect private requests/feedback and update quote-request status.
+There is no public registration. Admin routes require authenticated admin users.
+
+AUTOMATIC CONTENT
+The blog index queries published posts with pagination. The homepage article
+feed and insurance sliders query published posts, with relevant categories
+first in insurance sliders. New published posts appear automatically. Drafts
+and future-dated records are hidden. Existing navigation is managed in the
+shared header/footer blocks; a new page is available at its saved URL.
+
+FOR DEVELOPERS
+Routes: routes/web.php. Models: app/Models/. Frontend: content/page.blade.php.
+PageController queries Eloquent records and ContentRenderer renders sections.
+The shared layout queries database blocks. No per-page Blade views are used.
+Form clients load /forms/auto-options and /forms/services from the database.
+The old public options/services JSON files have been removed from public/.
+
+INSTALLATION IMPORT SOURCES
+The original approved design is archived under database/import/ solely for
+initial seeding and recovery. Runtime controllers do not read these files.
+On an empty database: php artisan migrate, then
+php artisan db:seed --class=ContentSeeder
+php artisan cms:create-admin
+The import refuses to overwrite existing content. Do not run migrate:fresh on
+a database containing edits. The former static builder is retired and guarded.
+
+BACKUPS AND CHECKS
+Private backups: ../.local-setup/laravel-backups/ (before/after migration).
+Tests: php artisan test. Blade compilation: php artisan view:cache.
+Verification: ../outputs/culbertson-laravel-20261024/dynamic-cms-verification.json
+Tests cover DB edits, publishing, automatic article feeds, authentication,
+media validation, all existing routes and database request storage.
+
+Sessions/cache remain local files. Email/CRM/insurer delivery and insurance
+pricing are not connected. This local website remains excluded from indexing.
+
+SHARED INSURANCE TEMPLATE (2026-10-24)
+All 11 pages with type=insurance use resources/views/content/insurance.blade.php.
+New insurance pages use it automatically; no slug-specific view or route needed.
+Create one at /admin/pages/create?type=insurance. Fill its insurance fields,
+set the related article category, then publish. Drafts are private.
+All editorial copy (including section labels and button text), image paths/alt,
+quote destination, phone, coverage options, FAQ answers and resource links are
+stored in pages.insurance_content. Coverage/FAQ rows can be added, removed or
+reordered in the editor. Resource columns are editable JSON. Images remain
+normal files in public/assets; their selected paths are database values.
+Shared header/footer/popup remain site_blocks; related articles query pages.
+Forms > New insurance page defaults controls initial copy for future pages.
+Defaults are copied when creating a page; existing page edits are independent.
+The old insurance page_sections are preserved for recovery and are no longer
+rendered for insurance pages. Installation-only source: insurance-content.json.
+InsuranceContentSeeder fills only missing content and does not overwrite edits.
+New pages are public at their saved URL; add menu links in Header & footer.
+Tests additionally cover all 11 shared layouts and quote links, new insurance
+creation, live content edits, draft visibility and invalid link rejection.
+
+SHARED BLOG ARTICLE DESIGN (2026-10-24)
+All 92 posts and new type=post records use content/article.blade.php.
+The reference-inspired layout includes a navy title banner, overlapping hero,
+publication date, calculated reading time, readable body and related articles.
+Title, date, category and hero use the existing Page database fields. Article
+sections remain editable in the CMS. ArticleContent removes only imported
+layout wrappers, duplicate title/hero and empty search chrome at render time;
+original section data is preserved. No article text is copied into Blade.
+Shared blog navigation/reading/related labels are editable under Forms >
+Shared blog article labels (blog-copy). Related posts query published database
+posts, prioritize shared categories and exclude the current article.
+New post creation in Admin requires a featured image when publishing.
+Browser checks: desktop header/body, narrow-screen sizing with no horizontal
+page overflow, six-card related feed and working next/previous controls.
+Validation: 20 tests passed / 4,340 assertions; Blade compilation passed.
+Preview: http://localhost:8083/florida-boat-insurance-requirements-guide/
+
+BLOG LISTING FEATURED SECTION (2026-10-24)
+The listing starts with the newest published post as a large lead story and
+three more recent posts in the Featured Articles sidebar. The lead summary
+comes from the database article opening paragraph. All titles, images, dates,
+categories and destinations use Page records. Shared labels are editable via
+Forms > Blog listing labels. Newly published articles update the section.
+Featured posts appear on page one and are excluded from the paginated grid;
+all remaining posts are reachable without duplicates. On mobile the feature
+columns stack and the regular grid becomes one column.
+Validation: 8 focused tests / 147 assertions passed, including all 92 posts
+across pagination, dynamic updates and draft/future exclusion.
+
+CONTACT PAGE & ENQUIRIES (2026-10-24)
+/contact-us/ uses content/contact.blade.php via its database presentation
+marker template=contact. The photo banner, accessible support tabs, office
+information and form labels/options come from FormDefinition contact-page.
+Edit these under Admin > Forms > Contact page content & form. The former
+WordPress contact sections remain saved for recovery and are not rendered.
+POST /contact-us/send validates name, email, optional phone, enquiry topic,
+and message; native CSRF, a honeypot and rate limiting protect the endpoint.
+Successful requests are stored in contact_enquiries with a reference and a
+new status, then redirect to the form with a confirmation. No email or CRM
+notifications are configured. Review enquiries in Admin > Inbox, and change
+status to reviewed or contacted. This inbox requires an administrator login.
+Validation: 26 tests / 4,500 assertions passed; browser submission and private
+inbox verified. The single synthetic browser record was removed by exact
+reference. A token-free HTTP POST returned 419. Mobile checks show one-column
+cards and form fields without horizontal page overflow; keyboard tab switching
+also verified. Contact page screenshot: outputs/culbertson-laravel-20261024.
+
+WORDPRESS STRUCTURE RESTORED (2026-10-24)
+The Laravel database remains database/database.sqlite. The old WordPress
+MySQL database is the import source, not a runtime dependency.
+Native tables: categories (13), tags (136), authors (1 public WordPress
+byline), team_members (6), category_page (93 relationships), page_tag (300
+relationships), url_redirects (32) and legacy_query_redirects (88).
+Blog/news articles remain the 92 Page records with type=post; they now have
+real category, tag and author relationships. There is no duplicated article
+body table. Original WordPress IDs are retained separately on Pages and terms.
+Public category/tag/author archives use those relationships, published dates
+and draft filtering. Original /category/slug/, /tag/slug/, /author/slug/ and
+/agency-staff/ paths work. Archive pagination uses /page/N/ at the original
+10-post setting. The article listing also accepts its legacy /page/N/ paths.
+Team biographies/photos/order are stored in team_members and link to staff
+Pages. Existing team profile URLs are preserved. Footer links expose the team
+and agency-news archive. Empty original terms remain valid empty archives.
+The 88 Elementor template query URLs explicitly redirect to the homepage,
+matching the old WordPress behavior; they are not fake standalone pages.
+No WordPress plugin or Elementor runtime is required.
+Manage categories, tags, authors, team and redirects at /admin/structure.
+Category/tag/author slug changes and team profile renames preserve old URLs
+with redirects. Redirect loops and invalid category parent cycles are rejected.
+Page editor category/tag names sync relational entries and pivot records;
+blog/news author selection uses the authors table. Archive labels are in
+Forms > Categories, tags, authors & team archive labels.
+XML: /wp-sitemap.xml with the six original WordPress-style child sitemap
+paths. /sitemap.xml and /sitemap_index.xml redirect to it. The current XML
+contains 244 URLs, including all 241 old listed URLs plus newer app pages.
+/site-map/ now queries the database for pages, posts, terms, authors and team.
+Installation import: database/import/wordpress-structure.json is read by
+WordPressStructureSeeder only during seeding. Public requests use Eloquent
+records. The import preserves existing tagged records and editorial changes.
+Verification: 417/417 old audited URLs returned working pages after redirects,
+with matching resolved URL paths/queries (host and trailing slash normalized).
+No missing or unverified URLs remain. Original WordPress relationships were
+compared by WordPress ID. PRAGMA foreign_key_check returned no violations.
+31 tests passed (6,145 assertions), followed by three focused pagination and
+listing tests (133 assertions). Blade compilation passed. Admin category save
+and team photographs were also verified in the browser.
+The UPDATED URL comparison workbook records the current restored state; the
+previous comparison workbook is the earlier pre-restoration snapshot.
+Backup: ../.local-setup/laravel-backups/before-wordpress-structure.sqlite
+and after-wordpress-structure.sqlite. No original WordPress content was edited.
+
+TEAM DESIGN (2026-10-24)
+Directory: /agency-staff/ with portrait hero and six database-generated member cards.
+All staff profiles share the new portrait hero, full biography, related members and contact CTA.
+Edit people: /admin/structure?kind=team. Edit shared copy: /admin/forms (team-design).
+Copy defaults: php artisan db:seed --class=TeamDesignSeeder (preserves existing copy).
+Shared assets: public/team.css; resources/views/content/team-*.blade.php.
+
+ADMIN WORKSPACE (2026-10-25)
+Dashboard: /admin. Content list: /admin/content (type, status and search filters).
+Blue admin shell applies to all CMS screens; responsive sidebar and split-panel login.
+Dashboard counts, recent content, content distribution and submissions query the database.
+Self-hosted TinyMCE 8.10.0: public/vendor/tinymce, GPL mode; no cloud API key or paid plugins.
+Available: formatting, fonts/colors, lists, tables, images/uploads/library, links, media embeds, source code, code samples, anchors, special characters, emoticons, accordions, search/replace, word count, local draft recovery, preview, fullscreen, directionality, insert date/time, page breaks.
+Native JSON media upload: POST /admin/media with Accept: application/json, CSRF and admin session.
+Media picker: GET /admin/media/picker?q=...&page=... (admin only).
+Post sections, team biographies and insurance coverage/FAQ bodies support TinyMCE. Layout HTML uses explicit visual/source modes. Plain-text copy and JSON configuration remain in their appropriate editors.
+Only changed visual editors serialize into textarea fields; untouched source is preserved. Saving awaits image uploads.
+Premium-only collaboration, AI, advanced Word/PDF conversion, advanced spellcheck/image editing are not included.
+Existing admin credentials unchanged.
+
+SUBMISSION INBOX (2026-10-25)
+/admin/inbox: paginated unified quotes, contact enquiries and feedback; search reference/answers, filter type/status/service/date.
+/admin/inbox/{quotes|contacts|feedback}/{id}: dedicated private detail view with grouped answers and customer contact sidebar.
+POST same detail URL + /status: new/reviewed/contacted for quotes and contacts; new/reviewed/resolved for feedback.
+Existing /admin/quotes/{id}/status and /admin/contacts/{id}/status remain compatible.
+Viewing a submission does not change its status. All routes require an administrator; responses are no-store.
+Form question labels come from database definitions; previously collected answers are preserved.
+Dashboard activity now links directly to each submission.
