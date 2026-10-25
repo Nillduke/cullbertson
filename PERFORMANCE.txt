@@ -11,6 +11,9 @@ Do not replace an existing server database with the local development database.
 The cPanel package already includes these generated files and the content migration.
 public/.htaccess configures Apache compression and caching when those modules are enabled.
 server.php mirrors static-asset headers for local artisan serve; Apache does not use it.
+start-local.ps1 enables PHP OPcache for the local server and validates code changes on every
+request. This caches compiled PHP code, not database content. For production, enable OPcache
+through the hosting PHP settings when available; its availability affects server response time.
 
 New admin uploads create responsive WebP files automatically when PHP GD/WebP support is available.
 After copying original images by FTP or changing existing image files, run:
