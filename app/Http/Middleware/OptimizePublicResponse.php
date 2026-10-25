@@ -20,7 +20,7 @@ class OptimizePublicResponse
         $html = preg_replace_callback('~(<video\b[^>]*\bid="hero-video"[^>]*>)(.*?)</video>~is', function ($match) {
             $tag = preg_replace('~\sautoplay(?:="[^"]*")?~i', '', $match[1]);
             $tag = preg_replace('~\bpreload="[^"]*"~i', 'preload="none"', $tag);
-            $tag = preg_replace_callback('~\bposter="([^"]*)"~', fn ($m) => 'poster="'.app(ResponsiveImages::class)->url($m[1], 960).'"', $tag);
+            $tag = preg_replace_callback('~\bposter="([^"]*)"~', fn ($m) => 'poster="'.app(ResponsiveImages::class)->url($m[1], 768).'"', $tag);
             $source = $match[2];
             if (is_file(public_path('assets/florida-life-optimized.mp4'))) {
                 $source = str_replace('/assets/florida-life.mp4', '/assets/florida-life-optimized.mp4', $source);
