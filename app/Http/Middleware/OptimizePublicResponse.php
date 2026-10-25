@@ -18,24 +18,6 @@ class OptimizePublicResponse
         $html = app(ResponsiveImages::class)->html($response->getContent());
         // Discover overview/article hero photos before CSS and secondary backgrounds.
         $preloadHero = $request->is('insurance') || preg_match('~<body\b[^>]*class="[^"]*\bblog-detail-page\b~i', $html);
-        if ($preloadHero) {
-            $critical = ['styles.shared.min.css', 'exit-intent.css', 'support-pages.css', 'blog-detail.css', 'insurance-articles.css'];
-            $html = preg_replace_callback('~<link\b[^>]*rel="stylesheet"[^>]*>~i', function ($match) use ($critical) {
-                if (! preg_match('~\bhref="([^"]+)"~i', $match[0], $href)) {
-                    return $match[0];
-                }
-                $name = basename(parse_url(html_entity_decode($href[1]), PHP_URL_PATH) ?? '');
-                if (! in_array($name, $critical, true) || ! is_file(public_path($name))) {
-                    return $match[0];
-                }
-                $css = file_get_contents(public_path($name));
-                $css = preg_replace('~@charset\s+[^;]+;~i', '', $css);
-                // Inline styles resolve relative URLs against the document, not the CSS file.
-                $css = preg_replace('~url\((["\x27]?)assets/~i', 'url($1/assets/', $css);
-
-                return '<style data-critical="'.$name.'">'.$css.'</style>';
-            }, $html);
-        }
         if ($preloadHero && preg_match('~<img\b[^>]*fetchpriority="high"[^>]*>~i', $html, $hero)) {
             preg_match('~\bsrc="([^"]+)"~', $hero[0], $src);
             preg_match('~\bsrcset="([^"]+)"~', $hero[0], $srcset);

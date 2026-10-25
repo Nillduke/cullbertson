@@ -9,15 +9,20 @@
     <link rel="icon" type="image/svg+xml" href="{{ asset('assets/culbertson-mark.svg') }}">
     <link rel="preload" as="font" type="font/woff2" crossorigin href="{{ asset('assets/nunito-sans-roman.woff2') }}">
     @php($baseStylesheet = isset($contentPage) && $contentPage->slug === '' ? 'styles.home.min.css' : 'styles.shared.min.css')
-    <link rel="stylesheet" href="{{ asset($baseStylesheet) }}?v={{ filemtime(public_path($baseStylesheet)) }}">
-    <link rel="stylesheet" href="{{ asset('exit-intent.css') }}?v={{ filemtime(public_path('exit-intent.css')) }}">
+    @php($criticalTemplate = isset($contentPage) && ($contentPage->slug === 'insurance' || $contentPage->type === 'post'))
+    @if($criticalTemplate)
+        <style>{!! file_get_contents(public_path('styles.header-critical.min.css')) !!}</style>
+        <style>{!! $contentPage->slug === 'insurance' ? file_get_contents(public_path('styles.support-critical.min.css')) : file_get_contents(public_path('blog-detail.css')) !!}</style>
+    @endif
+    @include('partials.performance-stylesheet',['href'=>asset($baseStylesheet).'?v='.filemtime(public_path($baseStylesheet))])
+    @include('partials.performance-stylesheet',['href'=>asset('exit-intent.css').'?v='.filemtime(public_path('exit-intent.css'))])
     @if(isset($contentPage) && $contentPage->type === 'blog_index')<link rel="stylesheet" href="{{ asset('cms.css') }}">@endif
     @if(!empty($insuranceArticles))
-        <link rel="stylesheet" href="{{ asset('insurance-articles.css') }}?v={{ filemtime(public_path('insurance-articles.css')) }}">
+        @include('partials.performance-stylesheet',['href'=>asset('insurance-articles.css').'?v='.filemtime(public_path('insurance-articles.css'))])
         <script defer src="{{ asset('insurance-articles.js') }}?v={{ filemtime(public_path('insurance-articles.js')) }}"></script>
     @endif
     @foreach($styles ?? [] as $stylesheet)
-        <link rel="stylesheet" href="{{ $stylesheet }}">
+        @include('partials.performance-stylesheet',['href'=>$stylesheet])
     @endforeach
     <script defer src="{{ asset('app.js') }}?v={{ filemtime(public_path('app.js')) }}"></script>
     <script defer src="{{ asset('exit-intent.js') }}?v={{ filemtime(public_path('exit-intent.js')) }}"></script>

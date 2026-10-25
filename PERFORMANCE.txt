@@ -3,7 +3,7 @@ Performance build and deployment
 
 The public design, URLs and SEO fields remain database-driven. Original media are retained.
 
-Deploy all changed application files, prebuilt styles.home.min.css/styles.shared.min.css,
+Deploy all changed application files, all prebuilt styles.*.min.css files,
 the complete public/assets/optimized directory (including its manifest and .htaccess),
 and public/assets/florida-life-optimized.mp4. Run: php artisan migrate --force
 Do not replace an existing server database with the local development database.
@@ -23,8 +23,8 @@ After editing public/styles.css or changing CSS background images, rebuild both 
   npm install
   npm run optimize:css
 Node and npm are development/build tools; the deployed prebuilt site does not need Node.
-The insurance overview and article templates inline their local critical styles to avoid
-stylesheet round trips before the hero paints; relative font URLs are kept absolute.
+The insurance overview and article templates inline small header/hero critical styles,
+then load complete stylesheets without blocking the first paint. A noscript fallback is included.
 
 The homepage remains full-screen. Mobile/data-saving/reduced-motion visitors see a poster
 and can opt into video playback. Desktop video starts after the initial page load.
