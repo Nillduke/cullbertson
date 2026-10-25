@@ -16,6 +16,17 @@ class OptimizePublicResponse
             return $response;
         }
         $html = app(ResponsiveImages::class)->html($response->getContent());
+        // The overview's split hero shares its photo with the footer background.
+        // Discover the responsive hero before CSS so that shared request stays high priority.
+        if ($request->is('insurance') && preg_match('~<img\b[^>]*fetchpriority="high"[^>]*>~i', $html, $hero)) {
+            preg_match('~\bsrc="([^"]+)"~', $hero[0], $src);
+            preg_match('~\bsrcset="([^"]+)"~', $hero[0], $srcset);
+            preg_match('~\bsizes="([^"]+)"~', $hero[0], $sizes);
+            if ($src && $srcset && $sizes) {
+                $preload = '<link rel="preload" as="image" href="'.app(ResponsiveImages::class)->url($src[1], 768).'" imagesrcset="'.$srcset[1].'" imagesizes="'.$sizes[1].'" fetchpriority="high">';
+                $html = str_replace('</head>', $preload.'</head>', $html);
+            }
+        }
         // The background remains full-screen; defer the video bytes until playback is appropriate.
         $html = preg_replace_callback('~(<video\b[^>]*\bid="hero-video"[^>]*>)(.*?)</video>~is', function ($match) {
             $tag = preg_replace('~\sautoplay(?:="[^"]*")?~i', '', $match[1]);
