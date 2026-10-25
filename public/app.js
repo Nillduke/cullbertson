@@ -72,6 +72,7 @@ const quoteChoices=JSON.parse(document.querySelector('#cms-home-quote-products')
 function showQuoteChoice(key){
  const choice=quoteChoices[key];
  document.querySelector('#quote-product-title').textContent=choice.title;
+ if(choice.icon)document.querySelector('#quote-product-icon').src='/assets/quote-'+choice.icon+'.svg';
  coverageQuoteForm.action=key==='auto'?'/auto-quote/':key==='bundle'?'/quote/':'/'+choice.path;
  const more=document.querySelector('#quote-learn-link');
  more.href='/'+choice.info;more.textContent=choice.label;
@@ -83,7 +84,6 @@ function showQuoteChoice(key){
 document.querySelectorAll('[data-quote-product]').forEach(button=>button.addEventListener('click',()=>{
  const key=button.dataset.quoteProduct;const choice=quoteChoices[key];showQuoteChoice(key);
  document.querySelector('#quote-product-description').textContent=choice.description;
- document.querySelector('#quote-product-icon').src='/assets/quote-'+choice.icon+'.svg';
  document.querySelectorAll('.quote-product[data-quote-product]').forEach(tile=>tile.setAttribute('aria-pressed',String(tile===button)));
  document.querySelector('.quote-reset').hidden=key==='auto';
  const subproducts=document.querySelector('#quote-subproducts');subproducts.replaceChildren();subproducts.hidden=!choice.options;
