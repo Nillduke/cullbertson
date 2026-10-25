@@ -1,46 +1,25 @@
-GOOGLE TRACKING DEPLOYMENT
+GOOGLE TRACKING - IMMEDIATE LOADING
 
-Enable on the server with GOOGLE_TRACKING_ENABLED=true, then run php artisan config:cache.
-Local/testing defaults to disabled. Public layouts read the editable google-tracking
-FormDefinition. Admin layouts never install these tags.
+The supplied GTM-NPKN5562 head snippet and AW-18511592688 async Google tag
+are installed in the shared public layout. The standard GTM noscript iframe is
+immediately after the body tag. No consent banner, choice or saved preference
+is required. Admin pages remain excluded; local tracking defaults to disabled.
+The server has GOOGLE_TRACKING_ENABLED=true.
 
-Destinations restored:
-  GTM-NPKN5562 supplies the primary G-F93LLMC4SC Google tag and AW-18511592688 Ads tag.
-  G-0H056Z22M3 is retained for completed-form events, with automatic page views disabled.
-  G-9CTSTL96SL is the additional Analytics destination. GT-WR4WXG6 is its verified
-  Google tag alias; it is not configured as a second page-view destination.
+G-F93LLMC4SC is supplied by GTM. G-0H056Z22M3 receives completed-form events
+with automatic page views disabled. G-9CTSTL96SL is the additional Analytics
+destination; GT-WR4WXG6 is its linked alias and is not configured separately.
 
-The privacy banner uses basic consent gating. No optional Google scripts are loaded
-until the visitor allows analytics and ads. Only necessary keeps them blocked.
-The Privacy settings button can change that choice; withdrawing consent reloads
-the page to stop optional Google loading. Necessary application sessions are separate.
-Choices are stored for up to 180 days. Advertising personalization and user-provided
-advertising data remain denied. A consent banner is not an account-level compliance audit.
+New completion events contain a SHA-256 transaction ID and coverage category,
+not customer names, emails, phone numbers, addresses or quote answers. Page
+location/referrer parameters supplied by this code omit queries/fragments.
+Continue saves do not count as conversions. The existing Ads action stays
+limited to completed auto quotes. Session hashes suppress repeat events.
 
-Completed quote saves call CulbertsonTracking.completeQuote only after a successful
-final server response. Partial Continue saves never call it. All completed coverage
-types send generate_lead to the three Analytics destinations. The existing Google Ads
-action HbyeCIfhj54dEPD5gftE stays limited to auto quotes, as in the old GTM rule.
-The adsServices setting can be reviewed if the agency adds other conversion actions.
+The old auto thank-you URL uses direct Google page measurement instead of GTM
+to prevent its old GTM path rule counting bookmarks/reloads as leads. New inline
+confirmations use explicit completed-save events. The GTM account is unchanged.
 
-Only an opaque SHA-256 transaction ID and coverage category are supplied with lead
-events. Names, emails, phone numbers, addresses, answers and raw request references
-are not passed. Page-location/referrer parameters supplied by this code omit queries
-and fragments. Completed-event hashes are de-duplicated in the current browser session.
-
-The published GTM container still has its old auto thank-you path rule. On that
-legacy confirmation URL the app uses direct Google page measurement rather than
-loading GTM, preventing bookmarks/reloads from creating lead conversions. New inline
-form confirmations use explicit completion events; the GTM account was not modified.
-
-Checks:
-  node scripts/test-google-tracking.mjs
-  php artisan test --filter="GoogleTrackingTest|QuoteProgressTest|FormInformationTest"
-
-The public GTM/Google tag resources were fetched and identifiers verified. Deployment
-checks confirm public settings, assets and admin exclusion. Real test conversions
-were not sent. Analytics/Ads account receipt, attribution and conversion-action
-configuration should be verified in the relevant accounts with an authorized test.
-
-This installation covers the Google destinations identified by the audit. It does
-not install Facebook Pixel, Clarity, Metricool, Google Reviews or Google reCAPTCHA.
+Checks: node scripts/test-google-tracking.mjs
+php artisan test --filter=GoogleTrackingTest
+Account-side receipt and attribution are not verified by source/deployment tests.

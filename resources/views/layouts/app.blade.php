@@ -45,6 +45,7 @@
     @stack('head')
 </head>
 <body class="{{ $bodyClass ?? 'content-page' }}" data-service="{{ $service ?? '' }}">
+    @include('partials.google-tracking-noscript')
     @if(isset($contentPage) && $contentPage->slug === '')
         <script type="application/json" id="cms-home-quote-products">{!! json_encode(\App\Models\FormDefinition::data('homepage-products'),JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT) !!}</script>
     @endif
@@ -57,7 +58,6 @@
     {!! $siteBlocks['footer'] ?? '' !!}
     {!! $siteBlocks['feedback'] ?? '' !!}
     {!! $siteBlocks['exit-intent'] ?? '' !!}
-    @include('partials.google-tracking-consent')
     @stack('scripts')
 </body>
 </html>
