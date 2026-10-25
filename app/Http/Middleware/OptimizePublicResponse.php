@@ -19,6 +19,7 @@ class OptimizePublicResponse
         // Discover overview/article hero photos before CSS and secondary backgrounds.
         $preloadHero = $request->is('insurance') || preg_match('~<body\b[^>]*class="[^"]*\bblog-detail-page\b~i', $html);
         if ($preloadHero && preg_match('~<img\b[^>]*fetchpriority="high"[^>]*>~i', $html, $hero)) {
+            $html = str_replace($hero[0], str_replace(' decoding="async"', '', $hero[0]), $html);
             preg_match('~\bsrc="([^"]+)"~', $hero[0], $src);
             preg_match('~\bsrcset="([^"]+)"~', $hero[0], $srcset);
             preg_match('~\bsizes="([^"]+)"~', $hero[0], $sizes);

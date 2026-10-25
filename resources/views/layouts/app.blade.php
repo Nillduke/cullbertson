@@ -12,7 +12,6 @@
     @php($criticalTemplate = isset($contentPage) && ($contentPage->slug === 'insurance' || $contentPage->type === 'post'))
     @if($criticalTemplate)
         <style>{!! file_get_contents(public_path('styles.header-critical.min.css')) !!}</style>
-        <style>{!! $contentPage->slug === 'insurance' ? file_get_contents(public_path('styles.support-critical.min.css')) : file_get_contents(public_path('blog-detail.css')) !!}</style>
     @endif
     @include('partials.performance-stylesheet',['href'=>asset($baseStylesheet).'?v='.filemtime(public_path($baseStylesheet))])
     @include('partials.performance-stylesheet',['href'=>asset('exit-intent.css').'?v='.filemtime(public_path('exit-intent.css'))])
@@ -22,6 +21,11 @@
         <script defer src="{{ asset('insurance-articles.js') }}?v={{ filemtime(public_path('insurance-articles.js')) }}"></script>
     @endif
     @foreach($styles ?? [] as $stylesheet)
+        @if($criticalTemplate && basename(parse_url($stylesheet, PHP_URL_PATH)) === 'support-pages.css')
+            <style>{!! file_get_contents(public_path('styles.support-critical.min.css')) !!}</style>
+        @elseif($criticalTemplate && basename(parse_url($stylesheet, PHP_URL_PATH)) === 'blog-detail.css')
+            <style>{!! file_get_contents(public_path('blog-detail.css')) !!}</style>
+        @endif
         @include('partials.performance-stylesheet',['href'=>$stylesheet])
     @endforeach
     <script defer src="{{ asset('app.js') }}?v={{ filemtime(public_path('app.js')) }}"></script>
