@@ -27,6 +27,8 @@ class QuoteInitialView
         libxml_clear_errors();
         libxml_use_internal_errors($previous);
         $xpath = new DOMXPath($dom);
+        // A submit before hydration must never put contact details in the URL.
+        $dom->getElementById($auto ? 'auto-quote-wizard' : 'service-quote-wizard')->setAttribute('method', 'post');
         $find = fn ($query) => $xpath->query($query)->item(0);
         $replace = function ($node, string $content) use ($dom) {
             if (! $node) {
