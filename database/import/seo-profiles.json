@@ -2043,7 +2043,7 @@
   {
     "url_path": "/claims/",
     "fields": {
-      "title": "Claims \u2013 Culbertson Agency",
+      "title": "Claims - Culbertson Agency",
       "description": "",
       "canonical": "/claims/",
       "robots": "max-image-preview:large",
@@ -2051,7 +2051,7 @@
       "x_robots_tag": "",
       "schemas": [],
       "hreflang": [],
-      "og:title": "Claims \u2013 Culbertson Agency",
+      "og:title": "Claims - Culbertson Agency",
       "twitter:title": "",
       "og:description": "",
       "twitter:description": "",
@@ -2112,7 +2112,12 @@
       },
       "h1": "Claims Information",
       "h1_count": 1,
-      "legacy_issues": []
+      "legacy_issues": [],
+      "template_values": {
+        "separator_setting": "sc-dash",
+        "separator": "-",
+        "site_name": "Culbertson Agency"
+      }
     }
   },
   {
@@ -3097,7 +3102,7 @@
   {
     "url_path": "/florida-boat-insurance-requirements-guide/",
     "fields": {
-      "title": "Understanding Florida Boat Insurance Requirements \u2013 Culbertson Agency",
+      "title": "Understanding Florida Boat Insurance Requirements - Culbertson Agency",
       "description": "Explore Florida Boat Insurance Requirements to protect your vessel and finances. Learn the essentials and secure your boating adventures.",
       "canonical": "/florida-boat-insurance-requirements-guide/",
       "robots": "max-image-preview:large",
@@ -3156,7 +3161,12 @@
       },
       "h1": "Understanding Florida\u2019s Boat Insurance Requirements",
       "h1_count": 1,
-      "legacy_issues": []
+      "legacy_issues": [],
+      "template_values": {
+        "separator_setting": "sc-dash",
+        "separator": "-",
+        "site_name": "Culbertson Agency"
+      }
     }
   },
   {
@@ -3374,7 +3384,7 @@
   {
     "url_path": "/florida-natives-10-signs-you-are-a-true-floridian/",
     "fields": {
-      "title": "Native Florida: 10 Signs You Are a True Floridian \u2013 Culbertson Agency",
+      "title": "Native Florida: 10 Signs You Are a True Floridian - Culbertson Agency",
       "description": "Florida natives have their own set of characteristics that make them unique from other Americans, but how are they different?",
       "canonical": "/florida-natives-10-signs-you-are-a-true-floridian/",
       "robots": "max-image-preview:large",
@@ -3443,7 +3453,12 @@
       },
       "h1": "10 Signs You Are a True Floridian",
       "h1_count": 1,
-      "legacy_issues": []
+      "legacy_issues": [],
+      "template_values": {
+        "separator_setting": "sc-dash",
+        "separator": "-",
+        "site_name": "Culbertson Agency"
+      }
     }
   },
   {

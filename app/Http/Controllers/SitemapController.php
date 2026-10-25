@@ -19,6 +19,8 @@ class SitemapController extends Controller {
    'users-1'=>Author::whereHas('pages',$publicPosts)->get()->map(fn($x)=>$x->path()),
    default=>abort(404),
   };
+  $noindex=\App\Models\SeoProfile::where('fields->robots','like','%noindex%')->pluck('url_path')->all();
+  $paths=$paths->reject(fn($path)=>isset(\App\Services\SeoMetadata::QUOTE_ALIASES[\App\Services\SeoMetadata::path($path)])||in_array(\App\Services\SeoMetadata::path($path),$noindex,true));
   $xml='<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
   foreach($paths as $path)$xml.='<url><loc>'.$this->escape(url('/'.trim($path,'/')).($path===''?'':'/')).'</loc></url>';
   return response($xml.'</urlset>',200,['Content-Type'=>'application/xml; charset=UTF-8']);

@@ -1,10 +1,10 @@
 <?php
 // Read-only HTTP-kernel crawl of every URL in the original migration inventory.
-$options=getopt('',['output:','indexing:']);$root=dirname(__DIR__);
+$options=getopt('',['output:','indexing:','only:']);$root=dirname(__DIR__);
 putenv('SESSION_DRIVER=array');putenv('CACHE_STORE=array');
 require $root.'/vendor/autoload.php';$app=require $root.'/bootstrap/app.php';$kernel=$app->make(Illuminate\Contracts\Http\Kernel::class);$kernel->bootstrap();
 if(isset($options['indexing']))config(['app.search_engine_indexing'=>$options['indexing']==='on']);
-$records=json_decode(file_get_contents($root.'/database/import/wordpress-structure.json'),true)['expected_urls'];$cache=[];$result=[];
+$records=json_decode(file_get_contents($root.'/database/import/wordpress-structure.json'),true)['expected_urls'];$cache=[];$result=[];if(isset($options['only'])){$only=explode(',',$options['only']);$records=array_values(array_filter($records,fn($r)=>in_array(parse_url($r['destination'],PHP_URL_PATH),$only,true)));}
 function uriOf(string $url):string{$p=parse_url($url);return ($p['path']??'/').(isset($p['query'])?'?'.$p['query']:'');}
 function captureHead(string $html):array{
  $dom=new DOMDocument();$before=libxml_use_internal_errors(true);$dom->loadHTML('<?xml encoding="UTF-8"?>'.$html);libxml_clear_errors();libxml_use_internal_errors($before);$x=new DOMXPath($dom);$meta=[];
