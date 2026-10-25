@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @php($googleTracking=app(\App\Services\GoogleTracking::class)->configuration())
+    @include('partials.google-tracking-head')
     @include('partials.seo-head')
     <meta name="theme-color" content="#102c3e">
     <link rel="icon" type="image/svg+xml" href="{{ asset('assets/culbertson-mark.svg') }}">
@@ -55,6 +57,7 @@
     {!! $siteBlocks['footer'] ?? '' !!}
     {!! $siteBlocks['feedback'] ?? '' !!}
     {!! $siteBlocks['exit-intent'] ?? '' !!}
+    @include('partials.google-tracking-consent')
     @stack('scripts')
 </body>
 </html>

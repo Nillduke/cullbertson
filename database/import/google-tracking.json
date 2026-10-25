@@ -1,0 +1,24 @@
+{
+  "containerId": "GTM-NPKN5562",
+  "primaryAnalyticsId": "G-F93LLMC4SC",
+  "formsAnalyticsId": "G-0H056Z22M3",
+  "additionalAnalyticsId": "G-9CTSTL96SL",
+  "additionalGoogleTagId": "GT-WR4WXG6",
+  "adsId": "AW-18511592688",
+  "adsConversionLabel": "HbyeCIfhj54dEPD5gftE",
+  "adsServices": ["auto"],
+  "legacyAutoConfirmationPath": "/thanks-for-contacting-us/thanks-auto-insurance-quote/",
+  "consentVersion": 1,
+  "consentDays": 180,
+  "copy": {
+    "title": "Your privacy choices",
+    "description": "With your permission, Culbertson Agency uses Google Analytics and Google Ads to understand visits and completed quote requests, and measure advertising performance. Optional Google tags stay off until you allow them. Necessary site features work either way.",
+    "allow": "Allow analytics & ads",
+    "deny": "Only necessary",
+    "settings": "Privacy settings",
+    "close": "Close privacy settings",
+    "policyLabel": "Cookies and privacy information",
+    "policyUrl": "/cookie-policy/",
+    "note": "You can change this choice at any time using Privacy settings. Withdrawing permission stops future Google loading after the page refreshes; it does not remove information already received by Google."
+  }
+}
