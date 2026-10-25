@@ -36,10 +36,6 @@ class OptimizePublicResponse
             $tag = preg_replace('~\bpreload="[^"]*"~i', 'preload="none"', $tag);
             $tag = preg_replace_callback('~\bposter="([^"]*)"~', fn ($m) => 'poster="'.app(ResponsiveImages::class)->url($m[1], 768).'"', $tag);
             $source = $match[2];
-            if (is_file(public_path('assets/florida-life-optimized.mp4'))) {
-                $source = str_replace('/assets/florida-life.mp4', '/assets/florida-life-optimized.mp4', $source);
-            }
-
             return $tag.preg_replace('~\bsrc=~i', 'data-src=', $source).'</video>';
         }, $html);
         if (preg_match('~<video\b[^>]*\bid="hero-video"[^>]*\bposter="([^"]+)"~i', $html, $poster)) {

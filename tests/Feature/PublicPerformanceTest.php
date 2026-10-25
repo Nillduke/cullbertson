@@ -61,7 +61,8 @@ class PublicPerformanceTest extends TestCase
         $html = $response->getContent();
         preg_match('~<video\b.*?</video>~s', $html, $match);
         $this->assertStringContainsString('preload="none"', $match[0]);
-        $this->assertStringContainsString('data-src="/assets/florida-life-optimized.mp4"', $match[0]);
+        $this->assertStringContainsString('data-src="/assets/florida-life.mp4"', $match[0]);
+        $this->assertStringNotContainsString('florida-life-optimized.mp4', $match[0]);
         $this->assertStringNotContainsString('autoplay', $match[0]);
         $this->assertStringContainsString('rel="preload" as="image"', $html);
     }

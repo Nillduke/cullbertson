@@ -13,8 +13,8 @@ function updateVideoControl(){videoToggle.innerHTML=video.paused?playIcon:pauseI
 function loadVideo(){if(video.dataset.loaded)return;video.querySelectorAll('source[data-src]').forEach(source=>{source.src=source.dataset.src;delete source.dataset.src;});video.dataset.loaded='true';video.load();}
 function playVideo(){loadVideo();video.play().catch(updateVideoControl);}
 video.pause();video.removeAttribute('autoplay');updateVideoControl();
-// Keep the poster on touch/data-saving devices. The play control always opts in.
-if(!reducedMotion.matches&&matchMedia('(min-width: 961px)').matches&&!navigator.connection?.saveData){
+// Play the original hero video unless the visitor requests less motion or data.
+if(!reducedMotion.matches&&!navigator.connection?.saveData){
  const start=()=>window.setTimeout(()=>{if(!document.hidden&&!videoInteracted)playVideo();},250);
  if(document.readyState==='complete')start();else window.addEventListener('load',start,{once:true});
 }
