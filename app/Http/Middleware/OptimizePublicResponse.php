@@ -16,9 +16,9 @@ class OptimizePublicResponse
             return $response;
         }
         $html = app(ResponsiveImages::class)->html($response->getContent());
-        // The overview's split hero shares its photo with the footer background.
-        // Discover the responsive hero before CSS so that shared request stays high priority.
-        if ($request->is('insurance') && preg_match('~<img\b[^>]*fetchpriority="high"[^>]*>~i', $html, $hero)) {
+        // Discover overview/article hero photos before CSS and secondary backgrounds.
+        $preloadHero = $request->is('insurance') || preg_match('~<body\b[^>]*class="[^"]*\bblog-detail-page\b~i', $html);
+        if ($preloadHero && preg_match('~<img\b[^>]*fetchpriority="high"[^>]*>~i', $html, $hero)) {
             preg_match('~\bsrc="([^"]+)"~', $hero[0], $src);
             preg_match('~\bsrcset="([^"]+)"~', $hero[0], $srcset);
             preg_match('~\bsizes="([^"]+)"~', $hero[0], $sizes);
