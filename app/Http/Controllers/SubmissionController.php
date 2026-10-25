@@ -29,7 +29,7 @@ class SubmissionController extends Controller
   $model=self::MODELS[$kind]??abort(404);$record=$model::findOrFail($id);$item=$presenter->summarize($record,$kind);
   $previous=$model::where(fn($q)=>$q->where('created_at','>',$record->created_at)->orWhere(fn($q)=>$q->where('created_at',$record->created_at)->where('id','>',$id)))->orderBy('created_at')->orderBy('id')->value('id');$next=$model::where(fn($q)=>$q->where('created_at','<',$record->created_at)->orWhere(fn($q)=>$q->where('created_at',$record->created_at)->where('id','<',$id)))->orderByDesc('created_at')->orderByDesc('id')->value('id');
   $statuses=$kind==='feedback'?['new','reviewed','resolved']:['new','reviewed','contacted'];
-  return response()->view('admin.submission',compact('item','previous','next','statuses')+['labels'=>$presenter->labels($item['service']),'groups'=>$presenter->groups($item)])->header('Cache-Control','private, no-store');
+  return response()->view('admin.submission',compact('item','previous','next','statuses')+['attachments'=>$kind==='contacts'?DB::table('contact_files')->where('contact_enquiry_id',$id)->get():collect()]+['labels'=>$presenter->labels($item['service']),'groups'=>$presenter->groups($item)])->header('Cache-Control','private, no-store');
  }
  public function status(Request $request,string $kind,int $id){
   $model=self::MODELS[$kind]??abort(404);$record=$model::findOrFail($id);

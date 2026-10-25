@@ -23,6 +23,7 @@ Route::middleware(['auth',EnsureCmsAdmin::class])->prefix('admin')->group(functi
     Route::post('/blocks/{block}',[CmsController::class,'saveBlock']);
     Route::get('/forms',[CmsController::class,'forms']);
     Route::post('/forms/{form}',[CmsController::class,'saveForm']);
+    Route::get('/enquiry-files/{id}',[\App\Http\Controllers\SupportRequestController::class,'download'])->whereNumber('id');
     Route::get('/inbox',[\App\Http\Controllers\SubmissionController::class,'index']);
     Route::get('/inbox/{kind}/{id}',[\App\Http\Controllers\SubmissionController::class,'show'])->where('kind','quotes|contacts|feedback')->whereNumber('id');
     Route::post('/inbox/{kind}/{id}/status',[\App\Http\Controllers\SubmissionController::class,'status'])->where('kind','quotes|contacts|feedback')->whereNumber('id');
@@ -54,4 +55,5 @@ Route::get('/wp-sitemap-{key}.xml',[\App\Http\Controllers\SitemapController::cla
 Route::redirect('/sitemap_index.xml','/wp-sitemap.xml',301);
 Route::redirect('/sitemap.xml','/wp-sitemap.xml',301);
 Route::post('/contact-us/send',[\App\Http\Controllers\ContactController::class,'store'])->middleware('throttle:5,10');
+Route::post('/requests/{kind}',[\App\Http\Controllers\SupportRequestController::class,'store'])->where('kind','careers|documents|classic')->middleware('throttle:5,10');
 Route::get('/{path}', [PageController::class, 'show'])->where('path', '.*')->name('page');

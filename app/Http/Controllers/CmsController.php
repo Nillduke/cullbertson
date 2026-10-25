@@ -14,7 +14,7 @@ class CmsController extends Controller
         foreach([QuoteRequest::class=>'Quote request',\App\Models\ContactEnquiry::class=>'Contact enquiry',FeedbackEntry::class=>'Feedback'] as $model=>$kind){
             foreach($model::latest()->limit(5)->get() as $item)$activity->push(['url'=>'/admin/inbox/'.match($model){QuoteRequest::class=>'quotes',\App\Models\ContactEnquiry::class=>'contacts',default=>'feedback'}.'/'.$item->id,'reference'=>$item->reference,'kind'=>$kind,'status'=>$item->status??'received','created_at'=>$item->created_at]);
         }
-        return view('admin.dashboard',compact('counts','mix')+['recentPages'=>Page::latest('updated_at')->limit(6)->get(),'activity'=>$activity->sortByDesc('created_at')->take(5),'drafts'=>Page::where('status','draft')->count(),'newRequests'=>QuoteRequest::where('status','new')->count()+\App\Models\ContactEnquiry::where('status','new')->count(),'mediaCount'=>MediaAsset::count(),'redirectCount'=>\App\Models\UrlRedirect::count()+\App\Models\LegacyQueryRedirect::count()]);
+        return view('admin.dashboard',compact('counts','mix')+['recentPages'=>Page::latest('updated_at')->orderByDesc('id')->limit(6)->get(),'activity'=>$activity->sortByDesc('created_at')->take(5),'drafts'=>Page::where('status','draft')->count(),'newRequests'=>QuoteRequest::where('status','new')->count()+\App\Models\ContactEnquiry::where('status','new')->count(),'mediaCount'=>MediaAsset::count(),'redirectCount'=>\App\Models\UrlRedirect::count()+\App\Models\LegacyQueryRedirect::count()]);
     }
     public function index(Request $request){
         $query=Page::query();

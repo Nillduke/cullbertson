@@ -10,7 +10,7 @@ args=parser.parse_args()
 out=Path(args.output).resolve()
 if out.is_relative_to(root):raise SystemExit('Choose a staging directory outside the Git project.')
 app=out/'culbertson_app'; public=out/'public_html'
-private_tables=['users','password_reset_tokens','sessions','cache','cache_locks','jobs','job_batches','failed_jobs','quote_requests','contact_enquiries','feedback_entries']
+private_tables=['contact_files','users','password_reset_tokens','sessions','cache','cache_locks','jobs','job_batches','failed_jobs','quote_requests','contact_enquiries','feedback_entries']
 if not args.zip:
  if (app/'database/database.sqlite').exists():raise SystemExit('A prepared snapshot already exists; choose a new output directory.')
  out.mkdir(parents=True,exist_ok=True);app.mkdir(exist_ok=True);public.mkdir(exist_ok=True)

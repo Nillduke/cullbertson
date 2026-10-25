@@ -39,3 +39,11 @@ In Admin ? Messages & requests, select Partial leads to see incomplete requests,
 Resume is restricted to the original Laravel session and a per-form opaque identifier stored in sessionStorage; contact data is not stored in browser storage. Reloading resumes at the last saved question. Closing the browser tab or session expiry may start a new lead. Saving does not send email/SMS or submit to an insurer.
 
 For existing deployments, upload the updated code/assets and run `php artisan migrate --force`. Never replace the live database with the packaged first-install snapshot.
+
+## Supporting-page design
+
+About, the insurance directory, claims, Cape Coral, collector cars, media, careers, document submission, privacy and all existing thank-you URLs use the shared supporting-page design. HTML sitemap links are generated from published database records. Insurance cards and agency team profiles also query published records at runtime.
+
+The migration and idempotent `SupportPageSeeder` install named editable `page_sections`. Original sections are retained with component `legacy_archive` and are hidden from public rendering. Admin ? Pages & posts edits each design section; Admin ? Forms & site copy ? Supporting pages edits shared labels and form copy. Keep the dynamic directory, team and request-form markers in their sections.
+
+Native careers, documents and collector-car enquiries appear in the existing admin inbox. Document uploads and optional PDF resumes are saved under `storage/app/private/enquiry-files`, with metadata in `contact_files`. Only authenticated administrators may download them. File types and limits are checked on the server. Saving a request does not send emails or submit information to an insurer.

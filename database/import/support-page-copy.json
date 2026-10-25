@@ -1,0 +1,50 @@
+{
+  "insuranceLink": "Explore coverage",
+  "teamLink": "View profile",
+  "teamHeading": "Meet our team",
+  "home": "Home",
+  "sitemapEyebrow": "EXPLORE CULBERTSON",
+  "sitemapTitle": "Everything, in one place.",
+  "sitemapLead": "Find insurance, useful resources and the people behind your coverage.",
+  "searchLabel": "Find a page",
+  "searchPlaceholder": "Search pages, articles and topics",
+  "noResults": "No matching links. Try another search.",
+  "browse": "Browse by section",
+  "linksLabel": "links",
+  "request": {
+    "eyebrow": "LET'S CONNECT",
+    "careers": {
+      "title": "Tell us a little about yourself.",
+      "intro": "Share your interests and experience. A member of our team will review your enquiry.",
+      "messageLabel": "Your experience and the role you're interested in",
+      "fileLabel": "Resume (optional, PDF)",
+      "submit": "Send career enquiry"
+    },
+    "documents": {
+      "title": "Send your requested documents.",
+      "intro": "Your files are stored privately and can be downloaded only by authorized agency administrators.",
+      "messageLabel": "Your agent, policy reference and a short message",
+      "fileLabel": "Requested pictures or documents",
+      "submit": "Send documents"
+    },
+    "classic": {
+      "title": "Let's talk about your classic.",
+      "intro": "Tell us about the year, make and model, how you use the vehicle and the coverage you're looking for.",
+      "messageLabel": "About your vehicle and coverage needs",
+      "submit": "Send collector car enquiry"
+    },
+    "name": "Full name",
+    "email": "Email address",
+    "phone": "Phone number (optional)",
+    "fileHelp": "Up to 3 files, 2 MB each. PDF, JPG, PNG or WebP. Resumes must be PDF.",
+    "consent": "I agree that Culbertson Agency may contact me about this request.",
+    "privacy": "Privacy policy",
+    "requiredNote": "Fields marked * are required.",
+    "successTitle": "Thank you. Your request has been received.",
+    "referenceLabel": "Your reference",
+    "errorTitle": "Please check the highlighted fields.",
+    "confidentialNote": "Send only files your agent has requested. Please contact us first if a document contains payment details or government identification.",
+    "attachments": "Private attachments",
+    "download": "Download"
+  }
+}

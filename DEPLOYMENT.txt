@@ -55,3 +55,12 @@ TinyMCE: bundled self-hosted GPL edition; see public vendor notices. Premium plu
 
 QUOTE ASSET ROUTING FIX
 Auto and bundle quote pages use /auto-quote/ and /quote/. Their CSS/JS live under /quote-assets/auto/ and /quote-assets/services/. If updating an older manual installation, remove its old public_html/auto-quote/ and public_html/quote/ asset folders after uploading quote-assets/. Physical folders at these page URLs can intercept the Laravel route and cause a server 404/403. Legacy CSS/JS URLs redirect to the new asset files. Run migrate --force to update stored asset paths.
+
+SUPPORTING PAGES AND PRIVATE UPLOADS
+The new supporting-page layouts install through php artisan migrate --force.
+They remain editable in the admin content editor; original sections are archived.
+Careers and document forms store enquiries in the admin inbox. Uploaded files
+are private in culbertson_app/storage/app/private/enquiry-files. Keep this
+folder outside public_html, writable by PHP, and preserve it on future updates.
+PHP upload_max_filesize must be at least 2M, post_max_size at least 8M, and
+max_file_uploads at least 3. Public media ZIP downloads live in public_html/assets/downloads.

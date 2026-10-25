@@ -6,6 +6,8 @@
 <div class="sub-detail-heading"><span class="sub-avatar large {{ $item['kind'] }}">{{ mb_strtoupper(mb_substr($item['name'],0,1)) }}</span><div><p class="cms-kicker">{{ ['quotes'=>'QUOTE REQUEST','contacts'=>'CONTACT ENQUIRY','feedback'=>'WEBSITE FEEDBACK'][$item['kind']] }}</p><h1>{{ $item['name'] }}</h1><p>{{ $item['subject'] }} <span>&middot; {{ $item['reference'] }}</span></p></div><span class="sub-status {{ $item['status'] }}"><i></i>{{ ucfirst($item['status']) }}</span></div>
 @if($item['kind']==='quotes' && $item['completion_status']==='incomplete')<div class="quote-partial-note"><strong>Incomplete quote &middot; {{ $item['progress_percent'] }}% progress saved</strong>This visitor has not submitted the full form. Their saved contact details and answers are available below.<br>Last saved step: {{ $item['last_step_label']?:'Contact details' }}</div>@endif
 <div class="sub-detail-grid"><div class="sub-main-column">
+@if(count($attachments))<section class="sub-card"><header><h2>Private attachments</h2></header><div class="sub-card-body">@foreach($attachments as $attachment)<p><a href="/admin/enquiry-files/{{ $attachment->id }}">{{ $attachment->original_name }} &darr;</a> <small>{{ number_format($attachment->size/1024,1) }} KB</small></p>@endforeach</div></section>@endif
+
 @if($item['message'])
 <section class="sub-card"><header>@include('admin.icon',['icon'=>'inbox'])<h2>{{ $item['kind']==='feedback'?'Visitor feedback':'Customer message' }}</h2>@if($item['rating'])<span class="sub-rating">{{ $item['rating'] }}/5 <span aria-hidden="true">&#9733;</span></span>@endif</header><div class="sub-message">{{ $item['message'] }}</div></section>
 @endif
