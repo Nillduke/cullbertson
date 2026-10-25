@@ -22,8 +22,12 @@
     @endforeach
     <script defer src="{{ asset('app.js') }}?v={{ filemtime(public_path('app.js')) }}"></script>
     <script defer src="{{ asset('exit-intent.js') }}?v={{ filemtime(public_path('exit-intent.js')) }}"></script>
+    @if(str_contains($bodyClass ?? '', 'quote-flow-page'))
+        <link rel="stylesheet" href="/quote-progress.css?v={{ filemtime(public_path('quote-progress.css')) }}">
+        <script defer src="/quote-progress.js?v={{ filemtime(public_path('quote-progress.js')) }}"></script>
+    @endif
     @foreach($scripts ?? [] as $script)
-        <script defer src="{{ $script }}"></script>
+        <script defer src="{{ $script }}{{ str_starts_with($script,'/quote-assets/') ? (str_contains($script,'?') ? '&' : '?').'rev='.filemtime(public_path(parse_url($script,PHP_URL_PATH))) : '' }}"></script>
     @endforeach
     @stack('head')
 </head>

@@ -31,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('siteBlocks',$blocks);
             $view->with('siteCopy',\App\Models\FormDefinition::where('key','site-copy')->first()?->definition??[]);
         });
+        RateLimiter::for('quote-progress',fn(Request $request)=>Limit::perMinutes(10,180)->by($request->session()->getId()));
         RateLimiter::for('quotes', fn (Request $request) => Limit::perMinutes(10, 5)
             ->by($request->session()->getId())
             ->response(fn () => response()->json(['error' => 'Please wait before saving another quote request.'], 429)));

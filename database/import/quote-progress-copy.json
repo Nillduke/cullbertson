@@ -1,0 +1,22 @@
+{
+  "emailTitle": "Where can we email you?",
+  "emailDescription": "Start with your email so we can keep your quote request together.",
+  "phoneTitle": "What is your phone number?",
+  "phoneDescription": "Tell us how our local team can reach you about this request.",
+  "notice": "When you select Continue, we save your contact details and quote progress so our team can help if you do not finish.",
+  "consent": "I agree that Culbertson Agency may contact me about this quote request, including if I do not finish the form.",
+  "sms": "Optional: I would also like text messages about this request.",
+  "saving": "Saving your progress...",
+  "saved": "Progress saved",
+  "error": "We could not save your progress. Please try Continue again.",
+  "milestones": {
+    "Contact": "Contact",
+    "Vehicles": "Vehicles",
+    "Coverage": "Coverage",
+    "Drivers": "Drivers",
+    "Address": "Address",
+    "Details": "Details",
+    "Personal": "Your details",
+    "Review": "Review"
+  }
+}

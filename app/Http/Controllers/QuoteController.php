@@ -41,8 +41,8 @@ class QuoteController extends Controller
             'createdAt' => gmdate('c'), 'mode' => 'local-preview',
             'consentText' => 'I agree that Culbertson Agency may contact me about this quote request using the details provided.',
         ]);
-        $saved = QuoteRequest::create(['reference'=>$reference,'service'=>$service,'payload'=>$record]);
+        $saved = app(\App\Services\QuoteProgress::class)->complete(request(),$service,$record);
         if (!$saved) return response()->json(['error' => 'We could not save your request. Please try again.'], 503);
-        return response()->json(['ok' => true, 'reference' => $reference, 'mode' => 'local-preview'], 201)->header('Cache-Control', 'no-store');
+        return response()->json(['ok' => true, 'reference' => $saved->reference, 'mode' => 'local-preview'], 201)->header('Cache-Control', 'no-store');
     }
 }

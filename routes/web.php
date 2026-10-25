@@ -33,8 +33,10 @@ Route::middleware(['auth',EnsureCmsAdmin::class])->prefix('admin')->group(functi
     Route::post('/quotes/{quote}/status',[CmsController::class,'quoteStatus']);
     Route::post('/contacts/{contact}/status',[CmsController::class,'contactStatus']);
 });
-Route::get('/forms/{key}',fn(string $key)=>response()->json(FormDefinition::data($key))->header('Cache-Control','no-store'))->where('key','auto-options|services');
+Route::get('/forms/{key}',function(string $key){$data=FormDefinition::data($key);if($key==='auto-options')$data['progress']=FormDefinition::data('quote-progress-copy');return response()->json($data)->header('Cache-Control','no-store');})->where('key','auto-options|services');
 
+Route::get('/quote/progress',[\App\Http\Controllers\QuoteProgressController::class,'show'])->middleware('throttle:quote-progress');
+Route::post('/quote/progress',[\App\Http\Controllers\QuoteProgressController::class,'store'])->middleware('throttle:quote-progress');
 Route::get('/feedback', [QuoteController::class, 'token']);
 Route::post('/feedback', [FeedbackController::class, 'store'])->middleware('throttle:feedback');
 // Preserve old asset URLs while keeping native quote page paths free of physical folders.
