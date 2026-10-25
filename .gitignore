@@ -43,3 +43,11 @@ Thumbs.db
 /storage/logs/*
 !/storage/**/.gitignore
 /public/assets/media/
+
+# Private SSH credentials
+/id_rsa
+/id_rsa.*
+/id_ed25519
+/id_ed25519.*
+*.pem
+*.ppk
