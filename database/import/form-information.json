@@ -5,8 +5,8 @@
   "address": "13099 S Cleveland Ave, Suite 310, Fort Myers, FL 33907",
   "phone": "(239) 210-7700",
   "phoneUrl": "tel:12392107700",
-  "notice": "When you submit contact details, you ask Culbertson Agency to respond to your enquiry using the information and contact preferences you provide. This notice does not add consent to marketing calls or text messages.",
-  "quoteNotice": "Quote forms save the information you enter when you select Continue, so our agency team can help even if you do not finish. Submitting a form does not purchase, change or bind insurance coverage.",
+  "notice": "By clicking the \"Continue & Get Quote\" button above, I provide my ESIGN/electronic signature and express written consent and authorization to Culbertson Agency, identified above, to contact me for marketing/telemarketing purposes at the telephone number and address I have provided, using live operators, automated technology, artificial and/or AI generative voice or pre-recorded messages, SMS/MMS text messages and/or emails, if applicable, even if I have previously registered the provided telephone number on the Federal and/or any State Do Not Call Registry. I understand that my consent is not required as a condition of obtaining goods or services and can be revoked at any time. I acknowledge that to be connected with product sellers that can fit my needs without providing this consent, I can call the number listed on this page. I represent that I am at least 18 years of age, and agree to this website's",
+  "quoteNotice": "Message and data rates may apply. Message frequency varies. Reply HELP for customer support or STOP to opt-out. See",
   "powered": "Powered by",
   "linksLabel": "Form policies and privacy choices",
   "links": [
@@ -29,13 +29,9 @@
     {
       "label": "Cookies and Other Technology",
       "url": "/cookie-policy/"
-    },
-    {
-      "label": "SMS and Contact Terms",
-      "url": "/sms-terms-of-service/"
     }
   ],
-  "choicesNotice": "Manage your contact preferences or send a privacy request through Privacy Choices. Our team reviews these requests; submitting one does not automatically delete records or change your insurance policy.",
+  "choicesNotice": "As part of our ongoing effort to provide you with the best possible service, Culbertson Agency and its service providers may monitor and/or record and retain activity on this website and its applicable links, through the use of cookies, tracking pixels or other methods, for informational and quality control purposes.",
   "request": {
     "eyebrow": "YOUR INFORMATION. YOUR CHOICES.",
     "title": "Send a privacy request",
@@ -60,5 +56,21 @@
     "successTitle": "Your privacy request has been received.",
     "successBody": "Keep this reference. Our agency team will review your request and may contact you to verify your identity or clarify your instructions.",
     "inboxTopic": "Privacy request"
-  }
+  },
+  "noticeLinks": [
+    {
+      "label": "Privacy Policy",
+      "url": "/privacy-policy-2/"
+    },
+    {
+      "label": "Terms of Services",
+      "url": "/terms-of-use/"
+    }
+  ],
+  "noticeJoin": "and",
+  "smsLink": {
+    "label": "SMS Terms of Service",
+    "url": "/sms-terms-of-service/"
+  },
+  "smsSuffix": "for more details."
 }

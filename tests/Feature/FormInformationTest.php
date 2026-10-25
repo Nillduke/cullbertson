@@ -22,6 +22,11 @@ class FormInformationTest extends TestCase
             $this->assertNotEmpty($forms[0], $path);
             $this->assertCount(count($forms[0]), $footers[0], $path);
             $this->assertStringContainsString('Powered by', $html);
+            $this->assertStringContainsString('ESIGN/electronic signature', $html);
+            $this->assertStringContainsString('Message and data rates may apply.', $html);
+            $this->assertStringContainsString('SMS Terms of Service', $html);
+            $this->assertStringNotContainsString('Jill Owens', $html);
+            $this->assertStringNotContainsString('Goal Platform', $html);
             $this->assertStringNotContainsString('California Privacy Choices', $html);
             if (in_array($path, ['/auto-quote/', '/get-a-quote/'])) $this->assertGreaterThan(strpos($html, '</main>'), strpos($html, 'class="form-info"'));
         }
@@ -52,6 +57,8 @@ class FormInformationTest extends TestCase
         $this->get('/ccpa-opt-out/')->assertRedirect('/do-not-sell-my-personal-information/')->assertStatus(301);
         $this->get('/privacy-policy-2/')->assertSee('id="cookies-and-technologies"',false)->assertSee('id="privacy-choices"',false);
         $this->get('/privacy-choices/')->assertSee('action="'.url('/privacy-choices/request').'"',false);
+        $this->get('/terms-of-use/')->assertSee('Electronic signatures and communications');
+        $this->get('/sms-terms-of-service/')->assertSee('HELP and STOP');
     }
 
     public function test_privacy_requests_require_authority_and_appear_in_the_existing_admin_inbox(): void
