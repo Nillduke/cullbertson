@@ -64,6 +64,14 @@ class LeadMail {
   $details['rows']=['Reference'=>$row->reference,'Type'=>$item['subject'],'Received'=>$record->created_at->toDateTimeString(),'Completion'=>$partial?'Incomplete':'Submitted'];
   $sensitive=str_starts_with($row->reference??'','PRV-')||($record->payload['topic']??'')==='Document submission';
   if($s->include_contact&&!$sensitive)foreach(['Name'=>'name','Email'=>'email','Phone'=>'phone'] as $label=>$key)if($item[$key])$details['rows'][$label]=$item[$key];
+  if($row->kind==='quotes'){
+   $details['rows']['Form progress']=$item['progress_percent'].'%';
+   if($partial&&$item['last_step_label'])$details['rows']['Last saved step']=$item['last_step_label'];
+  }
+  if($s->include_contact&&!$sensitive){
+   if($item['message']!=='')$details['rows']['Message']=$item['message'];
+   if($item['rating']!==null)$details['rows']['Rating']=(string)$item['rating'];
+  }
   $details['url']=$base.'/admin/inbox/'.$row->kind.'/'.$row->source_id;$details['linkLabel']='Review submission';
   $details['note']='Sign in to review full details. This notification does not bind insurance coverage.';
   return $details;

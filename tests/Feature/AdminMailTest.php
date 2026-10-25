@@ -88,4 +88,18 @@ class AdminMailTest extends TestCase {
   $row=app(LeadMail::class)->deliver(MailDelivery::firstOrFail()->id);
   $this->assertSame('logged',$row->status);$this->assertNull($row->last_error);$this->assertNotNull($row->message_id);
  }
+ public function test_lead_table_shows_agency_fields_and_escapes_message_content():void {
+  $settings=$this->settings();
+  ContactEnquiry::create(['reference'=>'ENQ-TABLE','payload'=>['name'=>'Example Visitor','email'=>'visitor@example.com','phone'=>'2025550100','topic'=>'general','message'=>'Please call <script>alert(1)</script>']]);
+  $this->mock(AdminMailTransport::class,function($m){$m->shouldReceive('send')->once()->withArgs(function($s,$to,$mail){
+   $html=$mail->render();$this->assertStringContainsString('Dear Admin,',$html);$this->assertStringContainsString('scope="row"',$html);
+   $this->assertStringContainsString('background:#102c3e',$html);$this->assertStringContainsString('mailto:visitor@example.com',$html);
+   $this->assertStringContainsString('Please call &lt;script&gt;',$html);$this->assertStringNotContainsString('<script>',$html);return true;
+  })->andReturn('table@example.com');});
+  app(LeadMail::class)->deliver(MailDelivery::firstOrFail()->id);
+  $settings->update(['include_contact'=>false]);
+  ContactEnquiry::create(['reference'=>'ENQ-HIDDEN','payload'=>['name'=>'Hidden Person','email'=>'hidden@example.com','topic'=>'general','message'=>'Hidden message']]);
+  $this->mock(AdminMailTransport::class,function($m){$m->shouldReceive('send')->once()->withArgs(function($s,$to,$mail){$html=$mail->render();$this->assertStringNotContainsString('Hidden message',$html);$this->assertStringNotContainsString('hidden@example.com',$html);return true;})->andReturn('hidden@example.com');});
+  app(LeadMail::class)->deliver(MailDelivery::latest('id')->firstOrFail()->id);
+ }
 }
