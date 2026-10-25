@@ -23,6 +23,8 @@ After editing public/styles.css or changing CSS background images, rebuild both 
   npm install
   npm run optimize:css
 Node and npm are development/build tools; the deployed prebuilt site does not need Node.
+The insurance overview and article templates inline their local critical styles to avoid
+stylesheet round trips before the hero paints; relative font URLs are kept absolute.
 
 The homepage remains full-screen. Mobile/data-saving/reduced-motion visitors see a poster
 and can opt into video playback. Desktop video starts after the initial page load.
