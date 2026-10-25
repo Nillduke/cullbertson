@@ -3,7 +3,7 @@
     <h1 id="wizard-title">{{ $catalog['picker']['title'] }}</h1>
     <p class="wizard-description">{{ $catalog['picker']['description'] }}</p>
     <div class="service-picker">
-        <a class="service-tile" href="/auto-quote/"><img src="/assets/quote-auto.svg" width="53" height="45" alt=""><span><strong>{{ $catalog['picker']['autoLabel'] }}</strong><small>{{ $catalog['picker']['autoDescription'] }}</small></span><b aria-hidden="true">↗</b></a>
+        <a class="service-tile" href="/auto-quote/"><img src="/assets/quote-service-auto.svg" width="53" height="45" alt=""><span><strong>{{ $catalog['picker']['autoLabel'] }}</strong><small>{{ $catalog['picker']['autoDescription'] }}</small></span><b aria-hidden="true">↗</b></a>
         @foreach($catalog['services'] as $key => $item)
             <a class="service-tile" href="{{ !empty($item['path']) ? '/get-a-quote/'.$item['path'].'/' : '/quote/?service='.$key }}"><img src="/assets/quote-{{ $item['icon'] }}.svg" width="53" height="45" alt=""><span><strong>{{ $item['name'] }}</strong><small>{{ $key === 'home-auto' ? $catalog['picker']['bundleDescription'] : $catalog['picker']['serviceDescription'] }}</small></span><b aria-hidden="true">↗</b></a>
         @endforeach
