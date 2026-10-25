@@ -11,6 +11,8 @@
     @php($baseStylesheet = isset($contentPage) && $contentPage->slug === '' ? 'styles.home.min.css' : 'styles.shared.min.css')
     @php($criticalTemplate = isset($contentPage) && ($contentPage->slug === 'insurance' || $contentPage->type === 'post'))
     @if($criticalTemplate)
+        <script>if('IntersectionObserver' in window)document.documentElement.classList.add('perf-defer-footer');</script>
+        <style>html.perf-defer-footer .gradient-footer::before{background-image:linear-gradient(110deg,rgba(7,35,72,.94),rgba(20,84,139,.91) 48%,rgba(21,112,163,.92))}</style>
         <style>{!! file_get_contents(public_path('styles.header-critical.min.css')) !!}</style>
     @endif
     @include('partials.performance-stylesheet',['href'=>asset($baseStylesheet).'?v='.filemtime(public_path($baseStylesheet))])

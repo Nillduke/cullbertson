@@ -33,6 +33,7 @@
     ExpiresByType application/javascript "access plus 7 days"
     ExpiresByType text/javascript "access plus 7 days"
     ExpiresByType image/webp "access plus 30 days"
+    ExpiresByType image/avif "access plus 30 days"
     ExpiresByType image/jpeg "access plus 30 days"
     ExpiresByType image/png "access plus 30 days"
     ExpiresByType image/svg+xml "access plus 30 days"
@@ -40,7 +41,7 @@
     ExpiresByType video/mp4 "access plus 30 days"
 </IfModule>
 <IfModule mod_headers.c>
-    <FilesMatch "\.(css|js|svg|webp|jpe?g|png|woff2|mp4)$">
+    <FilesMatch "\.(css|js|svg|webp|avif|jpe?g|png|woff2|mp4)$">
         Header set Cache-Control "public, max-age=604800"
     </FilesMatch>
 </IfModule>

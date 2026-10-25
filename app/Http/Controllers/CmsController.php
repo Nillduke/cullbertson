@@ -81,6 +81,6 @@ class CmsController extends Controller
         $data=$request->validate(['image'=>'required|image|mimes:jpg,jpeg,png,webp|max:5120','alt'=>'nullable|string|max:255']);$file=$request->file('image');
         $name=bin2hex(random_bytes(12)).'.'.$file->extension();$dir=public_path('assets/media');if(!is_dir($dir))mkdir($dir,0755,true);
         $record=['path'=>'/assets/media/'.$name,'name'=>mb_substr($file->getClientOriginalName(),0,255),'alt'=>$data['alt']??'','mime'=>$file->getMimeType(),'size'=>$file->getSize()];
-        $file->move($dir,$name);MediaAsset::create($record);app(\App\Services\ResponsiveImages::class)->build($record['path']);return $request->expectsJson()?response()->json(['location'=>$record['path'],'alt'=>$record['alt']],201):back()->with('success','Image uploaded. Copy its path into the page editor.');
+        $file->move($dir,$name);MediaAsset::create($record);$images=app(\App\Services\ResponsiveImages::class);$images->build($record['path']);$images->buildAvif($record['path']);return $request->expectsJson()?response()->json(['location'=>$record['path'],'alt'=>$record['alt']],201):back()->with('success','Image uploaded. Copy its path into the page editor.');
     }
 }

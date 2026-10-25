@@ -1,5 +1,5 @@
 <IfModule mod_headers.c>
-    <FilesMatch "^[a-f0-9]{16}-[0-9]+\.webp$">
+    <FilesMatch "^[a-f0-9]{16}-[0-9]+\.(webp|avif)$">
         Header set Cache-Control "public, max-age=31536000, immutable"
     </FilesMatch>
 </IfModule>

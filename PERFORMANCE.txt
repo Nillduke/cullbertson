@@ -15,9 +15,11 @@ start-local.ps1 enables PHP OPcache for the local server and validates code chan
 request. This caches compiled PHP code, not database content. For production, enable OPcache
 through the hosting PHP settings when available; its availability affects server response time.
 
-New admin uploads create responsive WebP files automatically when PHP GD/WebP support is available.
+New admin uploads create responsive WebP and optional AVIF files automatically when PHP GD
+supports those formats. JPEG camera orientation is preserved when EXIF support is available.
 After copying original images by FTP or changing existing image files, run:
   php artisan site:optimize-media
+To also encode AVIF versions of existing media: php artisan site:optimize-media --avif
 
 After editing public/styles.css or changing CSS background images, rebuild both bundles:
   npm install

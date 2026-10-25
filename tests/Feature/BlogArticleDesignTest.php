@@ -13,7 +13,7 @@ class BlogArticleDesignTest extends TestCase {
             $response=$this->get('/'.$post->slug)->assertOk()->assertViewIs('content.article')->assertSee('data-template="shared-blog-article"',false)->assertSee($post->title)->assertSee($post->published_at->toDateString())->assertSee('blog-detail.css',false);
             $html=$response->getContent();$dom=new \DOMDocument();@$dom->loadHTML('<?xml encoding="UTF-8">'.$html);$xpath=new \DOMXPath($dom);
             $this->assertSame(1,$xpath->query('//main//h1')->length,$post->slug);
-            $this->assertSame(1,$xpath->query('//figure[contains(@class,"blog-hero")]/img')->length,$post->slug);
+            $this->assertSame(1,$xpath->query('//figure[contains(@class,"blog-hero")]//img')->length,$post->slug);
             $body=app(\App\Services\ArticleContent::class)->render($post);
             $this->assertStringNotContainsString('content-page-heading',$body);
             // Every imported article paragraph survives the wrapper/header cleanup.

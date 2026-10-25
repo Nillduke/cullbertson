@@ -65,4 +65,70 @@ class PublicPerformanceTest extends TestCase
         $this->assertStringNotContainsString('autoplay', $match[0]);
         $this->assertStringContainsString('rel="preload" as="image"', $html);
     }
+
+    public function test_responsive_preload_matches_avif_picture_and_follows_viewport_metadata(): void
+    {
+        $html = $this->get('/insurance/')->assertOk()->getContent();
+        $dom = new \DOMDocument;
+        $previous = libxml_use_internal_errors(true);
+        $dom->loadHTML($html);
+        libxml_clear_errors();
+        libxml_use_internal_errors($previous);
+        $xpath = new \DOMXPath($dom);
+        $source = $xpath->query('//picture/source[@type="image/avif"]')->item(0);
+        $preload = $xpath->query('//head/link[@rel="preload"][@type="image/avif"]')->item(0);
+        $this->assertNotNull($source);
+        $this->assertNotNull($preload);
+        $this->assertSame($source->getAttribute('srcset'), $preload->getAttribute('imagesrcset'));
+        $this->assertLessThan(strpos($html, 'type="image/avif"'), strpos($html, 'name="viewport"'));
+        $this->assertStringContainsString('src="/assets/quote-family.jpg"', $html);
+    }
+
+    public function test_resizing_respects_camera_orientation(): void
+    {
+        if (! function_exists('exif_read_data')) {
+            $this->markTestSkipped('EXIF support is optional.');
+        }
+        $original = public_path();
+        $temporary = storage_path('framework/testing/orientation-'.bin2hex(random_bytes(6)));
+        mkdir($temporary.'/assets', 0755, true);
+        $image = imagecreatetruecolor(80, 40);
+        imagefilledrectangle($image, 0, 0, 39, 39, imagecolorallocate($image, 255, 0, 0));
+        imagefilledrectangle($image, 40, 0, 79, 39, imagecolorallocate($image, 0, 0, 255));
+        ob_start();
+        imagejpeg($image, null, 95);
+        $jpeg = ob_get_clean();
+        imagedestroy($image);
+        $exif = "Exif\0\0II\x2a\0\x08\0\0\0".pack('v', 1).pack('vvVv', 0x112, 3, 1, 6)."\0\0".pack('V', 0);
+        file_put_contents($temporary.'/assets/camera.jpg', substr($jpeg, 0, 2)."\xff\xe1".pack('n', strlen($exif) + 2).$exif.substr($jpeg, 2));
+        try {
+            $this->app->usePublicPath($temporary);
+            $images = new ResponsiveImages;
+            $this->assertTrue($images->build('/assets/camera.jpg'));
+            $entry = $images->manifest()['/assets/camera.jpg'];
+            $this->assertSame(40, $entry['width']);
+            $this->assertSame(80, $entry['height']);
+            $result = imagecreatefromwebp($temporary.$entry['variants'][40]);
+            $color = imagecolorsforindex($result, imagecolorat($result, 20, 10));
+            $this->assertGreaterThan($color['blue'], $color['red']);
+            imagedestroy($result);
+        } finally {
+            $this->app->usePublicPath($original);
+            $base = realpath(storage_path('framework/testing')).DIRECTORY_SEPARATOR;
+            $resolved = realpath($temporary);
+            if ($resolved && str_starts_with($resolved, $base)) {
+                foreach (glob($temporary.'/assets/optimized/*') as $file) {
+                    if (is_file($file)) {
+                        unlink($file);
+                    }
+                }
+                unlink($temporary.'/assets/camera.jpg');
+                if (is_dir($temporary.'/assets/optimized')) {
+                    rmdir($temporary.'/assets/optimized');
+                }
+                rmdir($temporary.'/assets');
+                rmdir($temporary);
+            }
+        }
+    }
 }

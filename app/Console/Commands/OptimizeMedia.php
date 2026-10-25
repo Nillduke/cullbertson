@@ -7,7 +7,7 @@ use Illuminate\Console\Command;
 
 class OptimizeMedia extends Command
 {
-    protected $signature = 'site:optimize-media';
+    protected $signature = 'site:optimize-media {--avif : Also encode AVIF when PHP GD supports it}';
 
     protected $description = 'Build responsive WebP derivatives without changing original media or database content';
 
@@ -21,6 +21,9 @@ class OptimizeMedia extends Command
             $url = '/'.str_replace('\\', '/', substr($file->getPathname(), strlen(public_path()) + 1));
             if ($images->build($url)) {
                 $count++;
+                if ($this->option('avif')) {
+                    $images->buildAvif($url);
+                }
             }
         }
         $this->info("Responsive variants ready for {$count} images.");

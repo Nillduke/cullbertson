@@ -15,16 +15,18 @@ class OptimizePublicResponse
         if ($request->is('admin', 'admin/*') || ! $response instanceof \Illuminate\Http\Response || ! str_contains($response->headers->get('Content-Type', ''), 'text/html') || $response->getStatusCode() !== 200) {
             return $response;
         }
-        $html = app(ResponsiveImages::class)->html($response->getContent());
+        $html = $response->getContent();
         // Discover overview/article hero photos before CSS and secondary backgrounds.
         $preloadHero = $request->is('insurance') || preg_match('~<body\b[^>]*class="[^"]*\bblog-detail-page\b~i', $html);
+        $html = app(ResponsiveImages::class)->html($html, (bool) $preloadHero);
         if ($preloadHero && preg_match('~<img\b[^>]*fetchpriority="high"[^>]*>~i', $html, $hero)) {
             $html = str_replace($hero[0], str_replace(' decoding="async"', '', $hero[0]), $html);
             preg_match('~\bsrc="([^"]+)"~', $hero[0], $src);
             preg_match('~\bsrcset="([^"]+)"~', $hero[0], $srcset);
             preg_match('~\bsizes="([^"]+)"~', $hero[0], $sizes);
             if ($src && $srcset && $sizes) {
-                $preload = '<link rel="preload" as="image" href="'.app(ResponsiveImages::class)->url($src[1], 768).'" imagesrcset="'.$srcset[1].'" imagesizes="'.$sizes[1].'" fetchpriority="high">';
+                $avif = preg_match('~\bdata-avif-srcset="([^"]+)"~', $hero[0], $avifSet);
+                $preload = '<link rel="preload" as="image"'.($avif ? ' type="image/avif"' : '').' href="'.app(ResponsiveImages::class)->url($src[1], 768, $avif ? 'avif' : 'variants').'" imagesrcset="'.($avif ? $avifSet[1] : $srcset[1]).'" imagesizes="'.$sizes[1].'" fetchpriority="high">';
                 $html = preg_replace_callback('~<meta\b[^>]*\bname="viewport"[^>]*>~i', fn ($match) => $match[0].$preload, $html, 1);
             }
         }

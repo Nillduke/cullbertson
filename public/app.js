@@ -1,4 +1,8 @@
 'use strict';
+if(document.documentElement.classList.contains('perf-defer-footer')){
+ const footer=document.querySelector('#site-footer');
+ if(footer){const observer=new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting)){document.documentElement.classList.remove('perf-defer-footer');observer.disconnect();}},{rootMargin:'300px'});observer.observe(footer);}
+}
 const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
 const video=document.querySelector('#hero-video');const videoToggle=document.querySelector('#video-toggle');
 const pauseIcon='<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg>';
