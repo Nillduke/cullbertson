@@ -18,6 +18,6 @@ class DeploymentSetupTest extends TestCase {
  }
  public function test_indexing_is_a_server_setting_and_admin_stays_private():void {
   $this->get('/')->assertSee('content="noindex, nofollow"',false);
-  config(['app.search_engine_indexing'=>true]);$this->get('/')->assertSee('content="index, follow"',false);$this->get('/admin/login')->assertSee('content="noindex,nofollow"',false);
+  config(['app.search_engine_indexing'=>true]);$this->get('/')->assertSee('content="max-image-preview:large"',false)->assertDontSee('content="noindex, nofollow"',false);$this->get('/admin/login')->assertSee('content="noindex,nofollow"',false);
  }
 }

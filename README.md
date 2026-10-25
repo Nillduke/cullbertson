@@ -47,3 +47,15 @@ About, the insurance directory, claims, Cape Coral, collector cars, media, caree
 The migration and idempotent `SupportPageSeeder` install named editable `page_sections`. Original sections are retained with component `legacy_archive` and are hidden from public rendering. Admin ? Pages & posts edits each design section; Admin ? Forms & site copy ? Supporting pages edits shared labels and form copy. Keep the dynamic directory, team and request-form markers in their sections.
 
 Native careers, documents and collector-car enquiries appear in the existing admin inbox. Document uploads and optional PDF resumes are saved under `storage/app/private/enquiry-files`, with metadata in `contact_files`. Only authenticated administrators may download them. File types and limits are checked on the server. Saving a request does not send emails or submit information to an insurer.
+
+## SEO preservation
+
+`seo_profiles` stores metadata for the 297 distinct destinations reached by the original 417 audited URLs. Runtime output prefers saved Yoast fields, then saved Rank Math fields, then the originally rendered WordPress values. The source audit, raw saved fields and legacy plugin scores remain preserved separately from the active metadata. The user-approved Renters title/description correction is recorded in `database/import/seo-approved-overrides.json` and in that profile's source history.
+
+Admin ? SEO & metadata manages titles, descriptions, canonicals, robots, language, social tags, JSON-LD and hreflang. Page-editor links open the matching SEO profile. Visible headings and page titles remain separate from imported SEO overrides. New pages fall back to their database title/description and a self canonical. Paginated archives receive separate canonicals. The importer uses insert-or-ignore and never replaces an existing admin edit.
+
+The first audit was of the restored local WordPress copy, where SEO plugins were inactive. Missing source descriptions remain unset; no JSON-LD was invented when the audit had none. Saved social images are served at their original `/wp-content/uploads/` paths through a restricted public-image compatibility route.
+
+Local/staging pages remain noindex while `SEARCH_ENGINE_INDEXING=false`. At launch, configure the correct HTTPS `APP_URL`, enable indexing on the server, and refresh configuration caches. `robots.txt` is generated dynamically; remove the old physical public/robots.txt when updating an older deployment. Matching metadata does not establish unchanged rankings or traffic, especially after changes to content and headings.
+
+For a repeatable, read-only crawl of the original inventory: `php scripts/audit-seo.php --output=/absolute/path/report.json --indexing=on`. That indexing override affects only the audit process, not the running server configuration.

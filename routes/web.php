@@ -13,6 +13,10 @@ Route::post('/admin/login',[AdminAuthController::class,'authenticate'])->middlew
 Route::middleware(['auth',EnsureCmsAdmin::class])->prefix('admin')->group(function(){
     Route::post('/logout',[AdminAuthController::class,'logout']);
     Route::get('/',[CmsController::class,'dashboard']);
+    Route::get('/seo',[\App\Http\Controllers\SeoProfileController::class,'index']);
+    Route::get('/seo/create',[\App\Http\Controllers\SeoProfileController::class,'create']);
+    Route::get('/seo/{profile}/edit',[\App\Http\Controllers\SeoProfileController::class,'edit'])->whereNumber('profile');
+    Route::post('/seo/{profile?}',[\App\Http\Controllers\SeoProfileController::class,'save'])->whereNumber('profile');
     Route::get('/content',[CmsController::class,'index']);
     Route::get('/media/picker',[CmsController::class,'mediaPicker']);
     Route::get('/pages/create',[CmsController::class,'create']);
@@ -49,6 +53,8 @@ Route::get('/auto-quote/submit', [QuoteController::class, 'token']);
 Route::post('/auto-quote/submit', [QuoteController::class, 'auto'])->middleware('throttle:quotes');
 Route::get('/quote/submit', [QuoteController::class, 'token']);
 Route::post('/quote/submit', [QuoteController::class, 'service'])->middleware('throttle:quotes');
+Route::get('/robots.txt',[\App\Http\Controllers\LegacyMediaController::class,'robots']);
+Route::get('/wp-content/uploads/{path}',[\App\Http\Controllers\LegacyMediaController::class,'show'])->where('path','.*');
 Route::get('/', [PageController::class, 'show'])->name('home');
 Route::get('/wp-sitemap.xml',[\App\Http\Controllers\SitemapController::class,'index']);
 Route::get('/wp-sitemap-{key}.xml',[\App\Http\Controllers\SitemapController::class,'entries'])->where('key','[a-z0-9_-]+');

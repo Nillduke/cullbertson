@@ -26,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
     {
         if ($publicPath=config('app.public_path')) $this->app->usePublicPath($publicPath);
         View::composer('layouts.app',function($view){
+            $view->with('seo',app(\App\Services\SeoMetadata::class)->forRequest(request(),$view->getData()));
             $blocks=SiteBlock::pluck('content_html','key')->all();
             $blocks['exit-intent']=str_replace('%%EXIT_PREVIEW%%',app()->environment('local')&&request()->boolean('preview_exit')?'true':'false',$blocks['exit-intent']??'');
             $view->with('siteBlocks',$blocks);

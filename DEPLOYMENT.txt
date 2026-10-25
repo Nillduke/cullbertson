@@ -64,3 +64,17 @@ are private in culbertson_app/storage/app/private/enquiry-files. Keep this
 folder outside public_html, writable by PHP, and preserve it on future updates.
 PHP upload_max_filesize must be at least 2M, post_max_size at least 8M, and
 max_file_uploads at least 3. Public media ZIP downloads live in public_html/assets/downloads.
+
+SEO MIGRATION AND LAUNCH
+Run migrate --force to install the database SEO profiles. Set APP_URL to the
+actual preferred HTTPS domain. Keep SEARCH_ENGINE_INDEXING=false on staging.
+At the production launch set SEARCH_ENGINE_INDEXING=true and refresh config
+caches. Admin -> SEO & metadata keeps per-URL overrides separate from visible
+page headings. Existing audit data and the approved Renters correction are
+included. Legacy /wp-content/uploads/ image URLs resolve to public assets.
+When updating an older manual upload, remove the old physical
+public_html/robots.txt file so Laravel can generate robots.txt from the
+indexing setting and preferred domain. The new ZIP does not contain that file.
+Before launch verify rendered canonicals, robots.txt and XML sitemap on the
+actual HTTPS domain. The comparison was against the restored local WordPress
+audit; it cannot guarantee unchanged rankings, traffic or plugin SEO scores.

@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ $seo['lang'] }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="robots" content="{{ config('app.search_engine_indexing') ? 'index, follow' : 'noindex, nofollow' }}">
-    <meta name="description" content="{{ $description ?? '' }}">
+    @include('partials.seo-head')
     <meta name="theme-color" content="#102c3e">
-    <title>{{ $title ?? 'Culbertson Agency' }}</title>
     <link rel="icon" type="image/svg+xml" href="{{ asset('assets/culbertson-mark.svg') }}">
     <link rel="preload" as="font" type="font/woff2" crossorigin href="{{ asset('assets/nunito-sans-roman.woff2') }}">
     <link rel="stylesheet" href="{{ asset('styles.css') }}?v={{ filemtime(public_path('styles.css')) }}">
