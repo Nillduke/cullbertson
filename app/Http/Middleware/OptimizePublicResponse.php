@@ -42,7 +42,7 @@ class OptimizePublicResponse
             preg_match('~\bsizes="([^"]+)"~', $hero[0], $sizes);
             if ($src && $srcset && $sizes) {
                 $preload = '<link rel="preload" as="image" href="'.app(ResponsiveImages::class)->url($src[1], 768).'" imagesrcset="'.$srcset[1].'" imagesizes="'.$sizes[1].'" fetchpriority="high">';
-                $html = str_replace('<meta charset="utf-8">', '<meta charset="utf-8">'.$preload, $html);
+                $html = preg_replace_callback('~<meta\b[^>]*\bname="viewport"[^>]*>~i', fn ($match) => $match[0].$preload, $html, 1);
             }
         }
         // The background remains full-screen; defer the video bytes until playback is appropriate.
