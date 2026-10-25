@@ -5,6 +5,7 @@ class ContentRenderer
 {
     public function render(PageSection $section): string
     {
+        if(str_contains($section->content_html,'id="auto-quote-wizard"') || str_contains($section->content_html,'id="service-quote-wizard"'))return app(QuoteInitialView::class)->render($section->content_html,Page::find($section->page_id)?->presentation['service']??'');
         if($section->component==='legacy_archive')return '';
         if(in_array($section->component,['design_insurance_directory','design_agency_team','design_request_form'],true)){
             $copy=\App\Models\FormDefinition::data('support-page-copy');$html=$section->content_html;

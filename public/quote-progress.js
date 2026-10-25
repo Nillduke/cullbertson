@@ -6,12 +6,13 @@
   constructor(service,copy={}){
    this.service=service;this.copy=copy;this.key='culbertson-quote-flow:'+service;this.id=null;
    try{this.id=sessionStorage.getItem(this.key);}catch{}
-   if(!/^[a-f0-9-]{36}$/i.test(this.id||''))this.reset();
-   this.state=document.createElement('p');this.state.className='quote-save-state';this.state.setAttribute('role','status');this.state.setAttribute('aria-live','polite');document.querySelector('.wizard-actions').after(this.state);
+   this.hasDraft=/^[a-f0-9-]{36}$/i.test(this.id||'');if(!this.hasDraft)this.reset();
+   this.state=document.querySelector('.quote-save-state')||document.createElement('p');this.state.className='quote-save-state';this.state.setAttribute('role','status');this.state.setAttribute('aria-live','polite');if(!this.state.isConnected)document.querySelector('.wizard-actions').after(this.state);
   }
   reset(){this.id=uuid();try{sessionStorage.setItem(this.key,this.id);}catch{}}
   clear(){try{sessionStorage.removeItem(this.key);}catch{}}
   async resume(){
+   if(!this.hasDraft)return null;
    try{const r=await fetch('/quote/progress?'+new URLSearchParams({service:this.service,flow_id:this.id}),{credentials:'same-origin',cache:'no-store',headers:{Accept:'application/json'}});if(!r.ok)return null;const d=(await r.json()).draft;if(d?.completion_status==='completed'){this.reset();return null;}return d?{...d,payload:clean(d.payload)}:null;}catch{return null;}
   }
   milestones(stages){const ol=document.querySelector('.quote-milestones ol');ol.replaceChildren(...stages.map((stage,index)=>{const li=document.createElement('li');li.dataset.stage=stage;const number=document.createElement('span');number.textContent=index+1;li.append(number,document.createTextNode(this.copy.milestones?.[stage]||stage));return li;}));ol.style.setProperty('--quote-stage-count',stages.length);}

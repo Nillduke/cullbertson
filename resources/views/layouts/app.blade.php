@@ -8,7 +8,8 @@
     <meta name="theme-color" content="#102c3e">
     <link rel="icon" type="image/svg+xml" href="{{ asset('assets/culbertson-mark.svg') }}">
     <link rel="preload" as="font" type="font/woff2" crossorigin href="{{ asset('assets/nunito-sans-roman.woff2') }}">
-    <link rel="stylesheet" href="{{ asset('styles.css') }}?v={{ filemtime(public_path('styles.css')) }}">
+    @php($baseStylesheet = isset($contentPage) && $contentPage->slug === '' ? 'styles.home.min.css' : 'styles.shared.min.css')
+    <link rel="stylesheet" href="{{ asset($baseStylesheet) }}?v={{ filemtime(public_path($baseStylesheet)) }}">
     <link rel="stylesheet" href="{{ asset('exit-intent.css') }}?v={{ filemtime(public_path('exit-intent.css')) }}">
     @if(isset($contentPage) && $contentPage->type === 'blog_index')<link rel="stylesheet" href="{{ asset('cms.css') }}">@endif
     @if(!empty($insuranceArticles))

@@ -1,0 +1,30 @@
+Performance build and deployment
+===============================
+
+The public design, URLs and SEO fields remain database-driven. Original media are retained.
+
+Deploy all changed application files, prebuilt styles.home.min.css/styles.shared.min.css,
+the complete public/assets/optimized directory (including its manifest and .htaccess),
+and public/assets/florida-life-optimized.mp4. Run: php artisan migrate --force
+Do not replace an existing server database with the local development database.
+
+The cPanel package already includes these generated files and the content migration.
+public/.htaccess configures Apache compression and caching when those modules are enabled.
+server.php mirrors static-asset headers for local artisan serve; Apache does not use it.
+
+New admin uploads create responsive WebP files automatically when PHP GD/WebP support is available.
+After copying original images by FTP or changing existing image files, run:
+  php artisan site:optimize-media
+
+After editing public/styles.css or changing CSS background images, rebuild both bundles:
+  npm install
+  npm run optimize:css
+Node and npm are development/build tools; the deployed prebuilt site does not need Node.
+
+The homepage remains full-screen. Mobile/data-saving/reduced-motion visitors see a poster
+and can opt into video playback. Desktop video starts after the initial page load.
+The first quote view and service picker are rendered from form definitions on the server;
+subsequent steps retain the same validation, partial-lead saving and private resume behavior.
+
+Performance reports are local Lighthouse lab measurements. Retest the deployed HTTPS site
+and inspect real-user Core Web Vitals after traffic is available.

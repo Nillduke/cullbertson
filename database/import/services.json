@@ -1219,5 +1219,14 @@
         ]
       }
     ]
+  },
+  "picker": {
+    "eyebrow": "YOUR FLORIDA LIFE. OUR LOCAL EXPERTISE.",
+    "title": "What would you like to protect?",
+    "description": "Choose your coverage. We will guide you through a few simple questions, then you can review everything before saving your request.",
+    "autoLabel": "Auto",
+    "autoDescription": "For the road ahead",
+    "bundleDescription": "Explore home and auto together",
+    "serviceDescription": "Start your quote request"
   }
 }

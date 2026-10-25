@@ -5,9 +5,16 @@ const pauseIcon='<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="curre
 const playIcon='<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m8 4 12 8-12 8V4Z"/></svg>';
 if(video && videoToggle){
 function updateVideoControl(){videoToggle.innerHTML=video.paused?playIcon:pauseIcon;videoToggle.setAttribute('aria-label',video.paused?'Play background video':'Pause background video');}
-if(reducedMotion.matches){video.pause();video.removeAttribute('autoplay');}else{video.play().catch(updateVideoControl);}
+function loadVideo(){if(video.dataset.loaded)return;video.querySelectorAll('source[data-src]').forEach(source=>{source.src=source.dataset.src;delete source.dataset.src;});video.dataset.loaded='true';video.load();}
+function playVideo(){loadVideo();video.play().catch(updateVideoControl);}
+video.pause();video.removeAttribute('autoplay');updateVideoControl();
+// Keep the poster on touch/data-saving devices. The play control always opts in.
+if(!reducedMotion.matches&&matchMedia('(min-width: 961px)').matches&&!navigator.connection?.saveData){
+ const start=()=>window.setTimeout(()=>{if(!document.hidden)playVideo();},2500);
+ if(document.readyState==='complete')start();else window.addEventListener('load',start,{once:true});
+}
 video.addEventListener('play',updateVideoControl);video.addEventListener('pause',updateVideoControl);video.addEventListener('error',()=>{video.hidden=true;document.querySelector('.hero').style.backgroundImage='url("/assets/florida-neighborhood.webp")';document.querySelector('.hero').style.backgroundSize='cover';videoToggle.hidden=true;});
-videoToggle.addEventListener('click',()=>{if(video.paused)video.play().catch(updateVideoControl);else video.pause();});
+videoToggle.addEventListener('click',()=>{if(video.paused)playVideo();else video.pause();});
 }
 const menuButton=document.querySelector('.menu-toggle');
 const mobileMenu=document.querySelector('#mobile-menu');

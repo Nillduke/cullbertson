@@ -2,7 +2,7 @@
 (async()=>{
 const mount=document.querySelector('#quote-step-content'), form=document.querySelector('#auto-quote-wizard'), back=document.querySelector('#wizard-back'),next=document.querySelector('#wizard-next'),error=document.querySelector('#quote-validation');
 let OPTIONS;
-try{const response=await fetch('/forms/auto-options');if(!response.ok)throw Error();OPTIONS=await response.json();}catch{mount.innerHTML='<h1>We couldn’t load the form.</h1><p>Please reload this page or call <a href="tel:12392107700">(239) 210-7700</a>.</p>';next.hidden=true;back.hidden=true;return;}
+try{const bootstrap=document.querySelector('#quote-bootstrap');if(bootstrap){OPTIONS=JSON.parse(bootstrap.textContent).options;}else{const response=await fetch('/forms/auto-options');if(!response.ok)throw Error();OPTIONS=await response.json();}}catch{mount.innerHTML='<h1>We couldn’t load the form.</h1><p>Please reload this page or call <a href="tel:12392107700">(239) 210-7700</a>.</p>';next.hidden=true;back.hidden=true;return;}
 const blankVehicle=()=>({year:'',make:'',model:''}),blankDriver=()=>({month:'',day:'',year:'',gender:'',married:'',accidents:'',dui:'',firstName:'',lastName:''});
 const queryZip=new URLSearchParams(location.search).get('zip')||'';
 const data={vehicles:[blankVehicle()],insured:'',carrier:'',tenure:'',homeowner:'',bundleHome:'No',drivers:[blankDriver()],address:{street:'',unit:'',city:'',state:'FL',zip:/^\d{5}$/.test(queryZip)?queryZip:''},email:'',phone:'',consent:false,sms:false};
