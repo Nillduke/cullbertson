@@ -19,14 +19,14 @@ class PublicPerformanceTest extends TestCase
 
     public function test_quote_entry_is_ready_before_javascript_and_remains_database_driven(): void
     {
-        $this->get('/get-a-quote/')->assertOk()->assertSee('class="service-picker"', false)->assertSee('service-picker-layout', false)->assertSee('id="quote-bootstrap"', false)->assertDontSee('Choose your insurance to get started.');
+        $this->get('/get-a-quote/')->assertOk()->assertSee('class="service-picker"', false)->assertSee('service-picker-layout', false)->assertSee('id="quote-bootstrap"', false)->assertDontSee('Choose your insurance to get started.')->assertDontSee('Local design preview')->assertDontSee('This local preview');
         $form = FormDefinition::where('key', 'services')->firstOrFail();
         $definition = $form->definition;
         $definition['picker']['title'] = 'A different database heading';
         $form->update(['definition' => $definition]);
         $this->get('/get-a-quote/')->assertOk()->assertSee('A different database heading');
         foreach (['/auto-quote/', '/get-a-quote/get-a-auto-insurance-quote/', '/get-a-quote/get-a-home-insurance-quote/'] as $url) {
-            $this->get($url)->assertOk()->assertSee('name="email"', false)->assertSee('Where can we email you?')->assertSee('quote-progress-notice')->assertDontSee('Loading your quote form');
+            $this->get($url)->assertOk()->assertSee('name="email"', false)->assertSee('Where can we email you?')->assertSee('quote-progress-notice')->assertDontSee('Loading your quote form')->assertDontSee('Local design preview')->assertDontSee('This local preview');
         }
         $this->assertSame(0, QuoteRequest::count());
     }
