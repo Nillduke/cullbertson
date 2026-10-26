@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @php($globalScripts=app(\App\Services\GlobalScripts::class)->settings())
     @php($googleTracking=app(\App\Services\GoogleTracking::class)->configuration())
     @include('partials.google-tracking-head')
     @include('partials.seo-head')
@@ -42,6 +43,7 @@
     @foreach($scripts ?? [] as $script)
         <script defer src="{{ $script }}{{ str_starts_with($script,'/quote-assets/') ? (str_contains($script,'?') ? '&' : '?').'rev='.filemtime(public_path(parse_url($script,PHP_URL_PATH))) : '' }}"></script>
     @endforeach
+    {!! $globalScripts['header'] !!}
     @stack('head')
 </head>
 <body class="{{ $bodyClass ?? 'content-page' }}" data-service="{{ $service ?? '' }}">
@@ -58,6 +60,7 @@
     {!! $siteBlocks['footer'] ?? '' !!}
     {!! $siteBlocks['feedback'] ?? '' !!}
     {!! $siteBlocks['exit-intent'] ?? '' !!}
+    {!! $globalScripts['footer'] !!}
     @stack('scripts')
 </body>
 </html>
