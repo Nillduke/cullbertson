@@ -13,14 +13,14 @@ class FormInformationTest extends TestCase
     protected $seed = true;
     protected $seeder = ContentSeeder::class;
 
-    public function test_footer_follows_every_public_form_and_remains_editable_without_changing_consent(): void
+    public function test_footer_appears_only_on_quote_workspaces_and_remains_editable_without_changing_consent(): void
     {
-        foreach (['/', '/get-a-quote/', '/auto-quote/', '/contact-us/', '/recruit/', '/securely-send-pictures-documents-to-us/', '/classic-collector-car-insurance-in-florida/', '/privacy-choices/'] as $path) {
+        foreach (['/get-a-quote/', '/get-a-quote/?service=home', '/auto-quote/'] as $path) {
             $html = $this->get($path)->assertOk()->getContent();
             preg_match_all('~<form\b~i', $html, $forms);
             preg_match_all('~class="form-info(?: form-info--compact)?"~', $html, $footers);
             $this->assertNotEmpty($forms[0], $path);
-            $this->assertCount(count($forms[0]), $footers[0], $path);
+            $this->assertCount(1, $footers[0], $path);
             $this->assertStringContainsString('Powered by', $html);
             $this->assertStringContainsString('ESIGN/electronic signature', $html);
             $this->assertStringContainsString('Message and data rates may apply.', $html);
@@ -29,6 +29,9 @@ class FormInformationTest extends TestCase
             $this->assertStringNotContainsString('Goal Platform', $html);
             $this->assertStringNotContainsString('California Privacy Choices', $html);
             if (in_array($path, ['/auto-quote/', '/get-a-quote/'])) $this->assertGreaterThan(strpos($html, '</main>'), strpos($html, 'class="form-info"'));
+        }
+        foreach (['/', '/contact-us/', '/recruit/', '/securely-send-pictures-documents-to-us/', '/classic-collector-car-insurance-in-florida/', '/privacy-choices/', '/insurance/homeowners-insurance/'] as $path) {
+            $this->get($path)->assertOk()->assertDontSee('class="form-info',false)->assertDontSee('ESIGN/electronic signature');
         }
         $this->get('/admin/login')->assertOk()->assertDontSee('class="form-info',false);
         $this->getJson('/forms/services')->assertOk()->assertJsonStructure(['services']);
