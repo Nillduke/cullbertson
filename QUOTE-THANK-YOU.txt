@@ -1,0 +1,31 @@
+Quote confirmation and conversion scripts
+
+Successful /auto-quote/submit and /quote/submit responses include a same-site
+redirect URL for /quote/thank-you?receipt=... . Both quote frontends navigate there
+after the lead is successfully saved. Partial saves never produce this redirect.
+
+Receipts are random, session-bound, expire after 24 hours and are limited to the
+last 20 per session. Repeated completion of the same saved request reuses its
+receipt. Invalid, expired or partial-lead receipts redirect to Get a Quote.
+Confirmation responses are private/no-store and noindex/nofollow. Customer names,
+emails, telephone numbers and quote answers are not rendered on this page.
+
+Admin > Header & footer scripts > Quote thank-you page scripts accepts complete
+script tags. Code is stored in FormDefinition global-scripts, thank_you. It is not
+included in ordinary pages, partial forms or admin pages. The server includes
+thank-you scripts on the first receipt view only; refreshes still show the saved
+reference and next steps. External tracking/inbox delivery is not guaranteed.
+
+The dataLayer event culbertson_quote_thank_you exposes transaction_id (SHA-256 of
+the non-personal request reference) and coverage_type. Existing Google completion
+tracking runs from quote-thank-you.js instead of the form success screen and
+retains its client deduplication and existing coverage-specific conversion rules.
+Do not configure a second conversion for the same Google goal accidentally.
+
+Page wording is database-editable under Forms & site copy > Quote thank-you page
+content. Existing header/footer script settings are preserved when saving the new
+thank-you field, and vice versa.
+
+Checks:
+php -d xdebug.mode=off vendor/phpunit/phpunit/phpunit --filter="QuoteThankYouTest|QuoteProgressTest|GlobalScriptsTest|GoogleTrackingTest"
+node --check public/quote-thank-you.js

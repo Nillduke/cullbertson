@@ -43,6 +43,6 @@ class QuoteController extends Controller
         ]);
         $saved = app(\App\Services\QuoteProgress::class)->complete(request(),$service,$record);
         if (!$saved) return response()->json(['error' => 'We could not save your request. Please try again.'], 503);
-        return response()->json(['ok' => true, 'reference' => $saved->reference, 'mode' => 'local-preview'], 201)->header('Cache-Control', 'no-store');
+        return response()->json(['ok' => true, 'reference' => $saved->reference, 'mode' => 'local-preview', 'redirect'=>app(\App\Services\QuoteThankYou::class)->issue(request(),$saved)], 201)->header('Cache-Control', 'no-store');
     }
 }

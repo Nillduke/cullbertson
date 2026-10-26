@@ -26,11 +26,12 @@ class GlobalScriptsController extends Controller
         return response()->view('admin.globals',['scriptSettings'=>$scripts->settings(),'tracking'=>$tracking,'googleFields'=>self::GOOGLE_FIELDS,'managedHead'=>$managedHead,'managedBody'=>$managedBody,'inventory'=>$scripts->inventory(),'trackingEnabled'=>config('tracking.enabled'),'otherBlocks'=>SiteBlock::whereNotIn('key',['header','footer'])->get()])->header('Cache-Control','private, no-store');
     }
 
-    public function save(Request $request)
+    public function save(Request $request,GlobalScripts $scripts)
     {
-        $data=$request->validate(['header'=>'nullable|string|max:200000','footer'=>'nullable|string|max:200000']);
-        FormDefinition::updateOrCreate(['key'=>'global-scripts'],['name'=>'Public website header and footer scripts','definition'=>['header'=>$data['header']??'','footer'=>$data['footer']??'']]);
-        return redirect(url('/admin/globals'))->with('success','Header and footer scripts saved.');
+        $data=$request->validate(['header'=>'nullable|string|max:200000','footer'=>'nullable|string|max:200000','thank_you'=>'nullable|string|max:200000']);
+        foreach($data as &$value)$value??='';unset($value);
+        FormDefinition::updateOrCreate(['key'=>'global-scripts'],['name'=>'Public website and quote thank-you scripts','definition'=>array_replace($scripts->settings(),$data)]);
+        return redirect(url('/admin/globals'))->with('success','Website scripts saved.');
     }
 
     public function tracking(Request $request)

@@ -23,19 +23,21 @@ class GlobalScriptsTest extends TestCase
         $this->get('/admin/globals')->assertOk()->assertSee('Header &amp; footer scripts',false)->assertSee('GTM-NPKN5562')->assertSee('Gravity Forms')->assertDontSee('<header>Existing navigation</header>',false)->assertDontSee('<script id="culbertson-gtm-snippet">',false);
         $header='<script id="custom-header">window.exampleHeader=true;</script>';
         $footer='<script id="custom-footer">window.exampleFooter=true;</script>';
-        $this->post('/admin/globals/scripts',compact('header','footer'))->assertRedirect('/admin/globals');
+        $this->post('/admin/globals/scripts',compact('header','footer')+['thank_you'=>'<script id="only-thank-you">window.onlyThanks=true;</script>'])->assertRedirect('/admin/globals');
         $this->get('/admin/globals')->assertOk()->assertDontSee($header,false)->assertSee('custom-header');
         $page=Page::create(['slug'=>'script-check','title'=>'Script check','type'=>'page','status'=>'published','description'=>'Test','presentation'=>[]]);
         FormDefinition::firstOrCreate(['key'=>'archive-copy'],['name'=>'Archives','definition'=>[]]);
         $page->sections()->create(['name'=>'Body','component'=>'design_html','position'=>0,'content_html'=>'<main>Page content</main>']);
         config(['tracking.enabled'=>true]);
         $html=$this->get('/script-check')->assertOk()->getContent();
+        $this->assertStringNotContainsString('id="only-thank-you"',$html);
         $this->assertLessThan(strpos($html,'</head>'),strpos($html,$header));
         $this->assertGreaterThan(strpos($html,'<body'),strpos($html,$footer));
         $this->assertLessThan(strpos($html,'</body>'),strpos($html,$footer));
         $this->assertSame(1,substr_count($html,'id="culbertson-gtm-snippet"'));
         $this->assertSame('<header>Existing navigation</header>',SiteBlock::where('key','header')->first()->content_html);
         $this->post('/admin/globals/scripts',['header'=>'','footer'=>''])->assertSessionHasNoErrors();
+        $this->assertStringContainsString('only-thank-you',FormDefinition::where('key','global-scripts')->first()->definition['thank_you']);
         $this->get('/script-check')->assertOk()->assertDontSee('id="custom-header"',false)->assertDontSee('id="custom-footer"',false);
     }
 

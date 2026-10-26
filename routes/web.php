@@ -60,6 +60,7 @@ Route::get('/auto-quote/submit', [QuoteController::class, 'token']);
 Route::post('/auto-quote/submit', [QuoteController::class, 'auto'])->middleware('throttle:quotes');
 Route::get('/quote/submit', [QuoteController::class, 'token']);
 Route::post('/quote/submit', [QuoteController::class, 'service'])->middleware('throttle:quotes');
+Route::get('/quote/thank-you',[\App\Http\Controllers\QuoteThankYouController::class,'show']);
 Route::get('/robots.txt',[\App\Http\Controllers\LegacyMediaController::class,'robots']);
 Route::get('/wp-content/uploads/{path}',[\App\Http\Controllers\LegacyMediaController::class,'show'])->where('path','.*');
 Route::get('/', [PageController::class, 'show'])->name('home');

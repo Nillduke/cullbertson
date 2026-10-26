@@ -1,0 +1,20 @@
+{
+  "title": "Thank You for Your Quote Request | Culbertson Agency",
+  "description": "Your insurance quote request has been received by Culbertson Agency.",
+  "eyebrow": "REQUEST RECEIVED",
+  "heading": "Thank you. You're all set.",
+  "intro": "Your quote request has been saved. Our agency team will review your details and follow up using the contact information you provided.",
+  "referenceLabel": "Your request reference",
+  "nextHeading": "What happens next?",
+  "steps": [
+    {"title": "We review your request", "body": "Our team looks over the coverage and details you shared."},
+    {"title": "We follow up with you", "body": "An agency representative may contact you to confirm details and discuss available options."},
+    {"title": "You choose your next step", "body": "We help you understand your options and any additional information needed for a quote."}
+  ],
+  "help": "Questions about your request?",
+  "phone": "(239) 210-7700",
+  "phoneUrl": "tel:12392107700",
+  "homeLabel": "Back to homepage",
+  "quoteLabel": "Explore other coverage",
+  "coverageNotice": "Submitting a quote request does not purchase, change or bind insurance coverage. Your reference confirms receipt of your request."
+}

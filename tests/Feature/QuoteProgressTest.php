@@ -31,7 +31,7 @@ class QuoteProgressTest extends TestCase {
    $base=$this->base($key);$response=$this->postJson('/quote/progress',$base+['answers'=>['email'=>['email'=>'quote-progress@example.com']]])->assertOk();$reference=$response->json('reference');
    $full=$this->fullService($service);$this->postJson('/quote/progress',array_replace($base,['step'=>'phone','step_label'=>'Phone number','percent'=>12,'answers'=>['email'=>$full['email'],'phone'=>$full['phone'],'consent'=>true,'sms'=>false]]))->assertOk()->assertJson(['reference'=>$reference]);
    $this->postJson('/quote/progress',array_replace($base,['step'=>'details','step_label'=>'Service details','percent'=>80,'answers'=>$full]))->assertOk();
-   $this->postJson('/quote/submit',['flow_id'=>$base['flow_id'],'service'=>$key,'answers'=>$full])->assertCreated()->assertJson(['reference'=>$reference]);$this->assertSame('completed',QuoteRequest::where('reference',$reference)->firstOrFail()->completion_status);
+   $result=$this->postJson('/quote/submit',['flow_id'=>$base['flow_id'],'service'=>$key,'answers'=>$full])->assertCreated()->assertJson(['reference'=>$reference]);$this->assertStringContainsString('/quote/thank-you?receipt=',$result->json('redirect'));$this->assertSame('completed',QuoteRequest::where('reference',$reference)->firstOrFail()->completion_status);
   }
  }
  public function test_invalid_contacts_unknown_fields_and_unconsented_phone_steps_are_rejected():void {
