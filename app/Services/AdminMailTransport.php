@@ -30,8 +30,9 @@ class AdminMailTransport {
   $text=strtolower($e->getMessage());
   if($e instanceof \Illuminate\Contracts\Encryption\DecryptException)return 'The stored password cannot be decrypted. Enter it again in SMTP settings.';
   if(str_contains($text,'auth')||str_contains($text,'535'))return 'SMTP authentication failed. Check the username, password and provider SMTP access.';
+  if(str_contains($text,'timed out')||str_contains($text,'connection refused')||str_contains($text,'resolve'))return 'Could not connect to the SMTP server. Check the host, port and hosting firewall.';
   if(str_contains($text,'certificate')||str_contains($text,'tls')||str_contains($text,'ssl'))return 'TLS negotiation or certificate validation failed. Check the server name, port and encryption.';
-  if(str_contains($text,'connect')||str_contains($text,'timed out')||str_contains($text,'resolve'))return 'Could not connect to the SMTP server. Check the host, port and hosting firewall.';
+  if(str_contains($text,'connect'))return 'Could not connect to the SMTP server. Check the host, port and hosting firewall.';
   return 'The mail server did not accept the message. Check sender, recipients and relay permissions.';
  }
 }
