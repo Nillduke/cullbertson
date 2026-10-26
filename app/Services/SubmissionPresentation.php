@@ -18,6 +18,7 @@ class SubmissionPresentation
   $topic=$payload['topic']??$payload['type']??'';
   $this->contactCopy??=FormDefinition::data('contact-page');$topics=collect($this->contactCopy['topics']??[])->pluck('label','value');
   $subject=$kind==='quotes'?($payload['serviceName']??$services[$service]['name']??ucfirst($service)).' insurance':($kind==='contacts'?($topics[$topic]??Str::headline($topic)):Str::headline($topic?:'Website feedback'));
+  if(!empty($payload['wordpress']['form_name']))$subject=$payload['wordpress']['form_name'];
   return ['id'=>$record->id,'kind'=>$kind,'reference'=>$record->reference,'status'=>$record->status,'created_at'=>\Illuminate\Support\Carbon::parse($record->created_at),'updated_at'=>\Illuminate\Support\Carbon::parse($record->updated_at),'name'=>$name?:($kind==='feedback'?'Anonymous visitor':'Name not provided'),'email'=>(string)$email,'phone'=>(string)$phone,'service'=>$service,'subject'=>$subject,'message'=>(string)($payload['message']??''),'rating'=>$payload['rating']??null,'payload'=>$payload,'answers'=>$answers,'completion_status'=>$record->completion_status??'completed','progress_percent'=>(int)($record->progress_percent??100),'last_step_label'=>$record->last_step_label??'', 'url'=>'/admin/inbox/'.$kind.'/'.$record->id];
  }
  public function labels(string $service):array {

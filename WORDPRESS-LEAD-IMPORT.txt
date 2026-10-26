@@ -1,0 +1,32 @@
+Historical WordPress lead import
+
+Preview:
+php artisan leads:import-wordpress --config=/private/path/to/wp-config.php --dry-run
+
+Import:
+php artisan leads:import-wordpress --config=/private/path/to/wp-config.php
+
+Back up the target database privately before importing. The command reads the old
+Gravity Forms and Elementor tables using the old configuration without loading
+WordPress or changing its database. Source credentials are never printed.
+
+Stable references WP-GF-{entry ID} and WP-EL-{submission ID} prevent duplicate
+imports. Reruns leave existing records and their current follow-up statuses alone.
+The default exclusions are akshay,nillduke, preserving the requested test-lead
+cleanup. --exclude= can override this list for a separately authorized import.
+
+Original submission/update timestamps, form names, labeled answers, original
+entry fields, metadata and Gravity Forms notes are retained. Existing file URLs
+are retained as original answers; this command does not copy attachment binaries.
+Gravity Forms partial_entry_percent marks unfinished submissions. Spam/trash stay
+marked spam/trash. Read active entries map to Reviewed; unread ones map to New.
+
+Imports use direct database inserts in a transaction. They do not run lead-mail
+observers, create mail outbox entries, or send customer/admin notifications.
+
+Admin > Your inbox includes a Source filter for Imported WordPress / New website,
+spam/trash status filters, and original WordPress details on individual records.
+The source WordPress site stays unchanged.
+
+Validation:
+php -d xdebug.mode=off vendor/phpunit/phpunit/phpunit tests/Feature/WordPressLeadImportTest.php

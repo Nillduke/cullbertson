@@ -8,7 +8,7 @@ class SubmissionController extends Controller
 {
  public const MODELS=['quotes'=>QuoteRequest::class,'contacts'=>ContactEnquiry::class,'feedback'=>FeedbackEntry::class];
  public function index(Request $request,SubmissionPresentation $presenter){
-  $filters=$request->validate(['kind'=>'nullable|in:quotes,contacts,feedback','completion'=>'nullable|in:incomplete,completed','status'=>'nullable|in:new,reviewed,contacted,resolved','service'=>'nullable|string|max:80','q'=>'nullable|string|max:200','from'=>'nullable|date_format:Y-m-d','to'=>'nullable|date_format:Y-m-d'.($request->filled('from')?'|after_or_equal:from':'')]);
+  $filters=$request->validate(['kind'=>'nullable|in:quotes,contacts,feedback','completion'=>'nullable|in:incomplete,completed','status'=>'nullable|in:new,reviewed,contacted,resolved,spam,trash','source'=>'nullable|in:wordpress,current','service'=>'nullable|string|max:80','q'=>'nullable|string|max:200','from'=>'nullable|date_format:Y-m-d','to'=>'nullable|date_format:Y-m-d'.($request->filled('from')?'|after_or_equal:from':'')]);
   $union=null;$counts=[];$newCount=0;
   foreach(self::MODELS as $kind=>$model){
    $counts[$kind]=$model::count();$newCount+=$model::where('status','new')->count();
@@ -17,6 +17,8 @@ class SubmissionController extends Controller
   }
   $query=DB::query()->fromSub($union,'submissions');
   foreach(['kind','status','service'] as $key)if(!empty($filters[$key]))$query->where($key,$filters[$key]);
+  if(($filters['source']??'')==='wordpress')$query->where(fn($q)=>$q->where('reference','like','WP-GF-%')->orWhere('reference','like','WP-EL-%'));
+  if(($filters['source']??'')==='current')$query->where('reference','not like','WP-GF-%')->where('reference','not like','WP-EL-%');
   if(!empty($filters['completion']))$query->where('completion_status',$filters['completion']);
   if(!empty($filters['q']))$query->where(fn($q)=>$q->where('reference','like','%'.$filters['q'].'%')->orWhere('payload','like','%'.$filters['q'].'%'));
   if(!empty($filters['from']))$query->whereDate('created_at','>=',$filters['from']);
@@ -28,12 +30,12 @@ class SubmissionController extends Controller
  public function show(string $kind,int $id,SubmissionPresentation $presenter){
   $model=self::MODELS[$kind]??abort(404);$record=$model::findOrFail($id);$item=$presenter->summarize($record,$kind);
   $previous=$model::where(fn($q)=>$q->where('created_at','>',$record->created_at)->orWhere(fn($q)=>$q->where('created_at',$record->created_at)->where('id','>',$id)))->orderBy('created_at')->orderBy('id')->value('id');$next=$model::where(fn($q)=>$q->where('created_at','<',$record->created_at)->orWhere(fn($q)=>$q->where('created_at',$record->created_at)->where('id','<',$id)))->orderByDesc('created_at')->orderByDesc('id')->value('id');
-  $statuses=$kind==='feedback'?['new','reviewed','resolved']:['new','reviewed','contacted'];
+  $statuses=$kind==='feedback'?['new','reviewed','resolved','spam','trash']:['new','reviewed','contacted','spam','trash'];
   return response()->view('admin.submission',compact('item','previous','next','statuses')+['attachments'=>$kind==='contacts'?DB::table('contact_files')->where('contact_enquiry_id',$id)->get():collect()]+['labels'=>$presenter->labels($item['service']),'groups'=>$presenter->groups($item)])->header('Cache-Control','private, no-store');
  }
  public function status(Request $request,string $kind,int $id){
   $model=self::MODELS[$kind]??abort(404);$record=$model::findOrFail($id);
-  $record->update($request->validate(['status'=>'required|in:'.($kind==='feedback'?'new,reviewed,resolved':'new,reviewed,contacted')]));
+  $record->update($request->validate(['status'=>'required|in:'.($kind==='feedback'?'new,reviewed,resolved,spam,trash':'new,reviewed,contacted,spam,trash')]));
   return redirect('/admin/inbox/'.$kind.'/'.$id)->with('success','Submission status updated.');
  }
 }
