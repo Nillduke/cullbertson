@@ -42,11 +42,9 @@ class LeadSlack {
   if($s->include_contact&&!$sensitive)foreach(['Name'=>'name','Email'=>'email','Phone'=>'phone'] as $label=>$key)if($item[$key])$values[$label]=$item[$key];
   if($row->kind==='quotes')$values['Form progress']=$item['progress_percent'].'%';
   $fields=[];foreach($values as $label=>$value)$fields[]=['type'=>'plain_text','text'=>$label."\n".Str::limit((string)$value,1500),'emoji'=>false];
-  $url=rtrim($s->website_url?:config('app.url'),'/').'/admin/inbox/'.$row->kind.'/'.$row->source_id;
   return ['text'=>'Culbertson Agency — '.$heading.' — '.$row->reference,'unfurl_links'=>false,'unfurl_media'=>false,'blocks'=>[
    ['type'=>'header','text'=>['type'=>'plain_text','text'=>'Culbertson Agency · '.$heading,'emoji'=>false]],
    ['type'=>'section','fields'=>$fields],
-   ['type'=>'actions','elements'=>[['type'=>'button','text'=>['type'=>'plain_text','text'=>'Open lead in admin'],'url'=>$url]]],
    ['type'=>'context','elements'=>[['type'=>'plain_text','text'=>'Private agency notification. Full answers and uploaded files stay in the admin dashboard.']]],
   ]];
  }
