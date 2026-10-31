@@ -11,6 +11,10 @@ use App\Models\FormDefinition;
 Route::get('/admin/login',[AdminAuthController::class,'login'])->name('login');
 Route::post('/admin/login',[AdminAuthController::class,'authenticate'])->middleware('throttle:5,1');
 Route::middleware(['auth',EnsureCmsAdmin::class])->prefix('admin')->group(function(){
+    Route::get('/integrations/slack',[\App\Http\Controllers\SlackSettingsController::class,'index']);
+    Route::post('/integrations/slack',[\App\Http\Controllers\SlackSettingsController::class,'save']);
+    Route::post('/integrations/slack/test',[\App\Http\Controllers\SlackSettingsController::class,'test'])->middleware('throttle:3,1');
+    Route::post('/integrations/slack/retry/{delivery}',[\App\Http\Controllers\SlackSettingsController::class,'retry'])->whereNumber('delivery')->middleware('throttle:10,1');
     Route::get('/mail',[\App\Http\Controllers\MailSettingsController::class,'index']);
     Route::post('/mail',[\App\Http\Controllers\MailSettingsController::class,'save']);
     Route::post('/mail/connection',[\App\Http\Controllers\MailSettingsController::class,'connection'])->middleware('throttle:5,1');

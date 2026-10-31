@@ -1,0 +1,45 @@
+Slack lead notifications
+
+Admin > Slack integration (/admin/integrations/slack) contains the channel label,
+incoming webhook URL, website/admin base URL, notification preferences, enable
+switch, test button and delivery history. No environment-file edits are needed.
+
+Create an incoming webhook in your Slack app and select its destination channel
+in Slack. The backend channel field is a label, not a routing override: modern
+incoming webhooks are bound to the channel selected in Slack. For another channel,
+create a webhook for that channel and replace the saved URL in admin.
+Official guide: https://docs.slack.dev/messaging/sending-messages-using-incoming-webhooks/
+
+Save settings, send a test, confirm it in Slack, then enable notifications.
+The test posts a synthetic message with no customer details, even while normal
+notifications are disabled. No real webhook or workspace is bundled with the app.
+The initial state is disabled. Enter the webhook privately in admin, not in chat.
+
+Webhook secrets are encrypted using APP_KEY in slack_settings and slack_deliveries.
+The admin page never echoes the saved URL, and validation does not flash it back.
+Only HTTPS hooks.slack.com/services/... URLs are accepted. HTTP redirects are not
+followed, TLS verification remains enabled, and raw network errors are not logged.
+Keep APP_KEY with private backups. cPanel packages exclude both private tables.
+
+Completed quotes, first partial leads, contacts and feedback have separate switches.
+Repeated Continue actions do not create extra partial notifications. An optional
+contact switch includes basic name/email/phone; privacy and document notices omit
+them. Full quote answers, addresses, birth dates and attachments are not sent.
+Lead fields use plain-text Slack blocks to avoid unintended mentions or markup.
+Lead links require admin authentication. Slack and email work independently.
+
+Notifications are saved before an after-response send. No queue worker is needed.
+Historical WordPress imports bypass model observers and do not send Slack notices.
+Normal retries retain the webhook captured when the notification was queued.
+Manual Retry uses the current settings, allowing revoked webhooks to be replaced.
+Rate limits and temporary failures back off up to five attempts. Permanent Slack
+errors remain available for review/manual retry. Diagnostic tests do not auto-retry.
+As with other network sends, acceptance followed by a connection failure can leave
+an uncertain result; review Slack before manually retrying an uncertain delivery.
+
+Cron command (every five minutes from the private app directory):
+php artisan slack:deliver --limit=20
+
+Checks:
+php -d xdebug.mode=off vendor/phpunit/phpunit/phpunit tests/Feature/SlackIntegrationTest.php
+Tests use HTTP fakes and never post to a real Slack workspace.

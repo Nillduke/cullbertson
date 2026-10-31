@@ -28,6 +28,9 @@ class AppServiceProvider extends ServiceProvider
         \App\Models\QuoteRequest::observe(\App\Observers\LeadMailObserver::class);
         \App\Models\ContactEnquiry::observe(\App\Observers\LeadMailObserver::class);
         \App\Models\FeedbackEntry::observe(\App\Observers\LeadMailObserver::class);
+        \App\Models\QuoteRequest::observe(\App\Observers\LeadSlackObserver::class);
+        \App\Models\ContactEnquiry::observe(\App\Observers\LeadSlackObserver::class);
+        \App\Models\FeedbackEntry::observe(\App\Observers\LeadSlackObserver::class);
         View::composer('layouts.app',function($view){
             $view->with('seo',app(\App\Services\SeoMetadata::class)->forRequest(request(),$view->getData()));
             $blocks=SiteBlock::pluck('content_html','key')->all();
