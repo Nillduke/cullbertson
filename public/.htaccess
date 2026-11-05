@@ -5,6 +5,10 @@
 
     RewriteEngine On
 
+    # The former hosting preview must not expose this website or its assets.
+    RewriteCond %{HTTP_HOST} ^(www\.)?aaspire-agency\.com(:[0-9]+)?$ [NC]
+    RewriteRule ^ - [F,L]
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
