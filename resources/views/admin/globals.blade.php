@@ -2,7 +2,7 @@
 @section('title','Header & footer scripts')
 @section('content')
 <link rel="stylesheet" href="{{ asset('admin-global-scripts.css') }}?v={{ filemtime(public_path('admin-global-scripts.css')) }}">
-<div class="cms-title"><div><p class="cms-kicker">WEBSITE INTEGRATIONS</p><h1>Header & footer scripts</h1><p>Add website scripts and review the integrations already installed.</p></div><span class="globals-badge">Public website only</span></div>
+<div class="cms-title"><div><p class="cms-kicker">WEBSITE INTEGRATIONS</p><h1>Header & footer scripts</h1><p>Add website scripts and review the integrations already installed.</p></div><a class="cms-button secondary" href="{{ url('/admin/page-scripts') }}">Page-specific scripts</a></div>
 <div class="globals-note"><strong>Script placement</strong><p>Header scripts load before &lt;/head&gt;. Footer scripts load before &lt;/body&gt;. Paste complete script tags here. The Google tags below are managed separately and already load automatically.</p></div>
 <form method="post" action="{{ url('/admin/globals/scripts') }}" class="globals-editor-form">@csrf
 <div class="globals-grid">

@@ -1,0 +1,34 @@
+PAGE-SPECIFIC HEADER AND FOOTER SCRIPTS
+
+Admin -> Page-specific scripts (/admin/page-scripts).
+Choose a page and click Load page scripts. Paste complete script/widget tags,
+enable the page, then save. Disable to pause execution without deleting the code.
+Clear the fields and save to remove the code. Saving scripts does not publish drafts.
+
+All CMS pages (including drafts), insurance, articles, team profiles, category/tag/
+author archives and the service quote catalog appear automatically. Newly added
+pages and quote services join the selector without a deployment.
+
+Global scripts still load first in each location. Page-specific scripts follow.
+Existing application assets and Google tracking remain managed separately.
+The installed-script inventory lists external scripts saved here and their status.
+Custom code is escaped in the admin editor and only output raw in the public layout.
+Only authenticated CMS admins can edit it. Admin pages never execute these snippets.
+
+Matching ignores marketing/query parameters and trailing slash differences.
+/auto-quote/ uses the canonical Auto quote page's scripts.
+/quote/?service=home (etc.) uses that service's canonical quote page's scripts.
+Services without a dedicated path (e.g. home-auto) have their own query-specific entry.
+/quote/ without a valid service uses the Get a Quote page's scripts.
+Archive/listing pagination inherits the base page's scripts.
+Get a Quote landing-page scripts do not automatically apply to all child quote forms.
+
+Quote thank-you scripts require a valid session receipt and run on the first
+confirmation view only. They do not run on refresh or invalid/direct visits.
+Existing global thank-you conversion code keeps its separate once-per-receipt behavior.
+Avoid duplicating the same conversion in multiple script settings.
+
+Storage: form_definitions key page-scripts, definition.entries keyed by normalized
+page path (or /quote/?service=... for query-specific services). Each entry stores
+enabled, header and footer. Per-page updates use a transaction to preserve other entries.
+No database schema migration required. Empty settings produce no custom page code.
