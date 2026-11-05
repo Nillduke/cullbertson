@@ -11,6 +11,9 @@ use App\Models\FormDefinition;
 Route::get('/admin/login',[AdminAuthController::class,'login'])->name('login');
 Route::post('/admin/login',[AdminAuthController::class,'authenticate'])->middleware('throttle:5,1');
 Route::middleware(['auth',EnsureCmsAdmin::class])->prefix('admin')->group(function(){
+    Route::get('/robots',[\App\Http\Controllers\RobotsSettingsController::class,'index']);
+    Route::post('/robots',[\App\Http\Controllers\RobotsSettingsController::class,'save']);
+    Route::post('/robots/reset',[\App\Http\Controllers\RobotsSettingsController::class,'reset']);
     Route::get('/integrations/slack',[\App\Http\Controllers\SlackSettingsController::class,'index']);
     Route::post('/integrations/slack',[\App\Http\Controllers\SlackSettingsController::class,'save']);
     Route::post('/integrations/slack/test',[\App\Http\Controllers\SlackSettingsController::class,'test'])->middleware('throttle:3,1');
