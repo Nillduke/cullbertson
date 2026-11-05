@@ -8,7 +8,7 @@ class GlobalScripts
 {
     public function settings():array
     {
-        return array_replace(['header'=>'','footer'=>'','thank_you'=>''],FormDefinition::where('key','global-scripts')->first()?->definition??[]);
+        return array_replace(['header'=>'','footer'=>'','thank_you'=>'','css'=>'','css_enabled'=>false],FormDefinition::where('key','global-scripts')->first()?->definition??[]);
     }
 
     public function inventory():array

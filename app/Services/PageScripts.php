@@ -30,8 +30,10 @@ class PageScripts
   return SeoMetadata::QUOTE_ALIASES[$path]??$path;
  }
  public function forRequest(Request $request,bool $firstConfirmation=false):array{
-  $empty=['header'=>'','footer'=>''];if($request->is('admin','admin/*'))return $empty;
-  $target=$this->target($request);if($target==='/quote/thank-you/'&&!$firstConfirmation)return $empty;
-  $entry=$this->settings()[$target]??[];return !empty($entry['enabled'])?['header'=>$entry['header']??'','footer'=>$entry['footer']??'']:$empty;
+  $empty=['header'=>'','footer'=>'','css'=>''];if($request->is('admin','admin/*'))return $empty;
+  $target=$this->target($request);$entry=$this->settings()[$target]??[];
+  $result=$empty;$result['css']=!empty($entry['css_enabled'])?($entry['css']??''):'';
+  if(!empty($entry['enabled'])&&($target!=='/quote/thank-you/'||$firstConfirmation)){$result['header']=$entry['header']??'';$result['footer']=$entry['footer']??'';}
+  return $result;
  }
 }

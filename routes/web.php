@@ -42,6 +42,7 @@ Route::middleware(['auth',EnsureCmsAdmin::class])->prefix('admin')->group(functi
     Route::post('/pages/{page}',[CmsController::class,'save']);
     Route::get('/globals',[\App\Http\Controllers\GlobalScriptsController::class,'index']);
     Route::post('/globals/scripts',[\App\Http\Controllers\GlobalScriptsController::class,'save']);
+    Route::post('/globals/css',[\App\Http\Controllers\GlobalScriptsController::class,'css']);
     Route::post('/globals/tracking',[\App\Http\Controllers\GlobalScriptsController::class,'tracking']);
     Route::post('/blocks/{block}',[CmsController::class,'saveBlock']);
     Route::get('/forms',[CmsController::class,'forms']);

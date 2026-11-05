@@ -32,3 +32,16 @@ Storage: form_definitions key page-scripts, definition.entries keyed by normaliz
 page path (or /quote/?service=... for query-specific services). Each entry stores
 enabled, header and footer. Per-page updates use a transaction to preserve other entries.
 No database schema migration required. Empty settings produce no custom page code.
+
+CUSTOM CSS
+Global scripts -> Global custom CSS provides a separate global styles editor and
+enable switch. Stored in global-scripts.css and css_enabled; saves preserve scripts.
+Page-specific scripts -> Page-specific CSS provides an independent enable switch
+and raw CSS editor for every catalog entry. Stored as css and css_enabled per entry.
+Scripts can remain disabled while CSS is enabled, and vice versa.
+Paste plain CSS without style tags. Style tags are rejected to keep the stylesheet
+inside its HTML style element. Clear CSS and save to remove the code.
+Public head order: application styles, global CSS, then page-specific CSS.
+CSS applies on every valid confirmation view, including refresh; the once-per-receipt
+restriction continues to apply only to thank-you scripts. Admin and email layouts
+never include custom public CSS. Both CSS options default to disabled.

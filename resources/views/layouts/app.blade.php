@@ -47,6 +47,8 @@
     {!! $globalScripts['header'] !!}
     {!! $pageScripts['header'] !!}
     @stack('head')
+    @if(!empty($globalScripts['css_enabled']) && $globalScripts['css']!=='')<style id="global-custom-css">{!! $globalScripts['css'] !!}</style>@endif
+    @if($pageScripts['css']!=='')<style id="page-custom-css">{!! $pageScripts['css'] !!}</style>@endif
 </head>
 <body class="{{ $bodyClass ?? 'content-page' }}" data-service="{{ $service ?? '' }}">
     @include('partials.google-tracking-noscript')

@@ -62,10 +62,10 @@ class PageScriptsTest extends TestCase
 
  public function test_thank_you_snippets_execute_only_on_first_valid_confirmation_view():void{
   $this->withCredentials();$this->withSession([]);$this->withCookie(config('session.cookie'),session()->getId());$this->admin();
-  $this->save('/quote/thank-you/')->assertSessionHasNoErrors();
+  $this->save('/quote/thank-you/',['css_enabled'=>1,'css'=>'.quote-thanks-card { --test-accent: blue; }'])->assertSessionHasNoErrors();
   $quote=QuoteRequest::withoutEvents(fn()=>QuoteRequest::create(['reference'=>'SCRIPT-TEST-ONLY','service'=>'home','completion_status'=>'completed','payload'=>[]]));
   $token=str_repeat('a',48);$this->withSession(['quote_receipts'=>[$token=>['quote_id'=>$quote->id,'created'=>now()->timestamp,'tracking_shown'=>false]]]);
   $this->get('/quote/thank-you/?receipt='.$token)->assertOk()->assertSee('id="page-only-head"',false)->assertSee('id="page-only-foot"',false);
-  $this->get('/quote/thank-you/?receipt='.$token)->assertOk()->assertDontSee('id="page-only-head"',false)->assertDontSee('id="page-only-foot"',false);
+  $this->get('/quote/thank-you/?receipt='.$token)->assertOk()->assertDontSee('id="page-only-head"',false)->assertDontSee('id="page-only-foot"',false)->assertSee('id="page-custom-css"',false);
  }
 }

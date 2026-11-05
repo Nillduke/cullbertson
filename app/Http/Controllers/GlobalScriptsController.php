@@ -42,4 +42,11 @@ class GlobalScriptsController extends Controller
         $row->update(['definition'=>array_replace($row->definition,$data)]);
         return redirect(url('/admin/globals').'#google-integrations')->with('success','Google integration settings saved. Existing conversion rules are preserved.');
     }
+
+    public function css(Request $request,GlobalScripts $scripts)
+    {
+        $data=$request->validate(['css'=>['nullable','string','max:200000','not_regex:~</?style\b~i'],'css_enabled'=>'sometimes|boolean']);
+        FormDefinition::updateOrCreate(['key'=>'global-scripts'],['name'=>'Public website scripts and CSS','definition'=>array_replace($scripts->settings(),['css'=>$data['css']??'','css_enabled'=>$request->boolean('css_enabled')])]);
+        return redirect(url('/admin/globals').'#global-css')->with('success','Global CSS saved.');
+    }
 }
