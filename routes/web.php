@@ -72,6 +72,7 @@ Route::get('/robots.txt',[\App\Http\Controllers\LegacyMediaController::class,'ro
 Route::get('/wp-content/uploads/{path}',[\App\Http\Controllers\LegacyMediaController::class,'show'])->where('path','.*');
 Route::get('/', [PageController::class, 'show'])->name('home');
 Route::get('/wp-sitemap.xml',[\App\Http\Controllers\SitemapController::class,'index']);
+Route::get('/sitemap-pages.xml',[\App\Http\Controllers\SitemapController::class,'pages']);
 Route::get('/wp-sitemap-{key}.xml',[\App\Http\Controllers\SitemapController::class,'entries'])->where('key','[a-z0-9_-]+');
 Route::redirect('/sitemap_index.xml','/wp-sitemap.xml',301);
 Route::redirect('/sitemap.xml','/wp-sitemap.xml',301);
