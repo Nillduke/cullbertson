@@ -11,6 +11,9 @@ use App\Models\FormDefinition;
 Route::get('/admin/login',[AdminAuthController::class,'login'])->name('login');
 Route::post('/admin/login',[AdminAuthController::class,'authenticate'])->middleware('throttle:5,1');
 Route::middleware(['auth',EnsureCmsAdmin::class])->prefix('admin')->group(function(){
+    Route::get('/sitemap',[\App\Http\Controllers\SitemapSettingsController::class,'index']);
+    Route::get('/sitemap/edit',[\App\Http\Controllers\SitemapSettingsController::class,'edit']);
+    Route::post('/sitemap',[\App\Http\Controllers\SitemapSettingsController::class,'save']);
     Route::get('/robots',[\App\Http\Controllers\RobotsSettingsController::class,'index']);
     Route::post('/robots',[\App\Http\Controllers\RobotsSettingsController::class,'save']);
     Route::post('/robots/reset',[\App\Http\Controllers\RobotsSettingsController::class,'reset']);

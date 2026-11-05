@@ -27,16 +27,13 @@ class SitemapController extends Controller {
   return $this->renderEntries($pages);
  }
  private function renderEntries($records){
-  $noindex=\App\Models\SeoProfile::where('fields->robots','like','%noindex%')->pluck('url_path')->map(fn($path)=>\App\Services\SeoMetadata::path($path))->all();
+  $settings=app(\App\Services\SitemapSettings::class);$overrides=$settings->overrides();$noindex=$settings->noindex();
   $xml="<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n".self::URLSET_OPEN."\n";
   foreach($records as $record){
-   $path=\App\Services\SeoMetadata::path($record instanceof Page?$record->slug:$record->path());
-   if(isset(\App\Services\SeoMetadata::QUOTE_ALIASES[$path])||in_array($path,$noindex,true))continue;
-   $home=$path==='/';$legal=preg_match('~(?:privacy|terms|cookies|ccpa)~',$path);
-   $frequency=$legal?'yearly':(($home||!($record instanceof Page)||$record->type==='blog_index')?'weekly':'monthly');
-   $priority=$home?'1.0':($legal?'0.3':($record->type==='insurance'?'0.9':'0.7'));
+   $entry=$settings->entry($record,$overrides,$noindex);if(!$entry['included'])continue;
+   $path=$entry['path'];$home=$path==='/';$frequency=$entry['frequency'];$priority=$entry['priority'];
    $xml.="  <url>\n    <loc>".$this->escape(url($path).($home?'':'/'))."</loc>\n";
-   $modified=collect([$record->updated_at?->toDateTimeString(),$record->sections_max_updated_at,$record->pages_max_updated_at])->filter()->max();
+   $modified=$entry['modified'];
    if($modified)$xml.='    <lastmod>'.\Illuminate\Support\Carbon::parse($modified)->utc()->format('Y-m-d\TH:i:s.v\Z')."</lastmod>\n";
    $xml.='    <changefreq>'.$frequency."</changefreq>\n    <priority>".$priority."</priority>\n  </url>\n";
   }
