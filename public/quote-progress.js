@@ -3,6 +3,23 @@
  const uuid=()=>typeof crypto.randomUUID==='function'?crypto.randomUUID():'10000000-1000-4000-8000-100000000000'.replace(/[018]/g,c=>(c^crypto.getRandomValues(new Uint8Array(1))[0]&15>>c/4).toString(16));
  const clean=value=>value===null?'':Array.isArray(value)?value.map(clean):typeof value==='object'?Object.fromEntries(Object.entries(value).map(([k,v])=>[k,clean(v)])):value;
  window.QuoteLeadProgress=class {
+  static async refreshToken(){
+   if(!this.refreshingToken)this.refreshingToken=(async()=>{
+    const response=await fetch('/quote/submit?refresh='+Date.now(),{credentials:'same-origin',cache:'no-store',headers:{Accept:'application/json'}});
+    let data;try{data=await response.json();}catch{}
+    if(!response.ok||typeof data?.token!=='string'||!data.token)throw Error('We could not refresh your form session. Please try Continue again.');
+    const meta=document.querySelector('meta[name="csrf-token"]');if(meta)meta.content=data.token;
+    return data.token;
+   })().finally(()=>{this.refreshingToken=null;});
+   return this.refreshingToken;
+  }
+  static async post(url,payload){
+   let token=document.querySelector('meta[name="csrf-token"]')?.content||await this.refreshToken();
+   const send=()=>fetch(url,{method:'POST',credentials:'same-origin',keepalive:true,headers:{'Content-Type':'application/json',Accept:'application/json','X-CSRF-TOKEN':token},body:JSON.stringify(payload)});
+   let response=await send();
+   if(response.status===419){token=await this.refreshToken();response=await send();}
+   return response;
+  }
   constructor(service,copy={}){
    this.service=service;this.copy=copy;this.key='culbertson-quote-flow:'+service;this.id=null;
    try{this.id=sessionStorage.getItem(this.key);}catch{}
@@ -19,10 +36,12 @@
   notice(){const p=document.createElement('p');p.className='quote-progress-notice';p.append(document.createTextNode(this.copy.notice||'We save your contact details and progress when you select Continue. '));const a=document.createElement('a');a.href='/privacy-policy-2/';a.target='_blank';a.rel='noopener';a.textContent='Privacy policy';p.append(' ',a);return p.outerHTML;}
   async save(snapshot,step,label,percent){
    this.state.textContent=this.copy.saving||'Saving your progress...';this.state.classList.remove('saved','failed');
-   const r=await fetch('/quote/progress',{method:'POST',credentials:'same-origin',keepalive:true,headers:{'Content-Type':'application/json',Accept:'application/json','X-CSRF-TOKEN':document.querySelector('meta[name="csrf-token"]').content},body:JSON.stringify({flow_id:this.id,service:this.service,step,step_label:label,percent:Math.min(99,Math.max(0,Math.round(percent))),...snapshot})});
-   let result;try{result=await r.json();}catch{result={};}
-   if(!r.ok){this.state.textContent=this.copy.error||'We could not save your progress. Please try again.';this.state.classList.add('failed');throw Error(result.error||Object.values(result.errors||{}).flat()[0]||this.state.textContent);}
-   this.state.textContent=(this.copy.saved||'Progress saved')+' | '+result.reference;this.state.classList.add('saved');return result;
+   try{
+    const r=await QuoteLeadProgress.post('/quote/progress',{flow_id:this.id,service:this.service,step,step_label:label,percent:Math.min(99,Math.max(0,Math.round(percent))),...snapshot});
+    let result;try{result=await r.json();}catch{result={};}
+    if(!r.ok)throw Error(r.status===419?'Your form session could not be restored. Please allow cookies for this website and try again.':r.status===429?'Please wait a moment, then select Continue again.':result.error||Object.values(result.errors||{}).flat()[0]||this.copy.error||'We could not save your progress. Please try Continue again.');
+    this.state.textContent=(this.copy.saved||'Progress saved')+' | '+result.reference;this.state.classList.add('saved');return result;
+   }catch(error){this.state.textContent='Progress not saved yet';this.state.classList.add('failed');throw error;}
   }
  };
 })();

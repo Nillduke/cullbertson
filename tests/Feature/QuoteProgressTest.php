@@ -45,7 +45,7 @@ class QuoteProgressTest extends TestCase {
   $this->getJson('/quote/progress?'.http_build_query(['flow_id'=>$base['flow_id'],'service'=>'auto']))->assertOk()->assertJsonPath('draft',null);
   session()->setId($originalId);$this->withCookie(config('session.cookie'),$originalId);$this->get('/admin/inbox/quotes/'.$quote->id)->assertRedirect('/admin/login');
   $admin=User::factory()->create();$admin->forceFill(['is_admin'=>true])->save();$this->actingAs($admin)->get('/admin/inbox?completion=incomplete')->assertOk()->assertSee($quote->reference)->assertSee('Partial leads');
-  $this->get('/admin/inbox/quotes/'.$quote->id)->assertOk()->assertSee('Incomplete quote')->assertSee('quote-progress@example.com');
+  $this->get('/admin/inbox/quotes/'.$quote->id)->assertOk()->assertSee('Partial quote saved')->assertSee('quote-progress@example.com');
   $this->get('/admin/inbox?completion=completed')->assertOk()->assertDontSee($quote->reference);
  }
 }
