@@ -17,7 +17,8 @@ class SubmissionInboxTest extends TestCase
  }
  public function test_inbox_combines_and_filters_real_submissions():void {
   $records=$this->entries();$this->actingAs($this->admin());
-  $this->get('/admin/inbox')->assertOk()->assertSee('TEST-INBOX-QUOTE')->assertSee('TEST-INBOX-CONTACT')->assertSee('TEST-INBOX-FEEDBACK')->assertSee('inbox-quote@example.com')->assertSee('/admin/inbox/quotes/'.$records['quote']->id,false);
+  $response=$this->get('/admin/inbox')->assertOk()->assertSee('Test Quote')->assertSee('Test Contact')->assertSee('/admin/inbox/quotes/'.$records['quote']->id,false);
+  $this->assertEqualsCanonicalizing(['TEST-INBOX-QUOTE','TEST-INBOX-CONTACT','TEST-INBOX-FEEDBACK'],$response->viewData('entries')->pluck('reference')->all());
   $this->get('/admin/inbox?kind=contacts&status=reviewed')->assertOk()->assertSee('TEST-INBOX-CONTACT')->assertDontSee('TEST-INBOX-QUOTE');
   $this->get('/admin/inbox?q=inbox-quote')->assertOk()->assertSee('TEST-INBOX-QUOTE')->assertDontSee('TEST-INBOX-CONTACT');
   $this->get('/admin/inbox?service=home')->assertOk()->assertSee('TEST-INBOX-QUOTE')->assertDontSee('TEST-INBOX-CONTACT');

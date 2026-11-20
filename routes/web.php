@@ -19,6 +19,10 @@ Route::middleware(['auth',EnsureCmsAdmin::class])->prefix('admin')->group(functi
     Route::get('/robots',[\App\Http\Controllers\RobotsSettingsController::class,'index']);
     Route::post('/robots',[\App\Http\Controllers\RobotsSettingsController::class,'save']);
     Route::post('/robots/reset',[\App\Http\Controllers\RobotsSettingsController::class,'reset']);
+    Route::get('/integrations/twilio',[\App\Http\Controllers\TwilioSettingsController::class,'index']);
+    Route::post('/integrations/twilio',[\App\Http\Controllers\TwilioSettingsController::class,'save']);
+    Route::post('/integrations/twilio/connection',[\App\Http\Controllers\TwilioSettingsController::class,'connection'])->middleware('throttle:5,1');
+    Route::post('/inbox/{kind}/{id}/call',[\App\Http\Controllers\ConversationController::class,'call'])->where('kind','quotes|contacts|feedback')->whereNumber('id')->middleware('throttle:5,1');
     Route::get('/integrations/slack',[\App\Http\Controllers\SlackSettingsController::class,'index']);
     Route::post('/integrations/slack',[\App\Http\Controllers\SlackSettingsController::class,'save']);
     Route::post('/integrations/slack/test',[\App\Http\Controllers\SlackSettingsController::class,'test'])->middleware('throttle:3,1');
@@ -48,6 +52,7 @@ Route::middleware(['auth',EnsureCmsAdmin::class])->prefix('admin')->group(functi
     Route::get('/forms',[CmsController::class,'forms']);
     Route::post('/forms/{form}',[CmsController::class,'saveForm']);
     Route::get('/enquiry-files/{id}',[\App\Http\Controllers\SupportRequestController::class,'download'])->whereNumber('id');
+    Route::post('/inbox/bulk',[\App\Http\Controllers\ConversationController::class,'bulk'])->middleware('throttle:30,1');
     Route::get('/inbox',[\App\Http\Controllers\ConversationController::class,'index']);
     Route::get('/inbox/{kind}/{id}',[\App\Http\Controllers\ConversationController::class,'show'])->where('kind','quotes|contacts|feedback')->whereNumber('id');
     Route::get('/inbox/{kind}/{id}/thread',[\App\Http\Controllers\ConversationController::class,'thread'])->where('kind','quotes|contacts|feedback')->whereNumber('id');
@@ -90,3 +95,10 @@ Route::post('/contact-us/send',[\App\Http\Controllers\ContactController::class,'
 Route::post('/privacy-choices/request',[\App\Http\Controllers\PrivacyRequestController::class,'store'])->middleware('throttle:5,10');
 Route::post('/requests/{kind}',[\App\Http\Controllers\SupportRequestController::class,'store'])->where('kind','careers|documents|classic')->middleware('throttle:5,10');
 Route::get('/{path}', [PageController::class, 'show'])->where('path', '.*')->name('page');
+
+Route::middleware([\App\Http\Middleware\VerifyTwilioSignature::class,'throttle:300,1'])->prefix('webhooks/twilio')->group(function(){
+ Route::post('/sms',[\App\Http\Controllers\TwilioWebhookController::class,'sms']);
+ Route::post('/voice',[\App\Http\Controllers\TwilioWebhookController::class,'voice']);
+ Route::post('/connect/{delivery}',[\App\Http\Controllers\TwilioWebhookController::class,'connect'])->whereNumber('delivery');
+ Route::post('/status/{delivery}',[\App\Http\Controllers\TwilioWebhookController::class,'status'])->whereNumber('delivery');
+});

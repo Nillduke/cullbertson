@@ -1,0 +1,49 @@
+TWILIO SMS AND VOICE
+
+Admin: /admin/integrations/twilio (also available in Inbox > Settings).
+Twilio is disabled by default. Credentials are encrypted using the application's
+existing APP_KEY. Preserve APP_KEY when deploying; do not commit credentials.
+
+Add these fields from your Twilio account:
+- Account SID (AC...)
+- Auth Token (blank on later saves keeps the saved secret)
+- SMS/voice-capable Twilio number, including country code, e.g. +12395550100
+- Agency callback / forwarding number, including country code
+- Optional Messaging Service SID (MG...) for SMS
+
+Save and use Check Twilio connection to check credentials without sending a text
+or placing a call. Enable the connection and desired SMS/voice channels when ready.
+Connection validation does not prove that a number is registered or deliverable.
+Twilio billing, trial restrictions and US messaging registration are managed in
+Twilio Console: https://console.twilio.com/.
+
+On the Twilio number, set these incoming webhook URLs using HTTP POST:
+SMS: https://culbertsonagency.com/webhooks/twilio/sms
+Voice: https://culbertsonagency.com/webhooks/twilio/voice
+The backend displays the actual URLs based on APP_URL. If using a Messaging
+Service, configure its incoming message webhook to the same SMS URL.
+Delivery/status callbacks for outgoing SMS and both call legs attach automatically.
+All Twilio endpoints validate the account and X-Twilio-Signature using the saved
+Auth Token; only these dedicated webhook paths bypass Laravel CSRF validation.
+
+SMS: choose SMS in the conversation composer. Save draft does not send. Send SMS
+uses the selected lead's saved phone number and shows provider delivery updates.
+Incoming messages match a known phone conversation or a single matching lead;
+ambiguous/unknown numbers create a separate Twilio contact without lead-notification
+emails or Slack alerts. Incoming SMS makes the conversation unread. STOP pauses
+SMS locally; START re-enables it. Twilio provider opt-outs also apply. Media is not
+downloaded; a notice links the workflow to Twilio Console for attachment review.
+
+VOICE: choose Call via Twilio and confirm. Twilio first rings the agency callback
+number. Answer and press 1 to dial/connect the customer's saved number. Incoming
+calls forward to the agency number. Calls and leg status/duration appear in the
+thread and Twilio activity history. There is no browser microphone calling or
+recording. The agency and Twilio numbers must differ.
+
+Duplicate message tokens and provider event SIDs prevent duplicate records/sends.
+Twilio API failures are not automatically retried: check provider activity before
+initiating another request, as a timeout can leave acceptance uncertain. Error
+messages are sanitized. No credentials, actual texts or real calls are required
+by the regression tests; the gateway is mocked.
+
+Incoming email mailbox synchronization remains separate from Twilio and SMTP.

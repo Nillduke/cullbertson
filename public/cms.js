@@ -82,7 +82,7 @@
  document.addEventListener('toggle',e=>{if(e.target.tagName==='DETAILS'&&e.target.open)scan();},true);
  document.addEventListener('change',e=>{if(e.target.matches('select[name="type"]'))setTimeout(scan,0);});
  document.querySelectorAll('.cms-shell form').forEach(form=>{
-  if(form.action.includes('/admin/login'))return;
+  if(form.closest('.cx-app')||(form.getAttribute('action')||'').includes('/admin/login'))return;
   form.addEventListener('input',setDirty);
   form.addEventListener('submit',async event=>{
    const editors=Array.from(form.querySelectorAll('textarea[data-rich-editor]')).map(field=>window.tinymce?.get(field.id)).filter(Boolean);

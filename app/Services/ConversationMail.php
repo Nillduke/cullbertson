@@ -8,8 +8,9 @@ use Illuminate\Validation\ValidationException;
 
 class ConversationMail {
  public function readiness(array $item):array {
+  $paused=InboxConversation::where('kind',$item['kind'])->where('source_id',$item['id'])->value('email_dnd');
   $s=MailSetting::find(1);
-  $reason=!filter_var($item['email'],FILTER_VALIDATE_EMAIL)?'This lead has no valid customer email address.':(!$s?->enabled?'Enable email sending in Email & SMTP.':($s->provider==='log'?'Choose a sending SMTP provider; log mode cannot email customers.':($s->missing(true)?'Complete the sender and SMTP settings in Email & SMTP.':'')));
+  $reason=$paused?'Email is paused by the Do not contact setting for this conversation.':(!filter_var($item['email'],FILTER_VALIDATE_EMAIL)?'This lead has no valid customer email address.':(!$s?->enabled?'Enable email sending in Email & SMTP.':($s->provider==='log'?'Choose a sending SMTP provider; log mode cannot email customers.':($s->missing(true)?'Complete the sender and SMTP settings in Email & SMTP.':''))));
   return ['ready'=>$reason==='','reason'=>$reason,'from'=>$s?->from_address??'','to'=>$item['email']];
  }
  public function enqueue(InboxMessage $message,array $item):MailDelivery {
@@ -33,6 +34,7 @@ class ConversationMail {
    if(!$message||$message->channel!=='reply')throw new \RuntimeException('Reply no longer exists.');
    $message->update(['status'=>'sending']);
    $conversation=InboxConversation::findOrFail($message->conversation_id);
+   if($conversation->email_dnd){$row->update(['status'=>'blocked','locked_at'=>null,'last_error'=>'Email paused by Do not contact.','next_attempt_at'=>null]);$message->update(['status'=>'blocked']);return $row->fresh();}
    $record=app(InboxWorkspace::class)->record($conversation->kind,$conversation->source_id);
    $item=app(SubmissionPresentation::class)->summarize($record,$conversation->kind);
    $mail=new ConversationReply($message->body,$item['name_provided']?$item['name']:'',$row->reference,$row->subject,$row->id,parse_url(config('app.url'),PHP_URL_HOST)?:'localhost');

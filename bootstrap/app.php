@@ -11,8 +11,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->validateCsrfTokens(except:['webhooks/twilio/*']);
         $middleware->web(append: [\App\Http\Middleware\OptimizePublicResponse::class, \App\Http\Middleware\AppendFormInformation::class, \App\Http\Middleware\AdminPathLinks::class]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        $exceptions->dontFlash(['auth_token']);
     })->create();

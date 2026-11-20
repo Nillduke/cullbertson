@@ -19,13 +19,14 @@ class InboxWorkspace {
  public function conversation(string $kind,int $id):InboxConversation{return InboxConversation::firstOrCreate(['kind'=>$kind,'source_id'=>$id]);}
  public function detail(string $kind,int $id,SubmissionPresentation $presenter,bool $markRead=true):array{
   $record=$this->record($kind,$id);$conversation=$this->conversation($kind,$id);
+  $conversation->load(['tags','followers']);
   if($markRead)$conversation->update(['read_at'=>now()]);
   $item=$presenter->summarize($record,$kind);$item+=app(SubmissionSource::class)->details($item);
   $groups=$presenter->groups($item);
   $savedGroups=$kind==='quotes'?$groups:[['title'=>'Submitted form details','values'=>array_diff_key($item['payload'],array_flip(['message','wordpress','sourcePage']))]];
   if(!empty($item['payload']['wordpress']['fields']))$savedGroups[]=['title'=>'Original submitted fields','values'=>$item['payload']['wordpress']['fields']];
   $savedGroups=array_values(array_filter(array_map(fn($group)=>['title'=>$group['title'],'values'=>$presenter->provided($group['values'])],$savedGroups),fn($group)=>count($group['values'])>0));
-  return ['item'=>$item,'outgoingMail'=>app(ConversationMail::class)->readiness($item),'conversation'=>$conversation,'messages'=>$conversation->messages()->with(['author','delivery'])->orderBy('id')->get(),
+  return ['item'=>$item,'outgoingMail'=>app(ConversationMail::class)->readiness($item),'smsState'=>app(TwilioCommunications::class)->readiness($item),'voiceState'=>app(TwilioCommunications::class)->readiness($item,'call'),'conversation'=>$conversation,'messages'=>$conversation->messages()->with(['author','delivery','twilioDelivery'])->orderBy('id')->get(),
    'owners'=>User::where('is_admin',true)->orderBy('name')->get(['id','name']),
    'attachments'=>$kind==='contacts'?DB::table('contact_files')->where('contact_enquiry_id',$id)->get():collect(),
    'statuses'=>$kind==='feedback'?['new','reviewed','resolved','spam','trash']:['new','reviewed','contacted','spam','trash'],

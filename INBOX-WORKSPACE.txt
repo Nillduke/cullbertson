@@ -31,9 +31,9 @@ mail:deliver retry schedule. Admin > Email & SMTP > Delivery history also suppor
 manual retry. As with SMTP generally, a process failure after remote acceptance
 can leave delivery uncertain; retries are not a guarantee of exactly-once delivery.
 
-Customer messages use the configured From and Reply-To. Incoming email replies,
-mailbox sync and SMS are not implemented. No mailbox credentials beyond existing
-outgoing SMTP settings are requested by this change.
+Customer emails use the configured From and Reply-To. Incoming email replies and
+mailbox sync still require a separate mailbox integration. SMS and voice calls
+use the Twilio settings documented in TWILIO-SETUP.txt.
 
 Thread refresh polls the protected JSON endpoint every 20 seconds while visible.
 The composer is not replaced by polling. The inbox list can be refreshed separately.
@@ -47,3 +47,21 @@ Only auth + EnsureCmsAdmin routes expose messages, details or management actions
 
 Responsive UI: three columns on wide screens, contact-details drawer on narrower
 desktops/tablets, list/thread navigation and details drawer on mobile.
+
+WORKSPACE TOOLS
+The compact conversation list shows the contact name and first line of the latest
+message. Full contact details, form context, reference and saved answers remain
+in the selected thread and contact panel. There are dedicated Manual actions,
+Analytics and Settings screens. Filters include owner, tags, source, date, service,
+completion and status. Sort by activity, received time or unread first.
+
+Select individual conversations or all on the current page for bulk read/unread,
+star/unstar, assignment, review/contact status, archive and restore. Archive retains
+the original record. Tags and admin followers are stored in relational tables.
+Email, SMS and call DND preferences are separate. Internal notes are always private.
+SMS drafts never send until Send SMS is explicitly selected. Twilio call requests
+require confirmation and the agency agent must answer and press 1.
+
+Additional migrations: 2026_11_21_020000_add_inbox_workspace_tools and
+2026_11_21_030000_add_twilio_communications. New tables are private and scrubbed
+from deployment content snapshots along with credentials and customer records.
