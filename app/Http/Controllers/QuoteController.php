@@ -11,7 +11,11 @@ class QuoteController extends Controller
 {
     public function token(): JsonResponse
     {
-        return response()->json(['token' => csrf_token()])->header('Cache-Control', 'no-store');
+        return response()->json(['token' => csrf_token()])->withHeaders([
+            'Cache-Control' => 'no-store, private, max-age=0',
+            'Pragma' => 'no-cache',
+            'Expires' => '0',
+        ]);
     }
 
     public function auto(Request $request, QuoteValidator $validator): JsonResponse

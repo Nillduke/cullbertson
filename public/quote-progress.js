@@ -4,6 +4,7 @@
  const clean=value=>value===null?'':Array.isArray(value)?value.map(clean):typeof value==='object'?Object.fromEntries(Object.entries(value).map(([k,v])=>[k,clean(v)])):value;
  window.QuoteLeadProgress=class {
   static async refreshToken(){
+   if(window.CulbertsonFormSession)return window.CulbertsonFormSession.refresh();
    if(!this.refreshingToken)this.refreshingToken=(async()=>{
     const response=await fetch('/quote/submit?refresh='+Date.now(),{credentials:'same-origin',cache:'no-store',headers:{Accept:'application/json'}});
     let data;try{data=await response.json();}catch{}
@@ -14,6 +15,7 @@
    return this.refreshingToken;
   }
   static async post(url,payload){
+   if(window.CulbertsonFormSession)return window.CulbertsonFormSession.post(url,payload);
    let token=document.querySelector('meta[name="csrf-token"]')?.content||await this.refreshToken();
    const send=()=>fetch(url,{method:'POST',credentials:'same-origin',keepalive:true,headers:{'Content-Type':'application/json',Accept:'application/json','X-CSRF-TOKEN':token},body:JSON.stringify(payload)});
    let response=await send();

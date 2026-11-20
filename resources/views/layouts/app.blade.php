@@ -35,6 +35,7 @@
         @endif
         @include('partials.performance-stylesheet',['href'=>$stylesheet])
     @endforeach
+    <script defer src="{{ asset('form-session.js') }}?v={{ filemtime(public_path('form-session.js')) }}"></script>
     <script defer src="{{ asset('app.js') }}?v={{ filemtime(public_path('app.js')) }}"></script>
     <script defer src="{{ asset('exit-intent.js') }}?v={{ filemtime(public_path('exit-intent.js')) }}"></script>
     @if(str_contains($bodyClass ?? '', 'quote-flow-page'))
