@@ -48,8 +48,12 @@ Route::middleware(['auth',EnsureCmsAdmin::class])->prefix('admin')->group(functi
     Route::get('/forms',[CmsController::class,'forms']);
     Route::post('/forms/{form}',[CmsController::class,'saveForm']);
     Route::get('/enquiry-files/{id}',[\App\Http\Controllers\SupportRequestController::class,'download'])->whereNumber('id');
-    Route::get('/inbox',[\App\Http\Controllers\SubmissionController::class,'index']);
-    Route::get('/inbox/{kind}/{id}',[\App\Http\Controllers\SubmissionController::class,'show'])->where('kind','quotes|contacts|feedback')->whereNumber('id');
+    Route::get('/inbox',[\App\Http\Controllers\ConversationController::class,'index']);
+    Route::get('/inbox/{kind}/{id}',[\App\Http\Controllers\ConversationController::class,'show'])->where('kind','quotes|contacts|feedback')->whereNumber('id');
+    Route::get('/inbox/{kind}/{id}/thread',[\App\Http\Controllers\ConversationController::class,'thread'])->where('kind','quotes|contacts|feedback')->whereNumber('id');
+    Route::get('/inbox/{kind}/{id}/details',[\App\Http\Controllers\SubmissionController::class,'show'])->where('kind','quotes|contacts|feedback')->whereNumber('id');
+    Route::post('/inbox/{kind}/{id}/manage',[\App\Http\Controllers\ConversationController::class,'manage'])->where('kind','quotes|contacts|feedback')->whereNumber('id');
+    Route::post('/inbox/{kind}/{id}/messages',[\App\Http\Controllers\ConversationController::class,'message'])->middleware('throttle:60,1')->where('kind','quotes|contacts|feedback')->whereNumber('id');
     Route::post('/inbox/{kind}/{id}/status',[\App\Http\Controllers\SubmissionController::class,'status'])->where('kind','quotes|contacts|feedback')->whereNumber('id');
     Route::get('/structure',[\App\Http\Controllers\StructureController::class,'index']);
     Route::post('/structure/{kind}/{id?}',[\App\Http\Controllers\StructureController::class,'save'])->whereNumber('id');

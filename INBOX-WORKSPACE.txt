@@ -1,0 +1,37 @@
+CONVERSATIONS WORKSPACE
+
+Local route: /admin/inbox. Direct lead URLs /admin/inbox/{kind}/{id} open the
+same workspace with that lead selected. Original full-detail view remains at
+/admin/inbox/{kind}/{id}/details. Existing lead status controls still work.
+
+All quote requests (including partials), contact enquiries, feedback and imported
+WordPress submissions are queried directly. Original payloads remain unchanged.
+There is one conversation per submission, identified by kind + source_id.
+No automatic merging of different customers or submissions takes place.
+
+Features: combined conversation list, search and original source/date/type/status/
+service/completion filters; All, Unread, Recent (7 days), Starred; owner assignment
+to CMS admins; shared team read/unread markers; threaded internal notes and reply
+drafts; editable saved reply drafts; private attachments and full submission fields.
+Notes and draft messages carry an author and timestamp. Duplicate submissions of
+the same message token do not create duplicate messages. Draft edits are scoped
+to the selected conversation. All content is escaped on output.
+
+EMAIL CONNECTION IS PENDING
+Reply drafts are saved in the database. No email, SMS, Slack message, customer
+reply or mailbox sync is sent/created by this workspace. Internal notes are
+available to the authorized admin team only. The UI labels drafts as not sent.
+Connecting outgoing email and importing incoming replies is a later integration.
+
+Thread refresh polls the protected JSON endpoint every 20 seconds while visible.
+The composer is not replaced by polling. The inbox list can be refreshed separately.
+Reading a lead changes its shared conversation read marker, not its lead status.
+Mark unread returns to the unread inbox. New source updates make the thread unread.
+
+Database migration: 2026_11_20_180000_create_inbox_conversations.
+Tables: inbox_conversations, inbox_messages. Both are private and are scrubbed from
+the cPanel content-snapshot package. Existing lead tables are not altered.
+Only auth + EnsureCmsAdmin routes expose messages, details or management actions.
+
+Responsive UI: three columns on wide screens, contact-details drawer on narrower
+desktops/tablets, list/thread navigation and details drawer on mobile.
