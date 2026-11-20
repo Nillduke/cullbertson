@@ -8,5 +8,31 @@
 <div class="cx-saved-answers">@foreach($savedGroups as $group)<details open><summary>{{ $group['title'] }}</summary>@include('admin.submission-values',['values'=>$group['values']])</details>@endforeach</div>
 <a class="cx-full-record" href="{{ url($item['url'].'/details') }}">View full submission record</a></div><time>{{ $item['created_at']->format('g:i A') }} UTC</time></div></article>
 @forelse($messages as $message)
-<article class="cx-message {{ $message->channel==='note'?'note':'outbound' }}"><span class="cx-avatar agent">{{ mb_strtoupper(mb_substr($message->author?->name??'Team',0,1)) }}</span><div><div class="cx-bubble"><div class="cx-message-label">{{ $message->author?->name??'Team member' }} <span>{{ $message->channel==='note'?'Internal note':'Reply draft · Not sent' }}</span></div><div class="cx-message-body">{{ $message->body }}</div>@if($message->channel==='reply')<button type="button" class="cx-edit-draft" data-edit-draft="{{ $message->id }}" data-body="{{ $message->body }}">Edit draft</button>@endif</div><time>{{ $message->created_at->format('M j, g:i A') }} UTC @if($message->updated_at->gt($message->created_at)) · Edited @endif</time></div></article>
-@empty<div class="cx-thread-start"><span>Start the conversation</span><p>Save a reply draft or add a private note for your team.</p></div>@endforelse
+<article class="cx-message {{ $message->channel==='note'?'note':'outbound' }}">
+ <span class="cx-avatar agent">{{ mb_strtoupper(mb_substr($message->author?->name??'Team',0,1)) }}</span>
+ <div><div class="cx-bubble">
+  <div class="cx-message-label">{{ $message->author?->name??'Team member' }}
+   <span>{{ $message->channel==='note'?'Internal note':match($message->status){'accepted'=>'Email accepted by SMTP','queued'=>'Email queued','sending'=>'Sending email','failed'=>'Email failed',default=>'Reply draft - Not sent'} }}</span>
+  </div>
+  <div class="cx-message-body">{{ $message->body }}</div>
+  @if($message->channel==='reply'&&$message->delivery)
+   <div class="cx-email-result">To: {{ implode(', ',$message->delivery->recipients) }}
+    @if($message->delivery->sent_at)
+     <br>Accepted: {{ $message->delivery->sent_at->format('M j, g:i A') }} UTC
+    @endif
+    @if($message->delivery->last_error)
+     <br>{{ $message->delivery->last_error }}
+    @endif
+    @if($message->status==='failed')
+     <br><a href="{{ url('/admin/mail#mail-history') }}">View delivery history and retry</a>
+    @endif
+   </div>
+  @endif
+  @if($message->channel==='reply'&&$message->status==='draft')
+   <button type="button" class="cx-edit-draft" data-edit-draft="{{ $message->id }}" data-body="{{ $message->body }}">Edit draft</button>
+  @endif
+ </div><time>{{ $message->created_at->format('M j, g:i A') }} UTC @if($message->updated_at->gt($message->created_at)) - Edited @endif</time></div>
+</article>
+@empty
+<div class="cx-thread-start"><span>Start the conversation</span><p>Write an email reply or add a private note for your team.</p></div>
+@endforelse

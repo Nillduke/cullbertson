@@ -37,19 +37,27 @@ class ConversationController extends Controller {
   return redirect(($data['read']??'')==='unread'?url('/admin/inbox').'?view=unread':url('/admin/inbox/'.$kind.'/'.$id))->with('success','Conversation updated.');
  }
  public function message(Request $request,string $kind,int $id,InboxWorkspace $workspace){
-  $workspace->record($kind,$id);$data=$request->validate(['channel'=>'required|in:reply,note','body'=>'required|string|max:10000','client_token'=>'required|uuid','message_id'=>'nullable|integer|min:1']);
+  $record=$workspace->record($kind,$id);$data=$request->validate(['channel'=>'required|in:reply,note','body'=>'required|string|max:10000','client_token'=>'required|uuid','message_id'=>'nullable|integer|min:1','delivery_action'=>'nullable|in:draft,send']);
+  $send=($data['delivery_action']??'draft')==='send';$mailer=app(\App\Services\ConversationMail::class);
+  $item=app(SubmissionPresentation::class)->summarize($record,$kind);
+  if($send){abort_unless($data['channel']==='reply',422);if(!($state=$mailer->readiness($item))['ready'])throw \Illuminate\Validation\ValidationException::withMessages(['body'=>$state['reason']]);}
   $conversation=$workspace->conversation($kind,$id);
-  DB::transaction(function()use($data,$request,$conversation){
-   if(!empty($data['message_id'])){$message=$conversation->messages()->whereKey($data['message_id'])->where('channel','reply')->where('status','draft')->firstOrFail();abort_unless($data['channel']==='reply',422);$message->update(['body'=>$data['body']]);}
-   else{$message=InboxMessage::firstOrCreate(['client_token'=>$data['client_token']],['conversation_id'=>$conversation->id,'user_id'=>$request->user()->id,'channel'=>$data['channel'],'status'=>$data['channel']==='reply'?'draft':'internal','body'=>$data['body']]);abort_unless($message->conversation_id===$conversation->id&&$message->user_id===$request->user()->id,409);}
+  $delivery=DB::transaction(function()use($data,$request,$conversation,$send,$mailer,$item){
+   if(!empty($data['message_id'])){$message=$conversation->messages()->whereKey($data['message_id'])->where('channel','reply')->where('status','draft')->lockForUpdate()->firstOrFail();abort_unless($data['channel']==='reply',422);$message->update(['body'=>$data['body']]);}
+   else{$message=InboxMessage::firstOrCreate(['client_token'=>$data['client_token']],['conversation_id'=>$conversation->id,'user_id'=>$request->user()->id,'channel'=>$data['channel'],'status'=>$data['channel']==='reply'?'draft':'internal','body'=>$data['body']]);abort_unless($message->conversation_id===$conversation->id&&$message->user_id===$request->user()->id&&$message->channel===$data['channel'],409);}
    $conversation->update(['last_message_at'=>now(),'read_at'=>now()]);
+   return $send?$mailer->enqueue($message,$item):null;
   });
+  if($delivery){
+   $result=$mailer->deliver($delivery->id);
+   return redirect(url('/admin/inbox/'.$kind.'/'.$id))->with($result->status==='failed'?'mail_error':'success',match($result->status){'accepted'=>'Email accepted by the mail server. Check the client inbox and spam folder.','failed'=>'Email could not be sent: '.$result->last_error,default=>'Email queued for delivery. Its status will update in this conversation.'});
+  }
   return redirect(url('/admin/inbox/'.$kind.'/'.$id))->with('success',$data['channel']==='reply'?'Reply saved as a draft; nothing has been sent.':'Internal note added.');
  }
  public function thread(string $kind,int $id,InboxWorkspace $workspace,SubmissionPresentation $presenter){
   $detail=$workspace->detail($kind,$id,$presenter,false);
   $lead=array_intersect_key($detail['item'],array_flip(['display_name','name_provided','email','phone','form_title','subject','reference','completion_status','progress_percent','last_step_label','message']));
-  $parts=['html'=>view('admin.conversation-thread',$detail)->render(),'contact_html'=>view('admin.conversation-contact',$detail)->render(),'answers_html'=>view('admin.conversation-answers',$detail)->render(),'lead'=>$lead];
+  $parts=['html'=>view('admin.conversation-thread',$detail)->render(),'contact_html'=>view('admin.conversation-contact',$detail)->render(),'answers_html'=>view('admin.conversation-answers',$detail)->render(),'lead'=>$lead,'outgoing_mail'=>$detail['outgoingMail']];
   $parts['version']=hash('sha256',json_encode($parts));
   return response()->json($parts)->header('Cache-Control','private, no-store');
  }

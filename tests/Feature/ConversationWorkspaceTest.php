@@ -42,7 +42,7 @@ class ConversationWorkspaceTest extends TestCase {
  }
  public function test_team_inbox_read_star_owner_and_original_submission_are_independent():void{
   $lead=$this->lead();$admin=$this->admin();$url='/admin/inbox/quotes/'.$lead->id;
-  $this->get($url)->assertOk()->assertSee('Contact details')->assertSee('Reply draft')->assertSee('Local Visitor');
+  $this->get($url)->assertOk()->assertSee('Contact details')->assertSee('Email reply')->assertSee('Local Visitor');
   $conversation=InboxConversation::firstOrFail();$this->assertNotNull($conversation->read_at);$this->assertSame('new',$lead->fresh()->status);
   $this->post($url.'/manage',['starred'=>1,'assigned_to'=>$admin->id])->assertRedirect($url);$this->assertTrue($conversation->fresh()->starred);$this->assertSame($admin->id,$conversation->fresh()->assigned_to);
   $this->get('/admin/inbox?view=starred')->assertSee($lead->reference);

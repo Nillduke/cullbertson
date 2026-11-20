@@ -28,6 +28,7 @@ class LeadMail {
  }
  public function deliver(int $id):MailDelivery {
   $s=MailSetting::current();$row=MailDelivery::findOrFail($id);
+  if($row->kind==='inbox_reply')return app(ConversationMail::class)->deliver($id);
   if($row->kind!=='test'&&!$s->enabled)return $row;
   if($s->missing($row->kind==='test'))return $row;
   $claimed=MailDelivery::whereKey($id)->where(function($q){$q->whereIn('status',['pending','failed'])->orWhere(fn($q)=>$q->where('status','sending')->where('locked_at','<',now()->subMinutes(5)));})->update(['status'=>'sending','locked_at'=>now(),'attempted_at'=>now(),'attempts'=>DB::raw('attempts + 1'),'updated_at'=>now()]);

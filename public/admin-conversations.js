@@ -1,12 +1,17 @@
 (()=>{'use strict';const workspace=document.querySelector('[data-conversations]');if(!workspace)return;
-const stream=workspace.querySelector('[data-thread-stream]'),form=workspace.querySelector('[data-message-form]'),body=form?.querySelector('[data-message-body]'),id=form?.querySelector('[data-message-id]'),button=form?.querySelector('[data-save-message]'),help=form?.querySelector('[data-composer-help]'),editing=form?.querySelector('[data-editing-label]');
-function mode(){if(!form)return;const note=form.querySelector('[name="channel"]:checked')?.value==='note';button.textContent=note?'Add internal note':(id.value?'Update reply draft':'Save reply draft');help.textContent=note?'Private note · Visible only to your admin team.':'Draft only - Customer email sending is not enabled in this inbox.';body.placeholder=note?'Add a note for your team…':'Write your reply…';if(note){id.value='';editing.hidden=true;}}
+const stream=workspace.querySelector('[data-thread-stream]'),form=workspace.querySelector('[data-message-form]'),body=form?.querySelector('[data-message-body]'),id=form?.querySelector('[data-message-id]'),button=form?.querySelector('[data-save-message]'),help=form?.querySelector('[data-composer-help]'),editing=form?.querySelector('[data-editing-label]'),sendButton=form?.querySelector('[data-send-message]');
+function mode(){if(!form)return;const note=form.querySelector('[name="channel"]:checked')?.value==='note';button.textContent=note?'Add internal note':(id.value?'Update reply draft':'Save reply draft');help.textContent=note?'Private note - Visible only to your admin team.':form.dataset.mailHelp;sendButton.hidden=note;sendButton.disabled=form.dataset.mailReady!=='1';body.placeholder=note?'Add a note for your team…':'Write your reply…';if(note){id.value='';editing.hidden=true;}}
 form?.querySelectorAll('[name="channel"]').forEach(r=>r.addEventListener('change',mode));
 workspace.addEventListener('click',event=>{const details=event.target.closest('[data-toggle-details]');if(details){if(matchMedia('(max-width:1200px)').matches)workspace.classList.toggle('details-open');else workspace.classList.toggle('details-hidden');}
 if(event.target.closest('[data-show-list]'))workspace.classList.add('show-list');
 const edit=event.target.closest('[data-edit-draft]');if(edit&&form){form.querySelector('[name="channel"][value="reply"]').checked=true;id.value=edit.dataset.editDraft;body.value=edit.dataset.body;editing.hidden=false;mode();body.focus();}
 if(event.target.closest('[data-cancel-edit]')){id.value='';body.value='';editing.hidden=true;mode();}});
-form?.addEventListener('submit',()=>{button.disabled=true;button.textContent='Saving…';});
+form?.addEventListener('submit',event=>{
+ const action=event.submitter?.value||'draft';form.dataset.submitting='1';
+ const input=document.createElement('input');input.type='hidden';input.name='delivery_action';input.value=action;form.append(input);
+ button.disabled=true;sendButton.disabled=true;
+ if(action==='send')sendButton.textContent='Sending...';else button.textContent='Saving...';
+});
 function updateLead(lead){
  if(!lead)return;
  workspace.querySelectorAll('[data-lead-name]').forEach(node=>node.textContent=lead.display_name);
@@ -38,6 +43,10 @@ async function refresh(){if(document.hidden||busy)return;busy=true;try{
  if(data.version!==version){
   const bottom=stream.scrollHeight-stream.scrollTop-stream.clientHeight<100;
   stream.innerHTML=data.html;updateLead(data.lead);
+  if(form&&data.outgoing_mail&&form.dataset.submitting!=='1'){
+   form.dataset.mailReady=data.outgoing_mail.ready?'1':'0';
+   form.dataset.mailHelp=data.outgoing_mail.ready?'From '+data.outgoing_mail.from+' to '+data.outgoing_mail.to:data.outgoing_mail.reason;mode();
+  }
   replaceDetails('[data-live-contact]',data.contact_html);replaceDetails('[data-live-answers]',data.answers_html);
   version=data.version;if(bottom)stream.scrollTop=stream.scrollHeight;
  }

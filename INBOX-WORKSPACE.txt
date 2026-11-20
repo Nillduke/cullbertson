@@ -17,11 +17,23 @@ Notes and draft messages carry an author and timestamp. Duplicate submissions of
 the same message token do not create duplicate messages. Draft edits are scoped
 to the selected conversation. All content is escaped on output.
 
-EMAIL CONNECTION IS PENDING
-Reply drafts are saved in the database. No email, SMS, Slack message, customer
-reply or mailbox sync is sent/created by this workspace. Internal notes are
-available to the authorized admin team only. The UI labels drafts as not sent.
-Connecting outgoing email and importing incoming replies is a later integration.
+OUTGOING CUSTOMER EMAIL
+The composer uses the existing Admin > Email & SMTP settings. Save reply draft
+never sends. Send email explicitly queues and attempts delivery to the lead email,
+not to the notification recipients. Internal notes are never sent. Existing drafts
+are not sent automatically. Edit draft loads an unsent draft into the composer;
+Send email sends it. Queued/accepted messages cannot be edited.
+
+Mail deliveries use a unique message key, atomic claim and stable Message-ID.
+The thread shows queued, sending, accepted by SMTP or failed; SMTP acceptance is
+not proof of inbox delivery. Failures have sanitized errors and the existing
+mail:deliver retry schedule. Admin > Email & SMTP > Delivery history also supports
+manual retry. As with SMTP generally, a process failure after remote acceptance
+can leave delivery uncertain; retries are not a guarantee of exactly-once delivery.
+
+Customer messages use the configured From and Reply-To. Incoming email replies,
+mailbox sync and SMS are not implemented. No mailbox credentials beyond existing
+outgoing SMTP settings are requested by this change.
 
 Thread refresh polls the protected JSON endpoint every 20 seconds while visible.
 The composer is not replaced by polling. The inbox list can be refreshed separately.
