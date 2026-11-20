@@ -41,7 +41,7 @@
    try{
     const r=await QuoteLeadProgress.post('/quote/progress',{flow_id:this.id,service:this.service,step,step_label:label,percent:Math.min(99,Math.max(0,Math.round(percent))),...snapshot});
     let result;try{result=await r.json();}catch{result={};}
-    if(!r.ok)throw Error(r.status===419?'Your form session could not be restored. Please allow cookies for this website and try again.':r.status===429?'Please wait a moment, then select Continue again.':result.error||Object.values(result.errors||{}).flat()[0]||this.copy.error||'We could not save your progress. Please try Continue again.');
+    if(!r.ok)throw Error(r.status===419?'Your form session expired. Refresh this page, then select Continue again.':r.status===429?'Please wait a moment, then select Continue again.':result.error||Object.values(result.errors||{}).flat()[0]||this.copy.error||'We could not save your progress. Please try Continue again.');
     this.state.textContent=(this.copy.saved||'Progress saved')+' | '+result.reference;this.state.classList.add('saved');return result;
    }catch(error){this.state.textContent='Progress not saved yet';this.state.classList.add('failed');throw error;}
   }

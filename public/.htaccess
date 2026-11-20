@@ -9,6 +9,13 @@
     RewriteCond %{HTTP_HOST} ^(www\.)?aaspire-agency\.com(:[0-9]+)?$ [NC]
     RewriteRule ^ - [F,L]
 
+    # Session cookies are HTTPS-only: never serve the live forms over HTTP.
+    # Respect HTTPS forwarded by the hosting proxy to avoid redirect loops.
+    RewriteCond %{HTTP_HOST} ^(www\.)?culbertsonagency\.com(:[0-9]+)?$ [NC]
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{HTTP:X-Forwarded-Proto} !^https$ [NC]
+    RewriteRule ^ https://culbertsonagency.com%{REQUEST_URI} [R=308,L,NE]
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

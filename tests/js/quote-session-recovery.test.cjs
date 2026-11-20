@@ -36,6 +36,6 @@ test('recovered progress shows saved state and real errors leave a clear unsaved
   const {Class}=setup([{status:419},{status:200,body:{token:'fresh-token'}},{status,body:{reference:'LOCAL-ONLY'}}]);
   const classes=new Set(),lead=Object.create(Class.prototype);Object.assign(lead,{service:'home',id:'flow',copy:{},state:{textContent:'',classList:{add:c=>classes.add(c),remove:(...names)=>names.forEach(n=>classes.delete(n))}}});
   if(status===200){await lead.save({answers:{}},'email','Email',5);assert.match(lead.state.textContent,/Progress saved/);assert.ok(classes.has('saved'));}
-  else{await assert.rejects(()=>lead.save({answers:{}},'email','Email',5),/allow cookies/);assert.equal(lead.state.textContent,'Progress not saved yet');assert.ok(classes.has('failed'));}
+  else{await assert.rejects(()=>lead.save({answers:{}},'email','Email',5),/Refresh this page/);assert.equal(lead.state.textContent,'Progress not saved yet');assert.ok(classes.has('failed'));}
  }
 });
