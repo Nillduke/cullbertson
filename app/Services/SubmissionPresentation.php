@@ -19,7 +19,11 @@ class SubmissionPresentation
   $this->contactCopy??=FormDefinition::data('contact-page');$topics=collect($this->contactCopy['topics']??[])->pluck('label','value');
   $subject=$kind==='quotes'?($payload['serviceName']??$services[$service]['name']??ucfirst($service)).' insurance':($kind==='contacts'?($topics[$topic]??Str::headline($topic)):Str::headline($topic?:'Website feedback'));
   if(!empty($payload['wordpress']['form_name']))$subject=$payload['wordpress']['form_name'];
-  return ['id'=>$record->id,'kind'=>$kind,'reference'=>$record->reference,'status'=>$record->status,'created_at'=>\Illuminate\Support\Carbon::parse($record->created_at),'updated_at'=>\Illuminate\Support\Carbon::parse($record->updated_at),'name'=>$name?:($kind==='feedback'?'Anonymous visitor':'Name not provided'),'email'=>(string)$email,'phone'=>(string)$phone,'service'=>$service,'subject'=>$subject,'message'=>(string)($payload['message']??''),'rating'=>$payload['rating']??null,'payload'=>$payload,'answers'=>$answers,'completion_status'=>$record->completion_status??'completed','progress_percent'=>(int)($record->progress_percent??100),'last_step_label'=>$record->last_step_label??'', 'url'=>'/admin/inbox/'.$kind.'/'.$record->id];
+  return ['id'=>$record->id,'kind'=>$kind,'reference'=>$record->reference,'status'=>$record->status,'created_at'=>\Illuminate\Support\Carbon::parse($record->created_at),'updated_at'=>\Illuminate\Support\Carbon::parse($record->updated_at),'display_name'=>$name?:((string)$email?:((string)$phone?:($kind==='feedback'?'Anonymous visitor':'Website visitor'))),'name_provided'=>$name!=='','name'=>$name?:($kind==='feedback'?'Anonymous visitor':'Name not provided'),'email'=>(string)$email,'phone'=>(string)$phone,'service'=>$service,'subject'=>$subject,'message'=>$this->message($payload,$answers),'rating'=>$payload['rating']??null,'payload'=>$payload,'answers'=>$answers,'completion_status'=>$record->completion_status??'completed','progress_percent'=>(int)($record->progress_percent??100),'last_step_label'=>$record->last_step_label??'', 'url'=>'/admin/inbox/'.$kind.'/'.$record->id];
+ }
+ private function message(array $payload,array $answers):string {
+  $value=$payload['message']??$answers['message']??'';
+  return is_array($value)?(string)($value['message']??''):(string)$value;
  }
  public function labels(string $service):array {
   $catalog=$this->catalog??=FormDefinition::data('services');$labels=['contactConsent'=>'Contact permission','smsRequested'=>'Text messages requested','consent'=>'Contact permission','sms'=>'Text messages requested','dateOfBirth'=>'Date of birth','insured'=>'Currently insured','bundleHome'=>'Bundle home coverage','dui'=>'DUI history','zip'=>'ZIP code','createdAt'=>'Submitted at','consentText'=>'Consent statement'];
@@ -27,6 +31,9 @@ class SubmissionPresentation
   foreach($catalog['common']??[] as $group)foreach($group as $question)if(is_array($question))$questions[]=$question;
   foreach($questions as $question){if(isset($question['id'],$question['title']))$labels[$question['id']]=$question['title'];foreach($question['fields']??[] as $field)$labels[$field['id']]=$field['label'];}
   return $labels;
+ }
+ public function provided(array $values):array {
+  $result=[];foreach($values as $key=>$value){if(is_array($value))$value=$this->provided($value);if($value!==null&&$value!==''&&$value!==[])$result[$key]=$value;}return $result;
  }
  public function groups(array $item):array {
   if($item['kind']!=='quotes')return [];

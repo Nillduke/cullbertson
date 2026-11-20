@@ -23,7 +23,7 @@ class FeedbackController extends Controller
         ]);
         if ($validator->fails()) return response()->json(['error' => $validator->errors()->first()], 422);
         $id = bin2hex(random_bytes(8));
-        $record = array_merge($validator->validated(), ['id' => $id, 'createdAt' => gmdate('c')]);
+        $record = array_merge($validator->validated(), app(\App\Services\SubmissionSource::class)->capture($request), ['id' => $id, 'createdAt' => gmdate('c')]);
         $saved = FeedbackEntry::create(['reference'=>$id,'payload'=>$record]);
         return $saved
             ? response()->json(['ok' => true, 'id' => $id], 201)->header('Cache-Control', 'no-store')

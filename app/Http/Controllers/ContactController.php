@@ -9,7 +9,7 @@ class ContactController extends Controller {
         $copy=FormDefinition::data('contact-page');
         $data=$request->validate(['name'=>'required|string|max:100','email'=>'required|email:rfc|max:254','phone'=>'nullable|string|max:40','topic'=>['required',Rule::in(array_column($copy['topics'],'value'))],'message'=>'required|string|min:10|max:3000','company_website'=>'nullable|string|max:0']);
         unset($data['company_website']);$reference='ENQ-'.strtoupper(bin2hex(random_bytes(5)));
-        ContactEnquiry::create(['reference'=>$reference,'payload'=>$data]);
+        ContactEnquiry::create(['reference'=>$reference,'payload'=>array_merge($data,app(\App\Services\SubmissionSource::class)->capture($request,'/contact-us/'))]);
         return redirect('/contact-us/#contact-form')->with('contact_reference',$reference);
     }
 }

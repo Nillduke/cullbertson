@@ -12,6 +12,25 @@ class ConversationWorkspaceTest extends TestCase {
  protected $seed=true;protected $seeder=\Database\Seeders\ContentSeeder::class;
  private function lead(string $reference='INBOX-WORKSPACE'):QuoteRequest{return QuoteRequest::withoutEvents(fn()=>QuoteRequest::create(['reference'=>$reference,'service'=>'home','status'=>'new','payload'=>['answers'=>['name'=>['firstName'=>'Local','lastName'=>'Visitor'],'email'=>'visitor@example.com']]]));}
  private function admin():User{$user=User::factory()->create(['is_admin'=>true]);$this->actingAs($user);return $user;}
+ public function test_partial_quotes_show_saved_contact_answers_and_form_context_in_the_thread():void{
+  $lead=QuoteRequest::withoutEvents(fn()=>QuoteRequest::create(['reference'=>'PARTIAL-DETAILS','service'=>'auto','completion_status'=>'incomplete','progress_percent'=>6,'last_step_label'=>'Phone number','payload'=>['request'=>['email'=>'partial@example.com','phone'=>'2395550100','drivers'=>[['firstName'=>'','lastName'=>'']],'vehicles'=>[['year'=>'2024','make'=>'Honda','model'=>'Civic']]],'sourcePage'=>['url'=>'https://example.com/auto-quote','title'=>'Your auto quote page']]]));
+  $this->admin();$url='/admin/inbox/quotes/'.$lead->id;
+  $response=$this->get($url)->assertOk()->assertSee('partial@example.com')->assertSee('Not entered yet')->assertSee('Phone number')->assertSee('Form / request')->assertSee('Your auto quote page');
+  $item=$response->viewData('item');$this->assertSame('partial@example.com',$item['display_name']);$this->assertFalse($item['name_provided']);
+  $this->get($url.'/thread')->assertOk()->assertSee('2395550100')->assertSee('Civic')->assertSee('6% complete')->assertSee('Only the answers saved so far');
+ }
+ public function test_imported_fields_and_original_page_are_visible_in_thread():void{
+  $lead=ContactEnquiry::withoutEvents(fn()=>ContactEnquiry::create(['reference'=>'IMPORTED-CONTEXT','payload'=>['name'=>'Original Person','email'=>'original@example.com','message'=>'Full original customer message.','wordpress'=>['form_name'=>'Original contact form','source'=>'Gravity Forms','entry_id'=>12,'original_status'=>'active','fields'=>['Preferred coverage'=>'Boat coverage'],'entry'=>['source_url'=>'https://culbertsonagency.com/contact-us/']]] ]));
+  $this->admin();$url='/admin/inbox/contacts/'.$lead->id;
+  $this->get($url.'/thread')->assertOk()->assertSee('Original contact form')->assertSee('Full original customer message.')->assertSee('Boat coverage')->assertSee('contact-us');
+ }
+ public function test_source_capture_drops_external_referrers_and_tracking_query_parameters():void{
+  $source=app(\App\Services\SubmissionSource::class);
+  $request=\Illuminate\Http\Request::create('https://culbertsonagency.com/quote/progress','POST');
+  $request->headers->set('referer','https://external.example/steal');$this->assertSame([],$source->capture($request));
+  $request->headers->set('referer','https://culbertsonagency.com/quote/?service=boat&token=private-value&utm_source=campaign');
+  $context=$source->capture($request)['sourcePage'];$this->assertStringEndsWith('/quote/?service=boat',$context['url']);$this->assertStringNotContainsString('private-value',$context['url']);
+ }
  public function test_team_inbox_read_star_owner_and_original_submission_are_independent():void{
   $lead=$this->lead();$admin=$this->admin();$url='/admin/inbox/quotes/'.$lead->id;
   $this->get($url)->assertOk()->assertSee('Contact details')->assertSee('Reply draft')->assertSee('Local Visitor');

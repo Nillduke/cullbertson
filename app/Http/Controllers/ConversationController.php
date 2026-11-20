@@ -44,7 +44,7 @@ class ConversationController extends Controller {
    else{$message=InboxMessage::firstOrCreate(['client_token'=>$data['client_token']],['conversation_id'=>$conversation->id,'user_id'=>$request->user()->id,'channel'=>$data['channel'],'status'=>$data['channel']==='reply'?'draft':'internal','body'=>$data['body']]);abort_unless($message->conversation_id===$conversation->id&&$message->user_id===$request->user()->id,409);}
    $conversation->update(['last_message_at'=>now(),'read_at'=>now()]);
   });
-  return redirect(url('/admin/inbox/'.$kind.'/'.$id))->with('success',$data['channel']==='reply'?'Reply saved as a draft. Email is not connected; nothing has been sent.':'Internal note added.');
+  return redirect(url('/admin/inbox/'.$kind.'/'.$id))->with('success',$data['channel']==='reply'?'Reply saved as a draft; nothing has been sent.':'Internal note added.');
  }
  public function thread(string $kind,int $id,InboxWorkspace $workspace,SubmissionPresentation $presenter){
   $detail=$workspace->detail($kind,$id,$presenter,false);

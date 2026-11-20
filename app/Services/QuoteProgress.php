@@ -51,7 +51,7 @@ class QuoteProgress {
    $quote=QuoteRequest::where('capture_key',$capture)->lockForUpdate()->first();
    if($quote){abort_unless($quote->service===$service,422);if($quote->completion_status==='completed')return $quote;}
    else $quote=new QuoteRequest(['capture_key'=>$capture,'reference'=>'CUL-'.gmdate('ymd').'-'.strtoupper(bin2hex(random_bytes(6))),'service'=>$service,'completion_status'=>'incomplete','status'=>'new']);
-   $notice=FormDefinition::data('quote-progress-copy');$payload=array_merge($snapshot,['reference'=>$quote->reference,'service'=>$service,'serviceName'=>$name,'createdAt'=>$quote->created_at?->toIso8601String()??gmdate('c'),'mode'=>'progress-capture','progressNotice'=>$quote->payload['progressNotice']??($notice['notice']??'')]);
+   $notice=FormDefinition::data('quote-progress-copy');$payload=array_merge($snapshot,!empty($quote->payload['sourcePage'])?['sourcePage'=>$quote->payload['sourcePage']]:app(SubmissionSource::class)->capture(request()),['reference'=>$quote->reference,'service'=>$service,'serviceName'=>$name,'createdAt'=>$quote->created_at?->toIso8601String()??gmdate('c'),'mode'=>'progress-capture','progressNotice'=>$quote->payload['progressNotice']??($notice['notice']??'')]);
    if(($snapshot[array_key_first($snapshot)]['consent']??false)===true)$payload['consentText']=$notice['consent']??'';
    $quote->fill(['payload'=>$payload,'last_step'=>$input['step'],'last_step_label'=>$input['step_label'],'progress_percent'=>min(99,$input['percent'])]);$quote->save();return $quote;
   });
@@ -63,8 +63,8 @@ class QuoteProgress {
    $quote=$capture?QuoteRequest::where('capture_key',$capture)->lockForUpdate()->first():null;
    if($quote){abort_unless($quote->service===$service,422);if($quote->completion_status==='completed')return $quote;}
    else $quote=new QuoteRequest(['capture_key'=>$capture,'reference'=>'CUL-'.gmdate('ymd').'-'.strtoupper(bin2hex(random_bytes(6))),'service'=>$service]);
-   $evidence=array_intersect_key($quote->payload??[],array_flip(['progressNotice','consentText']));
-   $quote->fill(['payload'=>array_merge($payload,$evidence,['reference'=>$quote->reference]),'completion_status'=>'completed','progress_percent'=>100,'completed_at'=>now(),'last_step'=>'review','last_step_label'=>'Request submitted']);$quote->save();return $quote;
+   $evidence=array_intersect_key($quote->payload??[],array_flip(['progressNotice','consentText','sourcePage']));
+   $quote->fill(['payload'=>array_merge(app(SubmissionSource::class)->capture(request()),$payload,$evidence,['reference'=>$quote->reference]),'completion_status'=>'completed','progress_percent'=>100,'completed_at'=>now(),'last_step'=>'review','last_step_label'=>'Request submitted']);$quote->save();return $quote;
   });
  }
 }
