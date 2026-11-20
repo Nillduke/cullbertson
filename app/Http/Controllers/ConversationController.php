@@ -48,6 +48,9 @@ class ConversationController extends Controller {
  }
  public function thread(string $kind,int $id,InboxWorkspace $workspace,SubmissionPresentation $presenter){
   $detail=$workspace->detail($kind,$id,$presenter,false);
-  return response()->json(['html'=>view('admin.conversation-thread',$detail)->render(),'version'=>hash('sha256',$detail['item']['updated_at']->toISOString().$detail['messages']->map(fn($m)=>$m->id.':'.$m->updated_at->toISOString())->join('|'))])->header('Cache-Control','private, no-store');
+  $lead=array_intersect_key($detail['item'],array_flip(['display_name','name_provided','email','phone','form_title','subject','reference','completion_status','progress_percent','last_step_label','message']));
+  $parts=['html'=>view('admin.conversation-thread',$detail)->render(),'contact_html'=>view('admin.conversation-contact',$detail)->render(),'answers_html'=>view('admin.conversation-answers',$detail)->render(),'lead'=>$lead];
+  $parts['version']=hash('sha256',json_encode($parts));
+  return response()->json($parts)->header('Cache-Control','private, no-store');
  }
 }

@@ -12,6 +12,15 @@ class ConversationWorkspaceTest extends TestCase {
  protected $seed=true;protected $seeder=\Database\Seeders\ContentSeeder::class;
  private function lead(string $reference='INBOX-WORKSPACE'):QuoteRequest{return QuoteRequest::withoutEvents(fn()=>QuoteRequest::create(['reference'=>$reference,'service'=>'home','status'=>'new','payload'=>['answers'=>['name'=>['firstName'=>'Local','lastName'=>'Visitor'],'email'=>'visitor@example.com']]]));}
  private function admin():User{$user=User::factory()->create(['is_admin'=>true]);$this->actingAs($user);return $user;}
+ public function test_polling_refreshes_identity_completion_and_contact_panels_after_a_partial_finishes():void{
+  $lead=QuoteRequest::withoutEvents(fn()=>QuoteRequest::create(['reference'=>'LIVE-IDENTITY','service'=>'auto','completion_status'=>'incomplete','progress_percent'=>6,'payload'=>['request'=>['email'=>'live@example.com','phone'=>'2395550100']]]));
+  $this->admin();$url='/admin/inbox/quotes/'.$lead->id.'/thread';
+  $before=$this->get($url)->assertOk()->assertJsonPath('lead.display_name','live@example.com')->assertJsonPath('lead.completion_status','incomplete')->json('version');
+  QuoteRequest::withoutEvents(fn()=>$lead->update(['payload'=>['request'=>['email'=>'live@example.com','phone'=>'2395550100','drivers'=>[['firstName'=>'Updated','lastName'=>'Person']]]],'completion_status'=>'completed','progress_percent'=>100]));
+  $after=$this->get($url)->assertOk()->assertJsonPath('lead.display_name','Updated Person')->assertJsonPath('lead.completion_status','completed')->assertJsonPath('lead.progress_percent',100)->assertJsonStructure(['html','contact_html','answers_html','lead','version']);
+  $this->assertStringContainsString('Updated Person',$after->json('contact_html'));
+  $this->assertNotSame($before,$after->json('version'));
+ }
  public function test_partial_quotes_show_saved_contact_answers_and_form_context_in_the_thread():void{
   $lead=QuoteRequest::withoutEvents(fn()=>QuoteRequest::create(['reference'=>'PARTIAL-DETAILS','service'=>'auto','completion_status'=>'incomplete','progress_percent'=>6,'last_step_label'=>'Phone number','payload'=>['request'=>['email'=>'partial@example.com','phone'=>'2395550100','drivers'=>[['firstName'=>'','lastName'=>'']],'vehicles'=>[['year'=>'2024','make'=>'Honda','model'=>'Civic']]],'sourcePage'=>['url'=>'https://example.com/auto-quote','title'=>'Your auto quote page']]]));
   $this->admin();$url='/admin/inbox/quotes/'.$lead->id;
