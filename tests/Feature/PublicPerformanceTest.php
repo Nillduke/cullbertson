@@ -26,7 +26,7 @@ class PublicPerformanceTest extends TestCase
         $form->update(['definition' => $definition]);
         $this->get('/get-a-quote/')->assertOk()->assertSee('A different database heading');
         foreach (['/auto-quote/', '/get-a-quote/get-a-auto-insurance-quote/', '/get-a-quote/get-a-home-insurance-quote/'] as $url) {
-            $this->get($url)->assertOk()->assertSee('name="email"', false)->assertSee('Where can we email you?')->assertSee('quote-progress-notice')->assertDontSee('Loading your quote form')->assertDontSee('Local design preview')->assertDontSee('This local preview');
+            $this->get($url)->assertOk()->assertSee('wizard-two-fields', false)->assertSee('name="email"', false)->assertSee('name="phone"', false)->assertSee('How can we reach you?')->assertSee('quote-progress-notice')->assertDontSee('Loading your quote form')->assertDontSee('Local design preview')->assertDontSee('This local preview');
         }
         $this->assertSame(0, QuoteRequest::count());
     }
