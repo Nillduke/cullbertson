@@ -25,9 +25,9 @@ class TwilioIntegrationTest extends TestCase
         return tap(TwilioSetting::current(), fn ($s) => $s->update(['enabled' => true, 'sms_enabled' => true, 'voice_enabled' => true, 'account_sid' => self::ACCOUNT, 'auth_token' => self::TOKEN, 'from_number' => '+12395550100', 'voice_agent_number' => '+12395550101']));
     }
     private function admin(): void { $this->actingAs(User::factory()->create(['is_admin' => true])); }
-    private function lead(): QuoteRequest
+    private function lead(bool $smsConsent = false): QuoteRequest
     {
-        return QuoteRequest::withoutEvents(fn () => QuoteRequest::create(['reference' => 'TWILIO-TEST', 'service' => 'auto', 'payload' => ['request' => ['email' => 'person@example.com', 'phone' => '(239) 555-0102']]]));
+        return QuoteRequest::withoutEvents(fn () => QuoteRequest::create(['reference' => 'TWILIO-TEST', 'service' => 'auto', 'payload' => ['request' => ['email' => 'person@example.com', 'phone' => '(239) 555-0102', 'sms' => $smsConsent], 'smsConsent' => $smsConsent]]));
     }
     private function signed(string $path, array $data)
     {
@@ -53,7 +53,7 @@ class TwilioIntegrationTest extends TestCase
     }
     public function test_outbound_sms_is_normalized_idempotent_and_delivery_does_not_regress(): void
     {
-        $this->admin(); $this->setupConnection(); $lead = $this->lead();
+        $this->admin(); $this->setupConnection(); $lead = $this->lead(true);
         $this->mock(TwilioGateway::class, fn ($mock) => $mock->shouldReceive('sms')->once()->withArgs(fn ($s, $to, $body, $callback) => $to === '+12395550102' && $body === 'Your quote is ready' && str_starts_with($callback, 'https://example.com/webhooks/twilio/status/'))->andReturn(['sid' => self::SMS, 'status' => 'queued', 'from' => '+12395550100']));
         $data = ['channel' => 'sms', 'body' => 'Your quote is ready', 'delivery_action' => 'send', 'client_token' => (string) Str::uuid()];
         $url = '/admin/inbox/quotes/'.$lead->id.'/messages';
@@ -62,6 +62,19 @@ class TwilioIntegrationTest extends TestCase
         $this->signed('/webhooks/twilio/status/'.$row->id, ['MessageSid' => self::SMS, 'MessageStatus' => 'delivered'])->assertNoContent();
         $this->signed('/webhooks/twilio/status/'.$row->id, ['MessageSid' => self::SMS, 'MessageStatus' => 'sent'])->assertNoContent();
         $this->assertSame('delivered', $row->fresh()->status);
+    }
+    public function test_outbound_sms_is_blocked_without_explicit_quote_opt_in(): void
+    {
+        $this->admin(); $this->setupConnection(); $lead = $this->lead(false);
+        $this->mock(TwilioGateway::class, fn ($mock) => $mock->shouldNotReceive('sms'));
+        $url = '/admin/inbox/quotes/'.$lead->id.'/messages';
+        $this->post($url, ['channel' => 'sms', 'body' => 'Quote update', 'delivery_action' => 'send', 'client_token' => (string) Str::uuid()])
+            ->assertSessionHasErrors('body');
+        $this->assertDatabaseCount('twilio_deliveries', 0);
+        $item = app(\App\Services\SubmissionPresentation::class)->summarize($lead, 'quotes');
+        $state = app(TwilioCommunications::class)->readiness($item, 'sms');
+        $this->assertFalse($state['ready']);
+        $this->assertStringContainsString('not opted in', $state['reason']);
     }
     public function test_drafts_disabled_channels_and_dnd_never_send(): void
     {
@@ -89,6 +102,12 @@ class TwilioIntegrationTest extends TestCase
         $data['MessageSid'] = 'SM55555555555555555555555555555555'; $data['From'] = '+12395550199';
         $this->signed('/webhooks/twilio/sms', $data)->assertOk();
         $this->assertSame('twilio', ContactEnquiry::firstOrFail()->payload['origin']);
+    }
+    public function test_help_keyword_returns_agency_help_details(): void
+    {
+        $this->setupConnection();
+        $data = $this->smsData('HELP'); $data['OptOutType'] = 'HELP';
+        $this->signed('/webhooks/twilio/sms', $data)->assertOk()->assertHeader('Content-Type', 'text/xml; charset=UTF-8')->assertSee('Culbertson Agency')->assertSee('(239) 210-7700');
     }
     public function test_voice_rings_agency_first_and_only_connects_customer_after_pressing_one(): void
     {

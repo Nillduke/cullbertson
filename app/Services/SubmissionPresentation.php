@@ -26,7 +26,7 @@ class SubmissionPresentation
   return is_array($value)?(string)($value['message']??''):(string)$value;
  }
  public function labels(string $service):array {
-  $catalog=$this->catalog??=FormDefinition::data('services');$labels=['contactConsent'=>'Contact permission','smsRequested'=>'Text messages requested','consent'=>'Contact permission','sms'=>'Text messages requested','dateOfBirth'=>'Date of birth','insured'=>'Currently insured','bundleHome'=>'Bundle home coverage','dui'=>'DUI history','zip'=>'ZIP code','createdAt'=>'Submitted at','consentText'=>'Consent statement'];
+  $catalog=$this->catalog??=FormDefinition::data('services');$labels=['contactConsent'=>'Contact permission','smsRequested'=>'Text messages requested','consent'=>'Contact permission','sms'=>'Text messages requested','smsConsent'=>'SMS consent recorded','smsConsentText'=>'SMS consent wording','smsConsentAt'=>'SMS consent recorded at','smsConsentVersion'=>'SMS consent version','dateOfBirth'=>'Date of birth','insured'=>'Currently insured','bundleHome'=>'Bundle home coverage','dui'=>'DUI history','zip'=>'ZIP code','createdAt'=>'Submitted at','consentText'=>'Consent statement'];
   $questions=$catalog['services'][$service]['questions']??[];
   foreach($catalog['common']??[] as $group)foreach($group as $question)if(is_array($question))$questions[]=$question;
   foreach($questions as $question){if(isset($question['id'],$question['title']))$labels[$question['id']]=$question['title'];foreach($question['fields']??[] as $field)$labels[$field['id']]=$field['label'];}
@@ -48,6 +48,7 @@ class SubmissionPresentation
   if($contact)$groups[]=['title'=>'Contact information','values'=>$contact];
   if($coverage)$groups[]=['title'=>'Coverage preferences','values'=>$coverage];
   if(!empty($item['payload']['consentText']))$consent['consentText']=$item['payload']['consentText'];
+  foreach(['smsConsent','smsConsentText','smsConsentAt','smsConsentVersion'] as $key)if(array_key_exists($key,$item['payload'])&&($item['payload'][$key]!==null||$key==='smsConsent'))$consent[$key]=$item['payload'][$key];
   if($consent)$groups[]=['title'=>'Permissions & preferences','values'=>$consent];
   return $groups;
  }

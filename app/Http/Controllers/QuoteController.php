@@ -40,10 +40,16 @@ class QuoteController extends Controller
     private function save(string $service, array $data): JsonResponse
     {
         $reference = 'CUL-'.gmdate('ymd').'-'.strtoupper(bin2hex(random_bytes(6)));
+        $answers = $data['request'] ?? $data['answers'] ?? [];
+        $smsConsent = ($answers['smsRequested'] ?? $answers['sms'] ?? false) === true;
         $record = array_merge($data, [
             'reference' => $reference, 'service' => $service,
             'createdAt' => gmdate('c'), 'mode' => 'local-preview',
             'consentText' => 'I agree that Culbertson Agency may contact me about this quote request using the details provided.',
+            'smsConsent' => $smsConsent,
+            'smsConsentText' => $smsConsent ? QuoteValidator::SMS_CONSENT_TEXT : null,
+            'smsConsentAt' => $smsConsent ? now()->toIso8601String() : null,
+            'smsConsentVersion' => $smsConsent ? 'quote-sms-v1' : null,
         ]);
         $saved = app(\App\Services\QuoteProgress::class)->complete(request(),$service,$record);
         if (!$saved) return response()->json(['error' => 'We could not save your request. Please try again.'], 503);

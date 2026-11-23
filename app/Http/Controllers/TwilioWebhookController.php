@@ -3,13 +3,16 @@ namespace App\Http\Controllers;
 use App\Models\{TwilioSetting,TwilioDelivery};
 use App\Services\TwilioCommunications;
 use Illuminate\Http\Request;
+use Twilio\TwiML\MessagingResponse;
 use Twilio\TwiML\VoiceResponse;
 class TwilioWebhookController extends Controller {
  private function xml(string $body){return response($body,200,['Content-Type'=>'text/xml; charset=UTF-8','Cache-Control'=>'no-store']);}
  public function sms(Request $request,TwilioCommunications $communications){
   abort_unless(TwilioSetting::findOrFail(1)->sms_enabled,503);
   $data=$request->validate(['MessageSid'=>'required|regex:/^[SM]M[a-fA-F0-9]{32}$/','From'=>'required|regex:/^\+[1-9][0-9]{7,14}$/','To'=>'required|regex:/^\+[1-9][0-9]{7,14}$/','Body'=>'nullable|string|max:1600','NumMedia'=>'nullable|integer|between:0,20','OptOutType'=>'nullable|in:STOP,START,HELP']);
-  $communications->receiveSms($data);return $this->xml('<?xml version="1.0" encoding="UTF-8"?><Response/>');
+  $communications->receiveSms($data);
+  if(($data['OptOutType']??'')==='HELP'||strtoupper(trim($data['Body']??''))==='HELP'){$reply=new MessagingResponse();$reply->message('Culbertson Agency: For help with your quote request, call (239) 210-7700 or reply with your question. Message and data rates may apply. Reply STOP to opt out.');return $this->xml((string)$reply);}
+  return $this->xml('<?xml version="1.0" encoding="UTF-8"?><Response/>');
  }
  public function voice(Request $request,TwilioCommunications $communications){
   $s=TwilioSetting::findOrFail(1);if(!$s->voice_enabled||!$s->voice_agent_number){$voice=new VoiceResponse();$voice->reject(['reason'=>'busy']);return $this->xml((string)$voice);}

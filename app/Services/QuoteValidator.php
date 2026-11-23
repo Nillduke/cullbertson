@@ -7,6 +7,8 @@ use DateTimeImmutable;
 
 class QuoteValidator
 {
+public const SMS_CONSENT_TEXT = 'I agree that Culbertson Agency may call or text me at the number provided about my insurance request, including using automated technology. Message and data rates may apply. Reply STOP to opt out. Consent is not a condition of purchase.';
+
 private function textField(array $input,string $name,int $max,bool $required=true):string{$v=$input[$name]??'';if(!is_string($v)||preg_match('/[\x00-\x08\x0B\x0C\x0E-\x1F]/',$v))$this->reject(422,['error'=>'Please check your '.preg_replace('/([A-Z])/',' $1',$name).'.']);$v=trim($v);if(($required&&$v==='')||mb_strlen($v)>$max)$this->reject(422,['error'=>'Please check your '.preg_replace('/([A-Z])/',' $1',$name).'.']);return $v;}
 private function enumField(array $input,string $name,array $choices):string{$v=$input[$name]??null;if(!is_string($v)||!in_array($v,$choices,true))$this->reject(422,['error'=>'Please check your '.$name.' selection.']);return $v;}
 

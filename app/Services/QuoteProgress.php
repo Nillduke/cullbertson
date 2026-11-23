@@ -53,6 +53,10 @@ class QuoteProgress {
    else $quote=new QuoteRequest(['capture_key'=>$capture,'reference'=>'CUL-'.gmdate('ymd').'-'.strtoupper(bin2hex(random_bytes(6))),'service'=>$service,'completion_status'=>'incomplete','status'=>'new']);
    $notice=FormDefinition::data('quote-progress-copy');$payload=array_merge($snapshot,!empty($quote->payload['sourcePage'])?['sourcePage'=>$quote->payload['sourcePage']]:app(SubmissionSource::class)->capture(request()),['reference'=>$quote->reference,'service'=>$service,'serviceName'=>$name,'createdAt'=>$quote->created_at?->toIso8601String()??gmdate('c'),'mode'=>'progress-capture','progressNotice'=>$quote->payload['progressNotice']??($notice['notice']??'')]);
    if(($snapshot[array_key_first($snapshot)]['consent']??false)===true)$payload['consentText']=$notice['consent']??'';
+   $answers=$snapshot[array_key_first($snapshot)];$smsConsent=($answers['smsRequested']??$answers['sms']??false)===true;
+   $payload['smsConsent']=$smsConsent;
+   if($smsConsent){$payload['smsConsentText']=QuoteValidator::SMS_CONSENT_TEXT;$payload['smsConsentAt']=now()->toIso8601String();$payload['smsConsentVersion']='quote-sms-v1';}
+   else{unset($payload['smsConsentText'],$payload['smsConsentAt'],$payload['smsConsentVersion']);}
    $quote->fill(['payload'=>$payload,'last_step'=>$input['step'],'last_step_label'=>$input['step_label'],'progress_percent'=>min(99,$input['percent'])]);$quote->save();return $quote;
   });
  }

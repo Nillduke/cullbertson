@@ -15,10 +15,13 @@ class TwilioCommunications {
  public function readiness(array $item,string $kind='sms'):array {
   $s=TwilioSetting::find(1);$to=$this->phone($item['phone']);$c=InboxConversation::where('kind',$item['kind'])->where('source_id',$item['id'])->first();
   $reason='';
+  $payload=$item['payload']??[];$answers=$item['answers']??[];
+  $smsConsent=($answers['smsRequested']??$answers['sms']??$payload['smsConsent']??false)===true;
   if(!$s?->enabled||!$s->credentialsReady())$reason='Set up and enable Twilio in Inbox settings.';
   elseif(!($kind==='sms'?$s->sms_enabled:$s->voice_enabled))$reason=$kind==='sms'?'SMS is disabled in Twilio settings.':'Voice calls are disabled in Twilio settings.';
   elseif(!$to)$reason='This contact has no valid phone number.';
   elseif($kind==='sms'&&$c?->sms_dnd)$reason='SMS is paused by Do not contact for this conversation.';
+  elseif($kind==='sms'&&!$smsConsent)$reason='This customer has not opted in to quote-related text messages.';
   elseif($kind==='call'&&$c?->voice_dnd)$reason='Calls are paused by Do not contact for this conversation.';
   elseif($kind==='sms'&&!$s->from_number&&!$s->messaging_service_sid)$reason='Set a Twilio SMS sender or Messaging Service SID.';
   elseif($kind==='call'&&(!$s->from_number||!$s->voice_agent_number))$reason='Set a Twilio voice number and agency callback number.';
