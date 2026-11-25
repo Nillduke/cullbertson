@@ -10,15 +10,15 @@ class QuoteProgressTest extends TestCase {
  protected $seeder=\Database\Seeders\ContentSeeder::class;
  protected function setUp():void {parent::setUp();$this->withCredentials();$this->withSession([]);$this->withCookie(config('session.cookie'),session()->getId());}
  private function base(string $service='auto'):array{return ['flow_id'=>(string)Str::uuid(),'service'=>$service,'step'=>'email','step_label'=>'Email address','percent'=>5];}
- private function fullAuto():array{return ['vehicles'=>[['year'=>'2024','make'=>'Honda','model'=>'Civic']],'drivers'=>[['month'=>'01','day'=>'15','year'=>'1990','gender'=>'Male','married'=>'No','accidents'=>'No','dui'=>'No','firstName'=>'Synthetic','lastName'=>'Progress']],'insured'=>'No','homeowner'=>'No','address'=>['street'=>'123 Example Street','unit'=>'','city'=>'Fort Myers','state'=>'FL','zip'=>'33907'],'email'=>'quote-progress@example.com','phone'=>'2025550100','consent'=>true,'sms'=>false];}
+ private function fullAuto():array{return ['vehicles'=>[['year'=>'2024','make'=>'Honda','model'=>'Civic']],'drivers'=>[['month'=>'01','day'=>'15','year'=>'1990','gender'=>'Male','married'=>'No','accidents'=>'No','dui'=>'No','firstName'=>'Synthetic','lastName'=>'Progress']],'insured'=>'No','homeowner'=>'No','address'=>['street'=>'123 Example Street','unit'=>'','city'=>'Fort Myers','state'=>'FL','zip'=>'33907'],'email'=>'quote-progress@example.com','phone'=>'2025550100','sms'=>false];}
  private function fullService(array $service):array {
   $answers=[];foreach($service['questions'] as $q){if($q['type']==='choice')$answers[$q['id']]=$q['options'][0];else foreach($q['fields'] as $f)$answers[$q['id']][$f['id']]=($f['type']??'')==='number'?(string)min($f['max'],max($f['min'],in_array($f['id'],['year','yearBuilt'])?2020:500)):'Example';}
-  return array_merge($answers,['insured'=>'No','start'=>'Just exploring','name'=>['firstName'=>'Synthetic','lastName'=>'Service'],'address'=>['street'=>'123 Example Street','unit'=>'','city'=>'Fort Myers','state'=>'FL','zip'=>'33907'],'email'=>['email'=>'quote-progress@example.com'],'phone'=>['phone'=>'2025550100'],'consent'=>true,'sms'=>false]);
+  return array_merge($answers,['insured'=>'No','start'=>'Just exploring','name'=>['firstName'=>'Synthetic','lastName'=>'Service'],'address'=>['street'=>'123 Example Street','unit'=>'','city'=>'Fort Myers','state'=>'FL','zip'=>'33907'],'email'=>['email'=>'quote-progress@example.com'],'phone'=>['phone'=>'2025550100'],'sms'=>false]);
  }
  public function test_each_continue_updates_one_partial_auto_lead_and_completion_is_idempotent():void {
   $base=$this->base();$response=$this->postJson('/quote/progress',$base+['request'=>['email'=>'quote-progress@example.com']])->assertOk();$reference=$response->json('reference');
   $quote=QuoteRequest::where('reference',$reference)->firstOrFail();$this->assertSame('incomplete',$quote->completion_status);$this->assertSame(5,$quote->progress_percent);$this->assertNull($quote->completed_at);
-  $phone=array_replace($base,['step'=>'phone:0:0','step_label'=>'Phone number','percent'=>10,'request'=>['email'=>'quote-progress@example.com','phone'=>'(202) 555-0100','consent'=>true,'sms'=>false]]);
+  $phone=array_replace($base,['step'=>'phone:0:0','step_label'=>'Phone number','percent'=>10,'request'=>['email'=>'quote-progress@example.com','phone'=>'(202) 555-0100','sms'=>false]]);
   $this->postJson('/quote/progress',$phone)->assertOk()->assertJson(['reference'=>$reference]);$this->assertDatabaseCount('quote_requests',1);$this->assertSame('2025550100',$quote->fresh()->payload['request']['phone']);
   $this->getJson('/quote/progress?'.http_build_query(['flow_id'=>$base['flow_id'],'service'=>'auto']))->assertOk()->assertJsonPath('draft.reference',$reference)->assertJsonPath('draft.payload.request.email','quote-progress@example.com')->assertJsonMissingPath('draft.capture_key');
   $quote->update(['status'=>'reviewed']);
@@ -29,15 +29,15 @@ class QuoteProgressTest extends TestCase {
   $this->withoutMiddleware(\Illuminate\Routing\Middleware\ThrottleRequests::class);
   foreach(FormDefinition::data('services')['services'] as $key=>$service){
    $base=$this->base($key);$response=$this->postJson('/quote/progress',$base+['answers'=>['email'=>['email'=>'quote-progress@example.com']]])->assertOk();$reference=$response->json('reference');
-   $full=$this->fullService($service);$this->postJson('/quote/progress',array_replace($base,['step'=>'phone','step_label'=>'Phone number','percent'=>12,'answers'=>['email'=>$full['email'],'phone'=>$full['phone'],'consent'=>true,'sms'=>false]]))->assertOk()->assertJson(['reference'=>$reference]);
+   $full=$this->fullService($service);$this->postJson('/quote/progress',array_replace($base,['step'=>'phone','step_label'=>'Phone number','percent'=>12,'answers'=>['email'=>$full['email'],'phone'=>$full['phone'],'sms'=>false]]))->assertOk()->assertJson(['reference'=>$reference]);
    $this->postJson('/quote/progress',array_replace($base,['step'=>'details','step_label'=>'Service details','percent'=>80,'answers'=>$full]))->assertOk();
    $result=$this->postJson('/quote/submit',['flow_id'=>$base['flow_id'],'service'=>$key,'answers'=>$full])->assertCreated()->assertJson(['reference'=>$reference]);$this->assertStringContainsString('/quote/thank-you?receipt=',$result->json('redirect'));$this->assertSame('completed',QuoteRequest::where('reference',$reference)->firstOrFail()->completion_status);
   }
  }
- public function test_invalid_contacts_unknown_fields_and_unconsented_phone_steps_are_rejected():void {
+ public function test_phone_step_saves_without_contact_checkbox_and_unknown_fields_are_rejected():void {
   $base=$this->base();$this->postJson('/quote/progress',$base+['request'=>['email'=>'bad']])->assertUnprocessable();
-  $this->postJson('/quote/progress',array_replace($base,['step'=>'phone:0:0','request'=>['email'=>'quote-progress@example.com','phone'=>'2025550100','consent'=>false]]))->assertUnprocessable();
-  $this->postJson('/quote/progress',$base+['request'=>['email'=>'quote-progress@example.com','status'=>'contacted']])->assertUnprocessable();$this->assertDatabaseCount('quote_requests',0);
+  $this->postJson('/quote/progress',array_replace($base,['step'=>'phone:0:0','request'=>['email'=>'quote-progress@example.com','phone'=>'2025550100']]))->assertOk();
+  $unknown=$this->base();$this->postJson('/quote/progress',$unknown+['request'=>['email'=>'quote-progress@example.com','status'=>'contacted']])->assertUnprocessable();$this->assertDatabaseCount('quote_requests',1);
  }
  public function test_drafts_are_session_bound_and_visible_as_partial_leads_only_to_admins():void {
   $base=$this->base();$this->postJson('/quote/progress',$base+['request'=>['email'=>'quote-progress@example.com']])->assertOk();$quote=QuoteRequest::firstOrFail();

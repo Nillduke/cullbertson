@@ -33,7 +33,7 @@ $clean['insured']=$this->enumField($request,'insured',['Yes','No']);if($clean['i
 $clean['homeowner']=$this->enumField($request,'homeowner',['Yes','No']);$clean['bundleHome']=$clean['homeowner']==='Yes'?$this->enumField($request,'bundleHome',['Yes','No']):'No';
 $address=$request['address']??null;if(!is_array($address))$this->reject(422,['error'=>'Please check your address.']);$clean['address']=['street'=>$this->textField($address,'street',160),'unit'=>$this->textField($address,'unit',40,false),'city'=>$this->textField($address,'city',80),'state'=>$this->enumField($address,'state',$options['states']),'zip'=>$this->textField($address,'zip',5)];if(!preg_match('/^\d{5}$/',$clean['address']['zip']))$this->reject(422,['error'=>'Enter a five-digit ZIP code.']);
 $clean['email']=$this->textField($request,'email',254);if(!filter_var($clean['email'],FILTER_VALIDATE_EMAIL))$this->reject(422,['error'=>'Enter a valid email address.']);$phone=$this->textField($request,'phone',24);$digits=preg_replace('/\D/','',$phone);if(strlen($digits)===11&&$digits[0]==='1')$digits=substr($digits,1);if(!preg_match('/^[2-9]\d{9}$/',$digits))$this->reject(422,['error'=>'Enter a valid 10-digit US phone number.']);$clean['phone']=$digits;
-if(($request['consent']??false)!==true)$this->reject(422,['error'=>'Please acknowledge contact about your quote request.']);if(isset($request['sms'])&&!is_bool($request['sms']))$this->reject(422,['error'=>'Please check the text-message preference.']);$clean['contactConsent']=true;$clean['smsRequested']=$request['sms']??false;
+if(isset($request['consent'])&&!is_bool($request['consent']))$this->reject(422,['error'=>'Please check your contact preference.']);if(isset($request['sms'])&&!is_bool($request['sms']))$this->reject(422,['error'=>'Please check the text-message preference.']);$clean['smsRequested']=$request['sms']??false;
 
 return $clean;
 }
@@ -76,9 +76,9 @@ foreach ($questions as $q) {
         $clean[$q['id']][$f['id']]=$v;
     }
 }
-if (($answers['consent']??false)!==true) $this->reject(422,['error'=>'Please acknowledge contact about this quote request.']);
+if (isset($answers['consent'])&&!is_bool($answers['consent'])) $this->reject(422,['error'=>'Please check your contact preference.']);
 if (isset($answers['sms'])&&!is_bool($answers['sms'])) $this->reject(422,['error'=>'Please check the text-message preference.']);
-$clean['consent']=true;$clean['sms']=$answers['sms']??false;
+$clean['sms']=$answers['sms']??false;
 
 return ['service'=>$service,'serviceName'=>$catalog['services'][$service]['name'],'answers'=>$clean];
 }

@@ -45,7 +45,6 @@ class QuoteController extends Controller
         $record = array_merge($data, [
             'reference' => $reference, 'service' => $service,
             'createdAt' => gmdate('c'), 'mode' => 'local-preview',
-            'consentText' => 'I agree that Culbertson Agency may contact me about this quote request using the details provided.',
             'smsConsent' => $smsConsent,
             'smsConsentText' => $smsConsent ? QuoteValidator::SMS_CONSENT_TEXT : null,
             'smsConsentAt' => $smsConsent ? now()->toIso8601String() : null,

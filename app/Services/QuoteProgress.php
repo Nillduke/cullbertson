@@ -42,7 +42,7 @@ class QuoteProgress {
    Validator::make(['phone'=>$digits],['phone'=>'regex:/^[2-9]\d{9}$/'])->validate();
    if($service==='auto')$data['phone']=$digits;else $data['phone']['phone']=$digits;
   }
-  if(strtok($request->input('step'),':')==='phone')Validator::make(['phone'=>$phone,'consent'=>$data['consent']??false],['phone'=>'required','consent'=>'accepted'])->validate();
+  if(strtok($request->input('step'),':')==='phone')Validator::make(['phone'=>$phone],['phone'=>'required'])->validate();
   return [$base=>$data];
  }
  public function save(Request $request,array $input):QuoteRequest {

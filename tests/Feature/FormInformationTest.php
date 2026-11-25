@@ -43,7 +43,12 @@ class FormInformationTest extends TestCase
         $this->assertStringNotContainsString('Optional:', $consent['sms']);
         $this->get('/auto-quote/')
             ->assertSee('name="sms"', false)
+            ->assertDontSee('name="consent"', false)
             ->assertDontSee('Optional:', false);
+        $this->get('/auto-quote/')
+            ->assertSee('href="/privacy-policy-2/"', false)
+            ->assertSee('href="/sms-terms-of-service/"', false)
+            ->assertSee('SMS Terms of Service');
         $gzip=$this->withHeader('Accept-Encoding','gzip')->get('/auto-quote/')->assertHeader('Content-Encoding','gzip');
         $this->assertStringContainsString('Website provided by',gzdecode($gzip->getContent()));
     }
