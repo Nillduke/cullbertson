@@ -40,7 +40,10 @@ class FormInformationTest extends TestCase
         FormDefinition::where('key','form-information')->first()->update(['definition'=>$data]);
         $this->get('/auto-quote/')->assertSee('Website provided by');
         $consent=FormDefinition::data('quote-progress-copy');
-        $this->assertStringContainsString('Optional:', $consent['sms']);
+        $this->assertStringNotContainsString('Optional:', $consent['sms']);
+        $this->get('/auto-quote/')
+            ->assertSee('name="sms"', false)
+            ->assertDontSee('Optional:', false);
         $gzip=$this->withHeader('Accept-Encoding','gzip')->get('/auto-quote/')->assertHeader('Content-Encoding','gzip');
         $this->assertStringContainsString('Website provided by',gzdecode($gzip->getContent()));
     }
