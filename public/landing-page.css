@@ -53,6 +53,8 @@
 .auto-lp-benefits>div{display:flex;align-items:center;gap:13px;min-height:90px;padding:18px 20px;border:1px solid var(--auto-line);border-radius:15px;font-size:16px;line-height:1.5}
 .auto-lp-benefits svg{width:20px;height:20px;flex:none;color:#0089bd}
 .auto-lp-compare{margin:55px auto 0;max-width:896px;text-align:center}
+.auto-lp-image-section{width:min(calc(100% - 40px),992px);margin:34px auto 0;overflow:hidden;border:1px solid var(--auto-line);border-radius:16px;background:#edf5f8}
+.auto-lp-image-section img{display:block;width:100%;height:auto;max-height:520px;object-fit:cover}
 .auto-lp-compare h2,.auto-lp-review h2,.auto-lp-faq h2{font-size:25px;font-weight:800;letter-spacing:0;line-height:1.25}
 .auto-lp-compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px;text-align:left}
 .auto-lp-compare-grid article{min-height:148px;padding:20px;border:2px solid;border-radius:15px}

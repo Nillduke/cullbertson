@@ -28,7 +28,7 @@
   const form=event.target.closest('[data-contact-form]');if(!form)return;event.preventDefault();if(state.saving)return;captureContact();
   if(!form.reportValidity())return;
   state.saving=true;const button=form.querySelector('.auto-lp-submit'),error=form.querySelector('[role="alert"]');button.disabled=true;button.textContent='Sending your request…';error.hidden=true;
-  const body={flow_id:flowId,first_name:state.firstName,last_name:state.lastName,email:state.email,phone:state.phone,ownership:state.ownership,insured:state.carrier==='__not_insured__'?'No':'Yes',carrier:state.carrier==='__not_insured__'?'Currently not insured':state.carrier,zip:state.zip,sms:state.sms};
+  const body={flow_id:flowId,first_name:state.firstName,last_name:state.lastName,email:state.email,phone:state.phone,ownership:state.ownership,insured:state.carrier==='__not_insured__'?'No':'Yes',carrier:state.carrier==='__not_insured__'?'Currently not insured':state.carrier,zip:state.zip,sms:state.sms,landing_path:location.pathname.replace(/\/?$/,'/')};
   try{
    const send=token=>fetch('/auto-insurance/submit',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json','Accept':'application/json','X-Requested-With':'XMLHttpRequest','X-CSRF-TOKEN':token},body:JSON.stringify(body)});
    let token=document.querySelector('meta[name="csrf-token"]')?.content||'',response=await send(token);

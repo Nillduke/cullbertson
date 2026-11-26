@@ -23,12 +23,12 @@ class CmsController extends Controller
         if(in_array($request->input('status'),['draft','published']))$query->where('status',$request->input('status'));
         return view('admin.index',['pages'=>$query->orderBy('type')->orderBy('title')->paginate(25)->withQueryString(),'counts'=>['Content items'=>Page::count(),'Blog posts'=>Page::where('type','post')->count(),'Quote requests'=>QuoteRequest::count(),'Feedback'=>FeedbackEntry::count()]]);
     }
-    public function create(Request $request){return view('admin.edit',['page'=>new Page(['type'=>in_array($request->input('type'),['post','insurance','page','staff','blog_index'])?$request->input('type'):'page','status'=>'draft','categories'=>[]]),'sections'=>collect()]);}
+    public function create(Request $request){$landing=$request->input('template')==='landing';$page=new Page(['type'=>in_array($request->input('type'),['post','insurance','page','staff','blog_index'])?$request->input('type'):'page','status'=>'draft','categories'=>[]]);if($landing)$page->presentation=['template'=>'landing'];return view('admin.edit',['page'=>$page,'sections'=>collect()]);}
     public function edit(Page $page){return view('admin.edit',['page'=>$page,'sections'=>$page->sections]);}
     public function save(Request $request,?Page $page=null){
         $page=$page??new Page;
         if(is_string($request->input('slug')))$request->merge(['slug'=>trim($request->input('slug'),'/')]);
-        $input=$request->validate(['title'=>'required|string|max:255','slug'=>['nullable','string','max:255','regex:~^[a-z0-9/-]*$~',Rule::unique('pages','slug')->ignore($page->id)],'type'=>'required|in:page,post,insurance,staff,blog_index','status'=>'required|in:draft,published','presentation_template'=>'nullable|in:default,landing,contact,support,html-sitemap','description'=>'nullable|string|max:2000','featured_image'=>[Rule::requiredIf($request->input('type')==='post'&&$request->input('status')==='published'),'nullable','string','max:500','regex:~^/assets/[a-zA-Z0-9_./%+() -]+$~'],'tags'=>'nullable|string|max:1800','author_id'=>'nullable|integer|exists:authors,id','categories'=>'nullable|string|max:300','article_category'=>'nullable|string|max:80','published_at'=>'nullable|date','sections'=>'nullable|array','sections.*.name'=>'required|string|max:180','sections.*.position'=>'required|integer|min:0|max:999','sections.*.content_html'=>'nullable|string|max:2000000','new_section_name'=>'nullable|string|max:180','new_section_html'=>'nullable|string|max:2000000']);
+        $input=$request->validate(['title'=>'required|string|max:255','slug'=>[Rule::requiredIf($request->input('type')==='page'&&$request->input('presentation_template')==='landing'),'nullable','string','max:255','regex:~^[a-z0-9/-]*$~',Rule::unique('pages','slug')->ignore($page->id)],'type'=>'required|in:page,post,insurance,staff,blog_index','status'=>'required|in:draft,published','presentation_template'=>'nullable|in:default,landing,contact,support,html-sitemap','description'=>'nullable|string|max:2000','featured_image'=>[Rule::requiredIf($request->input('type')==='post'&&$request->input('status')==='published'),'nullable','string','max:500','regex:~^/assets/[a-zA-Z0-9_./%+() -]+$~'],'tags'=>'nullable|string|max:1800','author_id'=>'nullable|integer|exists:authors,id','categories'=>'nullable|string|max:300','article_category'=>'nullable|string|max:80','published_at'=>'nullable|date','sections'=>'nullable|array','sections.*.name'=>'required|string|max:180','sections.*.position'=>'required|integer|min:0|max:999','sections.*.content_html'=>'nullable|string|max:2000000','sections.*.image_src'=>'nullable|string|max:500|regex:~^/assets/[a-zA-Z0-9_./%+() -]+$~','sections.*.image_alt'=>'nullable|string|max:255','new_section_name'=>'nullable|string|max:180','new_section_position'=>'nullable|integer|min:0|max:999','new_section_html'=>'nullable|string|max:2000000','new_section_image'=>'nullable|string|max:500|regex:~^/assets/[a-zA-Z0-9_./%+() -]+$~','new_section_image_alt'=>'nullable|string|max:255']);
         $slug=trim($input['slug']??'','/');
         $insurance=null;
         if($input['type']==='insurance'){
@@ -47,7 +47,8 @@ class CmsController extends Controller
             $insurance['resources']=$resources;
         }
         abort_if(preg_match('~^(admin|forms)(/|$)|^(feedback|quote/submit|auto-quote/submit|auto-insurance/submit|contact-us/send|up)$~',$slug),422,'This URL is reserved.');
-        DB::transaction(function()use($input,$page,$slug,$insurance){
+        $isNewLanding=!$page->exists&&$request->input('type')==='page'&&$request->input('presentation_template')==='landing';
+        DB::transaction(function()use($input,$page,$slug,$insurance,$request,$isNewLanding){
             $attributes=array_intersect_key($input,array_flip(['title','type','status','description','featured_image','article_category','published_at']));
             $attributes['slug']=$slug;$attributes['categories']=array_values(array_filter(array_unique(array_map('trim',explode(',',$input['categories']??'')))));
             if($attributes['status']==='published'&&empty($attributes['published_at']))$attributes['published_at']=now();
@@ -55,9 +56,14 @@ class CmsController extends Controller
             if($page->type==='page' && array_key_exists('presentation_template',$input)){
                 $presentation=$page->presentation??['bodyClass'=>'content-page','styles'=>[],'scripts'=>[]];
                 if($input['presentation_template']==='default')unset($presentation['template']);else $presentation['template']=$input['presentation_template'];
+                if($input['presentation_template']==='landing'){$presentation['bodyClass']='content-page auto-landing-page';$presentation['styles']=[];$presentation['scripts']=[];}
                 $page->presentation=$presentation;
             }
             $page->save();
+            if($isNewLanding){
+                $starter=Page::with('sections')->where('slug','auto-insurance')->first();
+                if($starter)foreach($starter->sections as $section)$page->sections()->create(['name'=>$section->name,'component'=>$section->component,'position'=>$section->position,'content_html'=>$section->content_html]);
+            }
             if($page->type==='post'){
                 $categoryIds=[];foreach(array_filter(array_map('trim',explode(',',$input['categories']??''))) as $name)$categoryIds[]=\App\Models\Category::firstOrCreate(['name'=>$name],['slug'=>\Illuminate\Support\Str::slug($name)])->id;
                 $page->categoryTerms()->sync($categoryIds);
@@ -65,8 +71,8 @@ class CmsController extends Controller
                 $page->categories=$page->categoryTerms()->pluck('name')->merge($page->tags()->pluck('name'))->unique()->values()->all();
                 if(array_key_exists('author_id',$input))$page->author_id=$input['author_id'];$page->save();
             }
-            foreach($input['sections']??[] as $id=>$section){$record=$page->sections()->whereKey($id)->firstOrFail();$record->update(['name'=>$section['name'],'position'=>$section['position'],'content_html'=>$section['content_html']??'']);}
-            if(!empty($input['new_section_name']))$page->sections()->create(['name'=>$input['new_section_name'],'position'=>($page->sections()->max('position')??-1)+1,'content_html'=>$input['new_section_html']??'']);
+            foreach($input['sections']??[] as $id=>$section){$record=$page->sections()->whereKey($id)->firstOrFail();$html=$section['content_html']??'';if(!empty($section['image_src']))$html='<section class="auto-lp-image-section"><img src="'.e($section['image_src']).'" alt="'.e($section['image_alt']??'').'" loading="lazy"></section>';$record->update(['name'=>$section['name'],'position'=>$section['position'],'content_html'=>$html]);}
+            if(!empty($input['new_section_name'])){$position=$request->integer('new_section_position',$page->sections()->max('position')+1);$page->sections()->where('position','>=',$position)->increment('position');$html=$input['new_section_html']??'';if(!empty($input['new_section_image']))$html='<section class="auto-lp-image-section"><img src="'.e($input['new_section_image']).'" alt="'.e($input['new_section_image_alt']??'').'" loading="lazy"></section>';$page->sections()->create(['name'=>$input['new_section_name'],'position'=>$position,'content_html'=>$html]);}
         });
         return redirect('/admin/pages/'.$page->id.'/edit')->with('success','Saved to the database. Published changes are live immediately.');
     }

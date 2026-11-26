@@ -40,6 +40,7 @@ class QuoteController extends Controller
             'carrier' => 'required|in:State Farm,Geico,Allstate,Other,Currently not insured',
             'zip' => ['required','regex:/^\\d{5}$/'],
             'sms' => 'nullable|boolean',
+            'landing_path' => ['nullable','string','max:255','regex:~^/[a-z0-9/-]*$~'],
         ]);
         abort_if(($input['insured'] === 'No') !== ($input['carrier'] === 'Currently not insured'), 422, 'Please check your insurance carrier selection.');
         $phone = preg_replace('/\\D/', '', $input['phone']);
@@ -61,6 +62,7 @@ class QuoteController extends Controller
             'service' => 'auto',
             'serviceName' => 'Auto insurance',
             'mode' => 'auto-insurance-landing',
+            'landingPage' => $input['landing_path'] ?? '/auto-insurance/',
             'smsConsent' => $sms,
             'smsConsentText' => $sms ? QuoteValidator::SMS_CONSENT_TEXT : null,
             'smsConsentAt' => $sms ? now()->toIso8601String() : null,

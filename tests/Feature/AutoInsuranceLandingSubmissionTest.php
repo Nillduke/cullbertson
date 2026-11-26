@@ -31,6 +31,7 @@ class AutoInsuranceLandingSubmissionTest extends TestCase
             'carrier' => 'State Farm',
             'zip' => '33907',
             'sms' => true,
+            'landing_path' => '/auto-insurance/',
         ];
 
         $result = $this->postJson('/auto-insurance/submit', $submission)
@@ -45,6 +46,7 @@ class AutoInsuranceLandingSubmissionTest extends TestCase
         $this->assertSame('Lease', $lead->payload['request']['vehicleOwnership']);
         $this->assertSame('State Farm', $lead->payload['request']['carrier']);
         $this->assertSame('33907', $lead->payload['request']['address']['zip']);
+        $this->assertSame('/auto-insurance/', $lead->payload['landingPage']);
         $this->assertTrue($lead->payload['smsConsent']);
         $this->assertStringContainsString('/quote/thank-you?receipt=', $result->json('redirect'));
 
