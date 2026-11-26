@@ -64,4 +64,29 @@ class CampaignLandingPagesTest extends TestCase
         $this->assertLessThan($comparison->position, $image->position);
     }
 
+    public function test_admin_publication_datetime_is_converted_from_browser_timezone_to_utc(): void
+    {
+        $admin = User::factory()->create(['is_admin' => true]);
+        $page = Page::create([
+            'title' => 'Home Insurance',
+            'slug' => 'home-insurance-test',
+            'type' => 'page',
+            'status' => 'draft',
+            'categories' => [],
+            'presentation' => ['bodyClass' => 'content-page', 'styles' => [], 'scripts' => []],
+        ]);
+
+        $this->actingAs($admin)->post('/admin/pages/'.$page->id, [
+            'title' => $page->title,
+            'slug' => $page->slug,
+            'type' => 'page',
+            'status' => 'published',
+            'presentation_template' => 'default',
+            'published_at' => '2026-11-26T12:46',
+            'publish_timezone' => 'Asia/Kolkata',
+        ])->assertRedirect();
+
+        $this->assertSame('2026-11-26 07:16:00', $page->fresh()->published_at->utc()->format('Y-m-d H:i:s'));
+    }
+
 }
