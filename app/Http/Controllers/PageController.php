@@ -19,7 +19,7 @@ class PageController extends Controller
         $contentPage=Page::published()->with('sections')->where('slug',$slug)->firstOrFail();
         $data=array_merge($contentPage->presentation??[],['contentPage'=>$contentPage,'title'=>$contentPage->title,'description'=>$contentPage->description]);
         if(($contentPage->presentation['template']??null)==='landing'){
-            $data['styles']=['/landing-page.css?v=2-'.filemtime(public_path('landing-page.css'))];
+            $data['styles']=['/landing-page.css?v='.substr(hash_file('sha256',public_path('landing-page.css')),0,12)];
             $data['bodyClass']='content-page auto-landing-page';
             return view('content.landing-page',$data);
         }
