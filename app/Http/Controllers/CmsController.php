@@ -46,7 +46,7 @@ class CmsController extends Controller
             \Illuminate\Support\Facades\Validator::make(['resources'=>$resources],['resources'=>'array|max:6','resources.*.eyebrow'=>'required|string|max:255','resources.*.title'=>'required|string|max:255','resources.*.body'=>'required|string|max:20000','resources.*.links'=>'required|array|max:15','resources.*.links.*.label'=>'required|string|max:255','resources.*.links.*.url'=>['required','string','max:500','regex:~^(?:/(?!/)|https?://|tel:)[^<>\s]+$~']])->validate();
             $insurance['resources']=$resources;
         }
-        abort_if(preg_match('~^(admin|forms)(/|$)|^(feedback|quote/submit|auto-quote/submit|contact-us/send|up)$~',$slug),422,'This URL is reserved.');
+        abort_if(preg_match('~^(admin|forms)(/|$)|^(feedback|quote/submit|auto-quote/submit|auto-insurance/submit|contact-us/send|up)$~',$slug),422,'This URL is reserved.');
         DB::transaction(function()use($input,$page,$slug,$insurance){
             $attributes=array_intersect_key($input,array_flip(['title','type','status','description','featured_image','article_category','published_at']));
             $attributes['slug']=$slug;$attributes['categories']=array_values(array_filter(array_unique(array_map('trim',explode(',',$input['categories']??'')))));

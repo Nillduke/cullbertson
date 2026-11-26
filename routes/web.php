@@ -80,6 +80,7 @@ Route::redirect('/quote/services.css','/quote-assets/services/services.css',301)
 Route::redirect('/quote/services.js','/quote-assets/services/services.js',301);
 Route::get('/auto-quote/submit', [QuoteController::class, 'token']);
 Route::post('/auto-quote/submit', [QuoteController::class, 'auto'])->middleware('throttle:quotes');
+Route::post('/auto-insurance/submit', [QuoteController::class, 'landingAuto'])->middleware('throttle:quotes');
 Route::get('/quote/submit', [QuoteController::class, 'token']);
 Route::post('/quote/submit', [QuoteController::class, 'service'])->middleware('throttle:quotes');
 Route::get('/quote/thank-you',[\App\Http\Controllers\QuoteThankYouController::class,'show']);

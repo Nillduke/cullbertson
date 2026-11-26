@@ -35,7 +35,7 @@ class StructureController extends Controller {
     $data=$request->validate($common);$target=trim(parse_url($data['destination'],PHP_URL_PATH)??'','/');
     if($kind==='redirects'){
      $seen=[$data['slug']];while(true){if(in_array($target,$seen,true))throw ValidationException::withMessages(['destination'=>'This redirect would create a loop.']);$seen[]=$target;$next=UrlRedirect::where('slug',$target)->first();if(!$next)break;$target=trim(parse_url($next->destination,PHP_URL_PATH)??'','/');}
-     if(preg_match('~^(admin|forms)(/|$)|^(wp-sitemap|sitemap)|^(feedback|contact-us/send|quote/submit|auto-quote/submit|up)$~',$data['slug']))throw ValidationException::withMessages(['slug'=>'This URL is reserved for an application endpoint.']);
+     if(preg_match('~^(admin|forms)(/|$)|^(wp-sitemap|sitemap)|^(feedback|contact-us/send|quote/submit|auto-quote/submit|auto-insurance/submit|up)$~',$data['slug']))throw ValidationException::withMessages(['slug'=>'This URL is reserved for an application endpoint.']);
     }else{
      $data['path']=$data['path']??'';parse_str(parse_url($data['destination'],PHP_URL_QUERY)??'',$query);
      if($target===$data['path'] && ($query[$data['parameter']]??null)===$data['value'])throw ValidationException::withMessages(['destination'=>'This redirect would create a loop.']);
