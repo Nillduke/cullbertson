@@ -5,4 +5,5 @@
         {!! app(\App\Services\ContentRenderer::class)->render($section) !!}
     @endforeach
 </main>
+@include('partials.auto-landing-footer')
 @endsection

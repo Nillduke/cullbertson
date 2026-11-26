@@ -89,4 +89,15 @@ class CampaignLandingPagesTest extends TestCase
         $this->assertSame('2026-11-26 07:16:00', $page->fresh()->published_at->utc()->format('Y-m-d H:i:s'));
     }
 
+    public function test_campaign_footer_contains_contact_map_and_legal_links(): void
+    {
+        $this->view('partials.auto-landing-footer')
+            ->assertSee('auto-landing-footer')
+            ->assertSee('13099 S Cleveland Ave Ste 310, Fort Myers FL 33907')
+            ->assertSee('sales@culbertsonagency.com')
+            ->assertSee('Get directions')
+            ->assertSee('/privacy-policy-2/')
+            ->assertSee('/terms-of-use/');
+    }
+
 }
