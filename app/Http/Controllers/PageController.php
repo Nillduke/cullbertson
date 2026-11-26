@@ -18,6 +18,11 @@ class PageController extends Controller
         if(preg_match('~^(.+)/page/([1-9][0-9]*)$~D',$slug,$pagination) && Page::published()->where('slug',$pagination[1])->where('type','blog_index')->exists()){$slug=$pagination[1];request()->merge(['page'=>(int)$pagination[2]]);}
         $contentPage=Page::published()->with('sections')->where('slug',$slug)->firstOrFail();
         $data=array_merge($contentPage->presentation??[],['contentPage'=>$contentPage,'title'=>$contentPage->title,'description'=>$contentPage->description]);
+        if(($contentPage->presentation['template']??null)==='landing'){
+            $data['styles']=['/landing-page.css?v=2-'.filemtime(public_path('landing-page.css'))];
+            $data['bodyClass']='content-page auto-landing-page';
+            return view('content.landing-page',$data);
+        }
         if(($contentPage->presentation['template']??null)==='support'){
             $data['styles']=['/support-pages.css?v='.filemtime(public_path('support-pages.css'))];$data['scripts']=['/support-pages.js?v='.filemtime(public_path('support-pages.js'))];
         }

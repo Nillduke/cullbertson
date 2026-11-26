@@ -26,7 +26,7 @@ class SubmissionPresentation
   return is_array($value)?(string)($value['message']??''):(string)$value;
  }
  public function labels(string $service):array {
-  $catalog=$this->catalog??=FormDefinition::data('services');$labels=['contactConsent'=>'Contact permission','smsRequested'=>'Text messages requested','consent'=>'Contact permission','sms'=>'Text messages requested','smsConsent'=>'SMS consent recorded','smsConsentText'=>'SMS consent wording','smsConsentAt'=>'SMS consent recorded at','smsConsentVersion'=>'SMS consent version','dateOfBirth'=>'Date of birth','insured'=>'Currently insured','bundleHome'=>'Bundle home coverage','dui'=>'DUI history','zip'=>'ZIP code','createdAt'=>'Submitted at','consentText'=>'Consent statement'];
+  $catalog=$this->catalog??=FormDefinition::data('services');$labels=['contactConsent'=>'Contact permission','smsRequested'=>'Text messages requested','consent'=>'Contact permission','sms'=>'Text messages requested','smsConsent'=>'SMS consent recorded','smsConsentText'=>'SMS consent wording','smsConsentAt'=>'SMS consent recorded at','smsConsentVersion'=>'SMS consent version','dateOfBirth'=>'Date of birth','vehicleOwnership'=>'Vehicle ownership','insured'=>'Currently insured','bundleHome'=>'Bundle home coverage','dui'=>'DUI history','zip'=>'ZIP code','createdAt'=>'Submitted at','consentText'=>'Consent statement'];
   $questions=$catalog['services'][$service]['questions']??[];
   foreach($catalog['common']??[] as $group)foreach($group as $question)if(is_array($question))$questions[]=$question;
   foreach($questions as $question){if(isset($question['id'],$question['title']))$labels[$question['id']]=$question['title'];foreach($question['fields']??[] as $field)$labels[$field['id']]=$field['label'];}
@@ -40,7 +40,7 @@ class SubmissionPresentation
   $groups=[];$contact=[];$coverage=[];$consent=[];$specific=[];
   foreach($item['answers'] as $key=>$value){
    if(in_array($key,['name','address','email','phone'])){$contact[$key]=$value;continue;}
-   if(in_array($key,['insured','carrier','tenure','start','homeowner','bundleHome'])){$coverage[$key]=$value;continue;}
+   if(in_array($key,['vehicleOwnership','insured','carrier','tenure','start','homeowner','bundleHome'])){$coverage[$key]=$value;continue;}
    if(in_array($key,['consent','sms','contactConsent','smsRequested'])){$consent[$key]=$value;continue;}
    if(in_array($key,['vehicles','drivers']))$groups[]=['title'=>Str::headline($key),'values'=>$value];else $specific[$key]=$value;
   }

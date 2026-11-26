@@ -28,7 +28,7 @@ class CmsController extends Controller
     public function save(Request $request,?Page $page=null){
         $page=$page??new Page;
         if(is_string($request->input('slug')))$request->merge(['slug'=>trim($request->input('slug'),'/')]);
-        $input=$request->validate(['title'=>'required|string|max:255','slug'=>['nullable','string','max:255','regex:~^[a-z0-9/-]*$~',Rule::unique('pages','slug')->ignore($page->id)],'type'=>'required|in:page,post,insurance,staff,blog_index','status'=>'required|in:draft,published','description'=>'nullable|string|max:2000','featured_image'=>[Rule::requiredIf($request->input('type')==='post'&&$request->input('status')==='published'),'nullable','string','max:500','regex:~^/assets/[a-zA-Z0-9_./%+() -]+$~'],'tags'=>'nullable|string|max:1800','author_id'=>'nullable|integer|exists:authors,id','categories'=>'nullable|string|max:300','article_category'=>'nullable|string|max:80','published_at'=>'nullable|date','sections'=>'nullable|array','sections.*.name'=>'required|string|max:180','sections.*.position'=>'required|integer|min:0|max:999','sections.*.content_html'=>'nullable|string|max:2000000','new_section_name'=>'nullable|string|max:180','new_section_html'=>'nullable|string|max:2000000']);
+        $input=$request->validate(['title'=>'required|string|max:255','slug'=>['nullable','string','max:255','regex:~^[a-z0-9/-]*$~',Rule::unique('pages','slug')->ignore($page->id)],'type'=>'required|in:page,post,insurance,staff,blog_index','status'=>'required|in:draft,published','presentation_template'=>'nullable|in:default,landing,contact,support,html-sitemap','description'=>'nullable|string|max:2000','featured_image'=>[Rule::requiredIf($request->input('type')==='post'&&$request->input('status')==='published'),'nullable','string','max:500','regex:~^/assets/[a-zA-Z0-9_./%+() -]+$~'],'tags'=>'nullable|string|max:1800','author_id'=>'nullable|integer|exists:authors,id','categories'=>'nullable|string|max:300','article_category'=>'nullable|string|max:80','published_at'=>'nullable|date','sections'=>'nullable|array','sections.*.name'=>'required|string|max:180','sections.*.position'=>'required|integer|min:0|max:999','sections.*.content_html'=>'nullable|string|max:2000000','new_section_name'=>'nullable|string|max:180','new_section_html'=>'nullable|string|max:2000000']);
         $slug=trim($input['slug']??'','/');
         $insurance=null;
         if($input['type']==='insurance'){
@@ -51,7 +51,13 @@ class CmsController extends Controller
             $attributes=array_intersect_key($input,array_flip(['title','type','status','description','featured_image','article_category','published_at']));
             $attributes['slug']=$slug;$attributes['categories']=array_values(array_filter(array_unique(array_map('trim',explode(',',$input['categories']??'')))));
             if($attributes['status']==='published'&&empty($attributes['published_at']))$attributes['published_at']=now();
-            $page->fill($attributes);if($insurance!==null)$page->insurance_content=$insurance;if(!$page->exists)$page->presentation=['bodyClass'=>'content-page','styles'=>[],'scripts'=>[]];$page->save();
+            $page->fill($attributes);if($insurance!==null)$page->insurance_content=$insurance;if(!$page->exists)$page->presentation=['bodyClass'=>'content-page','styles'=>[],'scripts'=>[]];
+            if($page->type==='page' && array_key_exists('presentation_template',$input)){
+                $presentation=$page->presentation??['bodyClass'=>'content-page','styles'=>[],'scripts'=>[]];
+                if($input['presentation_template']==='default')unset($presentation['template']);else $presentation['template']=$input['presentation_template'];
+                $page->presentation=$presentation;
+            }
+            $page->save();
             if($page->type==='post'){
                 $categoryIds=[];foreach(array_filter(array_map('trim',explode(',',$input['categories']??''))) as $name)$categoryIds[]=\App\Models\Category::firstOrCreate(['name'=>$name],['slug'=>\Illuminate\Support\Str::slug($name)])->id;
                 $page->categoryTerms()->sync($categoryIds);

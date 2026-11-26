@@ -1,0 +1,15 @@
+(()=>{
+ const quiz=document.querySelector('[data-auto-quiz]');if(!quiz)return;
+ const question=quiz.querySelector('[data-quiz-question]'),progress=quiz.querySelector('[data-quiz-progress]'),bar=quiz.querySelector('[data-quiz-bar]'),answers=quiz.querySelector('[data-quiz-answers]'),result=quiz.querySelector('[data-quiz-result]'),back=quiz.querySelector('[data-quiz-back]');
+ const choices=[['State Farm','State Farm'],['GEICO','Geico'],['Allstate','Allstate'],['Other','Other'],['Currently not insured','__not_insured__']];
+ const state={step:1,ownership:'',carrier:'',zip:''};
+ function render(){progress.textContent=`Question ${state.step} of 3`;bar.style.width=`${state.step*33.333}%`;back.hidden=state.step===1;result.hidden=state.step!==3;answers.hidden=state.step===3;
+  if(state.step===1){question.textContent='Do you own or lease your vehicle?';answers.innerHTML='<button type="button" data-ownership="own">I own my car <span aria-hidden="true">→</span></button><button type="button" data-ownership="lease">I lease my car <span aria-hidden="true">→</span></button>';}
+  if(state.step===2){question.textContent='Who is your current auto insurance carrier?';answers.innerHTML=choices.map(([label,value])=>`<button type="button" data-carrier="${value}">${label}<span aria-hidden="true">→</span></button>`).join('');}
+  if(state.step===3){question.textContent='What is your Florida ZIP code?';result.innerHTML='<label class="auto-lp-zip-label" for="auto-lp-zip">ZIP code</label><input id="auto-lp-zip" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" pattern="[0-9]{5}" aria-label="ZIP code" value="'+state.zip+'"><button type="button" data-continue disabled>Continue <span aria-hidden="true">→</span></button><small role="alert" hidden>Please enter a valid 5-digit ZIP code.</small>';const input=result.querySelector('input'),submit=result.querySelector('[data-continue]'),error=result.querySelector('[role="alert"]');const valid=()=>{state.zip=input.value.replace(/\D/g,'').slice(0,5);if(state.zip!==input.value)input.value=state.zip;submit.disabled=!/^\d{5}$/.test(state.zip);error.hidden=true};input.addEventListener('input',valid);valid();}
+ }
+ answers.addEventListener('click',event=>{const own=event.target.closest('[data-ownership]');if(own){state.ownership=own.dataset.ownership;state.step=2;render();return;}const carrier=event.target.closest('[data-carrier]');if(carrier){state.carrier=carrier.dataset.carrier;state.step=3;render();}});
+ back.addEventListener('click',()=>{if(state.step>1){state.step--;render();}});
+ result.addEventListener('click',event=>{if(!event.target.closest('[data-continue]'))return;const input=result.querySelector('input'),error=result.querySelector('[role="alert"]');state.zip=input.value.trim();if(!/^\d{5}$/.test(state.zip)){error.hidden=false;input.focus();return;}const params=new URLSearchParams({zip:state.zip,ownership:state.ownership});if(state.carrier==='__not_insured__')params.set('insured','No');else{params.set('insured','Yes');params.set('carrier',state.carrier);}location.assign(`/auto-quote/?${params.toString()}`);});
+ render();
+})();
