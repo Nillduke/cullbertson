@@ -10,6 +10,14 @@ class TwilioGateway {
   $options=['body'=>$body,'statusCallback'=>$callback];if($s->messaging_service_sid)$options['messagingServiceSid']=$s->messaging_service_sid;else $options['from']=$s->from_number;
   $message=$this->client($s)->messages->create($to,$options);return ['sid'=>$message->sid,'status'=>$message->status,'from'=>$message->from];
  }
+ public function testSms(TwilioSetting $s,string $to):array {
+  $options=['body'=>'Culbertson Agency Twilio test: SMS setup is working.'];if($s->messaging_service_sid)$options['messagingServiceSid']=$s->messaging_service_sid;else $options['from']=$s->from_number;
+  $message=$this->client($s)->messages->create($to,$options);return ['sid'=>$message->sid,'status'=>$message->status,'from'=>$message->from];
+ }
+ public function testCall(TwilioSetting $s,string $to):array {
+  $voice=new \Twilio\TwiML\VoiceResponse();$voice->say('This is a test call from Culbertson Agency. Your Twilio voice setup is working.');
+  $call=$this->client($s)->calls->create($to,$s->from_number,['twiml'=>(string)$voice,'timeout'=>25]);return ['sid'=>$call->sid,'status'=>$call->status];
+ }
  public function call(TwilioSetting $s,string $twiml,string $callback):array {
   $call=$this->client($s)->calls->create($s->voice_agent_number,$s->from_number,['twiml'=>$twiml,'statusCallback'=>$callback,'statusCallbackMethod'=>'POST','statusCallbackEvent'=>['initiated','ringing','answered','completed'],'timeout'=>25]);return ['sid'=>$call->sid,'status'=>$call->status];
  }

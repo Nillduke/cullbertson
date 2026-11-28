@@ -21,6 +21,7 @@ Route::middleware(['auth',EnsureCmsAdmin::class])->prefix('admin')->group(functi
     Route::post('/robots/reset',[\App\Http\Controllers\RobotsSettingsController::class,'reset']);
     Route::get('/integrations/twilio',[\App\Http\Controllers\TwilioSettingsController::class,'index']);
     Route::post('/integrations/twilio',[\App\Http\Controllers\TwilioSettingsController::class,'save']);
+    Route::post('/integrations/twilio/test',[\App\Http\Controllers\TwilioSettingsController::class,'test'])->middleware('throttle:3,1');
     Route::post('/integrations/twilio/connection',[\App\Http\Controllers\TwilioSettingsController::class,'connection'])->middleware('throttle:5,1');
     Route::post('/inbox/{kind}/{id}/call',[\App\Http\Controllers\ConversationController::class,'call'])->where('kind','quotes|contacts|feedback')->whereNumber('id')->middleware('throttle:5,1');
     Route::get('/integrations/slack',[\App\Http\Controllers\SlackSettingsController::class,'index']);

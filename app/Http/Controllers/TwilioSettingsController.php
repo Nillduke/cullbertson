@@ -20,4 +20,16 @@ class TwilioSettingsController extends Controller {
   try{$account=$gateway->check($s);$status=$account['status']==='active'?'success':'failed';$message='Account status: '.$account['status'].'; type: '.$account['type'].'. No SMS or call was sent.';}catch(\Throwable $error){$status='failed';$message=TwilioGateway::error($error);}
   $s->update(['connection_status'=>$status,'connection_message'=>$message,'connection_checked_at'=>now()]);return redirect(url('/admin/integrations/twilio'))->with($status==='success'?'success':'twilio_error',$message);
  }
+ public function test(Request $request,TwilioGateway $gateway,TwilioCommunications $communications){
+  $data=$request->validate(['channel'=>'required|in:sms,voice','test_phone'=>'required|string|max:24']);$to=$communications->phone($data['test_phone']);
+  if(!$to)return back()->withErrors(['test_phone'=>'Enter a valid phone number, including country code if outside the US.']);
+  $s=TwilioSetting::current();if(!$s->enabled||!$s->credentialsReady())return back()->withErrors(['twilio_test'=>'Save valid Twilio credentials and enable the connection first.']);
+  if($data['channel']==='sms'&&(!$s->sms_enabled||(!$s->from_number&&!$s->messaging_service_sid)))return back()->withErrors(['twilio_test'=>'Enable SMS and configure a Twilio sender or Messaging Service first.']);
+  if($data['channel']==='voice'&&(!$s->voice_enabled||!$s->from_number))return back()->withErrors(['twilio_test'=>'Enable voice and configure a Twilio phone number first.']);
+  try{
+   if($data['channel']==='sms'){$result=$gateway->testSms($s,$to);$message='Test SMS queued to '.$to.'. Twilio status: '.$result['status'].' ('.$result['sid'].').';}
+   else{$result=$gateway->testCall($s,$to);$message='Test voice call started to '.$to.'. Twilio status: '.$result['status'].' ('.$result['sid'].').';}
+   return back()->with('twilio_test_result',$message);
+  }catch(\Throwable $error){return back()->with('twilio_error',TwilioGateway::error($error));}
+ }
 }
